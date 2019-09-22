@@ -1,31 +1,34 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
+    <TopNav class="nav"/>
   </div>
 </template>
 
+<script>
+import TopNav from '@/components/project/TopNav.vue'
+
+export default {
+  name: 'App',
+  components:{
+    TopNav
+  }
+}
+</script>
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+@import './styles/base.css';
+@import './styles/normalize.css';
+@import '//at.alicdn.com/t/font_1408960_lef05kmc59s.css';
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#app{
+  background-color: rgb(244, 244, 244);
 }
 </style>
