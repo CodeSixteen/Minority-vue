@@ -1,5 +1,5 @@
 <template>
-  <div class="login" @click="clickDis">
+  <div class="login" @click="hideLogin">
     <div class="login-content">
       <div class="login-logo">
         <img src="~@/icons/login-logo.png" />
@@ -38,10 +38,10 @@
 export default {
   name: "Login",
   methods: {
-    clickDis(e) {
+    hideLogin(e) {
       let divClass = e.toElement.className;
       if (divClass === "login login-component") {
-        this.$emit("is-login", false);
+        this.$emit("hideLogin", false);
       }
     }
   }

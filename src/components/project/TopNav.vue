@@ -9,57 +9,58 @@
           </a>
         </div>
         <div class="nav-center">
-          <span></span>
+          <slot></slot>
         </div>
         <div class="nav-right">
           <div>
-            <i class="iconfont icon-pen"></i>
-          </div>
-          <div>
-            <i class="iconfont icon-search" @click="showSearchInput"></i>
-            <input type="text" class="home-nav-search" placeholder="搜索" @blur="hideSearchInput"/>
+            <i class="iconfont icon-search" @click="showSearchInput" ref="searchicon"></i>
           </div>
           <div class="home-nav-login" @click="clickLogin">登录</div>
         </div>
       </div>
     </header>
-    <Login v-show="isLogin" class="login-component" @is-login="isShowLogin"/>
+    <HomeSearch v-show="isShowSearch" class="home-search" @hideSearch="hideSearch" />
+    <Login v-show="isLogin" class="login-component" @hideLogin="hideLogin" />
   </div>
 </template>
 
 <script>
 import Login from "./Login";
+import HomeSearch from "./HomeSearch";
 
 export default {
   name: "TopNav",
   data() {
     return {
-      isLogin: false
+      isLogin: false,
+      isShowSearch: false
     };
   },
   components: {
-    Login
+    Login,
+    HomeSearch
   },
   methods: {
     showSearchInput() {
-      const input = document.querySelector(".home-nav-search");
-      const width = input.getBoundingClientRect().width;
-      if (width) {
-        input.style.width = "0px";
+      this.isShowSearch = !this.isShowSearch;
+      let el = this.$refs.searchicon;
+      if (this.isShowSearch) {
+        el.className = "iconfont icon-guanbi";
       } else {
-        input.style.width = "200px";
-        input.focus();
+        el.className = "iconfont icon-search";
       }
     },
-    hideSearchInput(){
-        const input = document.querySelector(".home-nav-search");
-        input.style.width = "0px";
+    clickLogin() {
+      this.isLogin = true;
+      this.isShowSearch = false;
+      this.$refs.searchicon.className = "iconfont icon-search";
     },
-    clickLogin(){
-        this.isLogin = true;
+    hideLogin(x) {
+      this.isLogin = x;
     },
-    isShowLogin(x){
-       this.isLogin = x;
+    hideSearch(x) {
+      this.isShowSearch = x;
+      this.$refs.searchicon.className = "iconfont icon-search";
     }
   }
 };
@@ -103,6 +104,12 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
+  div .iconfont {
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+    cursor: pointer;
+  }
 }
 .logo {
   display: flex;
@@ -121,8 +128,8 @@ export default {
   background-image: url("~@/icons/logo.svg");
   background-size: auto 100%;
 }
-.logo:hover .logo-icon{
-    background-color: #fc191a;
+.logo:hover .logo-icon {
+  background-color: #fc191a;
 }
 .logo-title {
   padding-left: 10px;
@@ -134,36 +141,33 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.icon-pen,
-.icon-search {
-  color: #aaa;
-  font-size: 18px;
-  padding: 10px;
-  cursor: pointer;
-}
 .home-nav-login {
   height: 30px;
-  padding: 0px 30px;
-  border: 1px solid #fff;
+  padding: 0px 16px;
   border-radius: 15px;
-  color: #fff;
+  color: #666;
   line-height: 30px;
   margin-left: 20px;
+  background-color: #fff;
+  cursor: pointer;
 }
-.home-nav-search {
-  background-color: transparent;
-  color: #fff;
-  border-bottom: 1px solid #fff;
-  height: 30px;
-  width: 0px;
-  transition: all 0.3s;
+.home-nav-login:hover {
+  color: #333;
 }
-.login-component{
-    position: fixed;
-    top:0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
+.login-component {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+.home-search {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }
 </style>

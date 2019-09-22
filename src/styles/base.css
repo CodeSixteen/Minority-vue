@@ -13,7 +13,7 @@ table { border-collapse:collapse; }
 body {
     font-size:14px;
     color:#666;
-    background:#fff
+    background:#fff;
 }
 .clearfix::before,.clearfix::after {  /*清楚浮动*/
     content:"";
@@ -58,4 +58,11 @@ s,i,em{font-style:normal;text-decoration:none;}
 /*公共部分*/
 .center{
     text-align: center;
+}
+.line{
+    width: 100%;
+    height: 1px;
+    display: block;
+    margin: 10px 0;
+    background-color: #ccc;
 }

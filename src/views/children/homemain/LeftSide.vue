@@ -36,7 +36,6 @@ export default {
   created() {
     getArticleLists()
       .then(res => {
-        console.log(res.data);
         this.articleLists = res.data;
       })
       .catch(err => {
