@@ -23,9 +23,15 @@
           <img src="~@/assets/images/lobaro.svg" />
           <span>Pi Store</span>
         </li>
-        <li class="nav-list-item">
+        <li class="nav-list-item tron">
           <img src="~@/assets/images/special.svg" />
           <span>Tron 计划</span>
+          <div class="tron-box">
+            <a href="https://beta.sspai.com/post/46283" class="tron-link">加入Tron 计划</a>
+            <a href="https://shortcuts.sspai.com/" class="tron-link">
+              <img src="~@/assets/images/shortcut.svg" alt />
+            </a>
+          </div>
         </li>
       </ul>
     </TopNav>
@@ -43,9 +49,6 @@ import goTop from "@/components/common/goTop";
 
 export default {
   name: "home",
-  data() {
-    return {};
-  },
   components: {
     TopNav,
     HomeSlide,
@@ -75,13 +78,14 @@ export default {
       display: flex;
       align-items: center;
       cursor: pointer;
-      transition: all .2s;
+      transition: all 0.2s;
+      position: relative;
       img {
         padding-right: 5px;
       }
     }
-    .nav-list-item:hover{
-      background-color:rgb(14,7,6);
+    .nav-list-item:hover {
+      background-color: rgb(14, 7, 6);
     }
   }
 }
@@ -92,13 +96,43 @@ export default {
   flex-direction: column;
   align-items: center;
   .main {
-    width: 1110px;
+    width: 100%;
+    max-width: 1110px;
     position: relative;
   }
   .go-top-component {
     position: fixed;
     bottom: 60px;
     right: 60px;
+  }
+}
+/* tron-box */
+.tron:hover .tron-box {
+  height: 80px;
+}
+.tron-box {
+  position: absolute;
+  top: 62px;
+  left: -10px;
+  width: 134px;
+  height: 0px;
+  overflow: hidden;
+  transition: all 0.2s;
+  .tron-link {
+    display: block;
+    height: 40px;
+    color: #fff;
+    font-weight: 400;
+    background-color: rgba(10, 10, 10, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 80px;
+    }
+  }
+  .tron-link:hover {
+    background-color: rgba(10, 10, 10, 1);
   }
 }
 </style>

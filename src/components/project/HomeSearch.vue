@@ -24,7 +24,7 @@ export default {
   name: "HomeSearch",
   methods: {
     colseBox(e) {
-      let divClass = e.toElement.className;
+      let divClass = e.target.className;
       if (divClass === "search-box home-search") {
         this.$emit("hideSearch", false);
       }

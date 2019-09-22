@@ -1,7 +1,7 @@
 <template>
   <div class="swiper-slide-container">
     <a :href="slideLink" class="slide-link">
-      <img :src="slideSrc" :alt="slideTitle" class="slide-img" />
+      <img :src="slideSrc" :alt="slideTitle" class="slide-img"/>
     </a>
   </div>
 </template>

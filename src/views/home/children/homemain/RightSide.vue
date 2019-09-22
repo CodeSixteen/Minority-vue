@@ -139,7 +139,7 @@ export default {
   }
   .matrix-all-btn{
     width: 100%;
-    padding: 20px;
+    padding: 20px 0;
     .matrix-all-link{
       display: block;
       color: $red;

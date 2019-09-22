@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <Swiper :swiperSlides='swiperSlides' :isIndicator='true'/>
+  <div class="home-swiper">
+    <Swiper :swiperSlides="swiperSlides" :isIndicator="true" />
   </div>
 </template>
 
 <script>
-import Swiper from '@/components/common/swiper/Swiper'
+import Swiper from "@/components/common/swiper/Swiper";
 import { getDataByBanner } from "@/network/home";
 
 export default {
@@ -15,16 +15,14 @@ export default {
       swiperSlides: []
     };
   },
-  components:{
+  components: {
     Swiper
   },
   created() {
     getDataByBanner()
       .then(res => {
         //处理数据（res）
-        res.data.forEach(item => {
-          this.swiperSlides.push(item);
-        });
+        this.swiperSlides = res.data;
       })
       .catch(err => {
         //错误时的处理（err）
@@ -34,4 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.home-swiper {
+  width: 100%;
+}
 </style>

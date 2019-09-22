@@ -1,5 +1,5 @@
 <template>
-  <div class="swiper" ref="swiper">
+  <div class="swiper" ref="swiper" @mouseover="clearIn" @mouseout="startIn">
     <div class="swiper-container" ref="swiperItem">
       <SwiperSlide
         v-for="(item,index) in newSwiperSlides"
@@ -11,7 +11,12 @@
       />
     </div>
     <div class="indicator-container" v-if="isIndicator">
-      <span class="indicator-item" v-for="i in indicator" :key="i" :class="{active:curIndex===i}"></span>
+      <span
+        class="indicator-item"
+        v-for="i in swiperSlides.length"
+        :key="i"
+        :class="{active:curIndex===i}"
+      ></span>
     </div>
     <div class="cut-slide">
       <div class="prev" @click="prev">
@@ -37,14 +42,21 @@ export default {
     },
     isIndicator: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data() {
     return {
-      newSwiperSlides: [],
-      indicator: 0,
-      curIndex: 1
+      newSwiperSlides: [
+        {
+          title: "de",
+          banner:
+            "https://cdn.sspai.com/topic/3adf2abe-606b-c6a8-7209-38c0c49b151d.jpg?imageMogr2/quality/95/thumbnail/!1440x330r/gravity/Center/crop/1440x330",
+          href: "javascript:0"
+        }
+      ],
+      curIndex: 1,
+      timer: null
     };
   },
   components: {
@@ -56,17 +68,14 @@ export default {
     }
   },
   mounted() {
-    this.modifyData(this.swiperSlides);
-    setInterval(() => {
-      this.next();
-    }, 5000);
+    this.startAutoPlay();
   },
   methods: {
     //对数据进行处理
-    modifyData: function(slide) {
+    modifyData(slide) {
       //根据图片数量
       if (slide.length > 1) {
-        this.indicator = slide.length;
+        this.newSwiperSlides = [];
         //在前后个添加一组数据，处理循环效果
         slide.forEach(item => {
           this.newSwiperSlides.push(item);
@@ -81,27 +90,22 @@ export default {
     },
     moveSlide() {
       let item = this.$refs.swiperItem;
+      let len = this.newSwiperSlides.length - 1;
+      item.style.transitionDuration = `0.5s`;
       item.style.transform = `translate(-${this.distance * this.curIndex}px,0)`;
-      if (this.curIndex <= 0) {
-        this.curIndex = this.newSwiperSlides.length - 2;
-        item.addEventListener("transitionend", () => {
-          item.style.transition = `none`;
-          item.style.transform = `translate(-${this.distance *
-            this.curIndex}px,0)`;
-          setTimeout(() => {
-            item.style.transition = "all .3s";
-          });
-        });
-      }
-      if (this.curIndex >= this.newSwiperSlides.length - 1) {
+      if (this.curIndex === len) {
         this.curIndex = 1;
         item.addEventListener("transitionend", () => {
-          item.style.transition = `none`;
+          item.style.transitionDuration = `0s`;
           item.style.transform = `translate(-${this.distance *
             this.curIndex}px,0)`;
-          setTimeout(() => {
-            item.style.transition = "all .3s";
-          });
+        });
+      } else if (this.curIndex === 0) {
+        this.curIndex = this.newSwiperSlides.length - 2;
+        item.addEventListener("transitionend", () => {
+          item.style.transitionDuration = `0s`;
+          item.style.transform = `translate(-${this.distance *
+            this.curIndex}px,0)`;
         });
       }
     },
@@ -112,6 +116,22 @@ export default {
     next() {
       this.curIndex++;
       this.moveSlide();
+    },
+    startAutoPlay() {
+      this.timer = setInterval(this.next, 5000);
+    },
+    clearIn() {
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
+    },
+    startIn() {
+      this.startAutoPlay();
+    }
+  },
+  watch: {
+    swiperSlides() {
+      this.modifyData(this.swiperSlides);
     }
   }
 };
@@ -126,10 +146,12 @@ export default {
 .swiper {
   position: relative;
   overflow: hidden;
+  height: auto;
+  max-height: 410px;
 }
 .swiper-container {
   display: flex;
-  transition: all 0.3s;
+  transition: all 0.5s;
   transform: translate(-100%, 0);
 }
 .swiper-item-container {

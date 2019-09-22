@@ -39,7 +39,7 @@ export default {
   name: "Login",
   methods: {
     hideLogin(e) {
-      let divClass = e.toElement.className;
+      let divClass = e.target.className;
       if (divClass === "login login-component") {
         this.$emit("hideLogin", false);
       }

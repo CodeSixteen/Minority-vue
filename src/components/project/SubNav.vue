@@ -1,6 +1,11 @@
 <template>
   <ul class="sub-nav">
-      <li v-for="(item,index) in navLists" :key="index" :class="{active:index===curIndex}">{{item}}</li>
+    <li
+      v-for="(item,index) in navLists"
+      :key="index"
+      :class="{active:index===curIndex}"
+      @click="cutArticleClassify(index,item)"
+    >{{item}}</li>
   </ul>
 </template>
 
@@ -15,10 +20,16 @@ export default {
       }
     }
   },
-  data(){
-      return{
-          curIndex: 0
-      }
+  data() {
+    return {
+      curIndex: 0
+    };
+  },
+  methods: {
+    cutArticleClassify(index, item) {
+      this.curIndex = index;
+      this.$emit("cutArticleClassify", item);
+    }
   }
 };
 </script>

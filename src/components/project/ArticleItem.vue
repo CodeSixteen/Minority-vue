@@ -50,7 +50,7 @@ export default {
   justify-content: flex-start;
   position: relative;
   .article-list-img {
-    width: 400px;
+    width: 50%;
     height: 100%;
     transition: all 0.3s ease-out;
     overflow: hidden;
@@ -65,7 +65,7 @@ export default {
     left: 0;
     content: "";
     background: linear-gradient(180deg, transparent, #000);
-    width: 400px;
+    width: 50%;
     height: 100%;
     transition: all 0.3s ease-out;
   }
@@ -119,13 +119,13 @@ export default {
   }
 }
 .article-list-item:hover .article-list-img {
-  width: 385px;
+  width: 48%;
 }
 .article-list-item:hover .article-list-img img {
   transform: scale(1.1);
 }
 .article-list-item:hover .article-list-img::after {
-  width: 385px;
+  width: 48%;
   opacity: 0;
 }
 </style>

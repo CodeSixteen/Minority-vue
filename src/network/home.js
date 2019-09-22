@@ -12,9 +12,9 @@ export function getHomeAdImg() {
     })
 }
 //请求文章列表
-export function getArticleLists() {
+export function getArticleLists(id) {
     return request({
-        url: "home/article_lists"
+        url: `home/article_lists/${id}`
     })
 }
 //请求右侧小广告
