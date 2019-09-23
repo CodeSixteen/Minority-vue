@@ -56,7 +56,8 @@ export default {
         }
       ],
       curIndex: 1,
-      timer: null
+      timer: null,
+      cutIsClick: true
     };
   },
   components: {
@@ -64,69 +65,83 @@ export default {
   },
   computed: {
     distance() {
+      //获取幻灯片每次切换需要移动的距离
       return this.$refs.swiper.offsetWidth;
     }
   },
   mounted() {
+    //开启自动播放
     this.startAutoPlay();
   },
   methods: {
     //对数据进行处理
     modifyData(slide) {
-      //根据图片数量
+      this.newSwiperSlides = [...slide];
+      //两张以上时，前后个添加一张
       if (slide.length > 1) {
-        this.newSwiperSlides = [];
-        //在前后个添加一组数据，处理循环效果
-        slide.forEach(item => {
-          this.newSwiperSlides.push(item);
-          if (slide.indexOf(item) === slide.length - 1) {
-            this.newSwiperSlides.unshift(item);
-            this.newSwiperSlides.push(slide[0]);
-          }
-        });
-      } else {
-        this.newSwiperSlides = slide;
+        this.newSwiperSlides.unshift(slide[slide.length - 1]);
+        this.newSwiperSlides.push(slide[0]);
       }
     },
+    prev() {
+      //切换下一张，要判断是否可以点击，动画没有执行完时，点击不切换
+      let item = this.$refs.swiperItem;
+      if (this.cutIsClick) {
+        this.curIndex--;
+        this.moveSlide();
+        this.cutIsClick = false;
+      }
+      item.addEventListener("transitionend", () => {
+        //监听动画结束事件，切换为可以点击
+        this.cutIsClick = true;
+      });
+    },
+    next() {
+      //切换下一张，要判断是否可以点击，动画没有执行完时，点击不切换
+      let item = this.$refs.swiperItem;
+      if (this.cutIsClick) {
+        this.curIndex++;
+        this.moveSlide();
+        this.cutIsClick = false;
+      }
+      item.addEventListener("transitionend", () => {
+        //监听动画结束事件，切换为可以点击
+        this.cutIsClick = true;
+      });
+    },
+    startAutoPlay() {
+      //执行后开始自动播放
+      this.timer = setInterval(this.next, 5000);
+    },
+    clearIn() {
+      //鼠标移入时停止自动播放
+      if (this.timer) {
+        clearInterval(this.timer);
+      }
+    },
+    startIn() {
+      //鼠标移出后开启自动播放
+      this.startAutoPlay();
+    },
     moveSlide() {
+      //移动swiper
       let item = this.$refs.swiperItem;
       let len = this.newSwiperSlides.length - 1;
       item.style.transitionDuration = `0.5s`;
       item.style.transform = `translate(-${this.distance * this.curIndex}px,0)`;
       if (this.curIndex === len) {
         this.curIndex = 1;
-        item.addEventListener("transitionend", () => {
-          item.style.transitionDuration = `0s`;
-          item.style.transform = `translate(-${this.distance *
-            this.curIndex}px,0)`;
-        });
+        this.setTransfrom(item);
       } else if (this.curIndex === 0) {
         this.curIndex = this.newSwiperSlides.length - 2;
-        item.addEventListener("transitionend", () => {
-          item.style.transitionDuration = `0s`;
-          item.style.transform = `translate(-${this.distance *
-            this.curIndex}px,0)`;
-        });
+        this.setTransfrom(item);
       }
     },
-    prev() {
-      this.curIndex--;
-      this.moveSlide();
-    },
-    next() {
-      this.curIndex++;
-      this.moveSlide();
-    },
-    startAutoPlay() {
-      this.timer = setInterval(this.next, 5000);
-    },
-    clearIn() {
-      if (this.timer) {
-        clearInterval(this.timer);
-      }
-    },
-    startIn() {
-      this.startAutoPlay();
+    setTransfrom(el) {
+      el.addEventListener("transitionend", () => {
+        el.style.transitionDuration = `0s`;
+        el.style.transform = `translate(-${this.distance * this.curIndex}px,0)`;
+      });
     }
   },
   watch: {

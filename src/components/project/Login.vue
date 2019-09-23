@@ -10,17 +10,21 @@
       <div>
         <form class="login-form">
           <div class="form-phone">
-            <input type="text" placeholder="手机号" class="form-phone-input" />
+            <input type="text" placeholder="手机号" class="form-phone-input" v-model="user.username" />
           </div>
           <div class="form-password">
-            <input type="password" placeholder="密码" class="form-password-input" />
+            <input
+              type="password"
+              placeholder="密码"
+              class="form-password-input"
+              v-model="user.password"
+            />
           </div>
           <div class="password-dispose">
-            <input type="checkbox" />
             <span class="pwd-remember">记住密码</span>
             <span class="pwd-forget">忘记密码</span>
           </div>
-          <button type="submit" class="login-submit-btn">登录</button>
+          <button type="button" class="login-submit-btn" @click="reql">登录</button>
           <span class="line"></span>
           <div class="center other-ways">
             <i class="iconfont icon-weibo"></i>
@@ -35,14 +39,39 @@
 </template>
 
 <script>
+import { requestLogin } from "@/network/login";
+
 export default {
   name: "Login",
+  data() {
+    return {
+      user: {
+        username: "张山",
+        password: "123456"
+      }
+    };
+  },
   methods: {
     hideLogin(e) {
       let divClass = e.target.className;
       if (divClass === "login login-component") {
         this.$emit("hideLogin", false);
       }
+    },
+    reql() {
+      requestLogin({
+        url: "login",
+        method: "post",
+        data: this.user
+      })
+        .then(res => {
+          if (!res.err) {
+            this.$emit("hideLogin", false);
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        });
     }
   }
 };
