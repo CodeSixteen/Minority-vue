@@ -3,8 +3,8 @@
     <li
       v-for="(item,index) in navLists"
       :key="index"
-      :class="{active:index===curIndex}"
-      @click="cutArticleClassify(index,item)"
+      :class="isActive(item)"
+      @click="cutArticleClassify(item)"
     >{{item}}</li>
   </ul>
 </template>
@@ -26,9 +26,21 @@ export default {
     };
   },
   methods: {
-    cutArticleClassify(index, item) {
-      this.curIndex = index;
-      this.$emit("cutArticleClassify", item);
+    cutArticleClassify(item) {
+      this.$store.state.articleClassifyId = item;
+    },
+    isActive(item) {
+      if (item === this.articleClassifyId) {
+        return this.changeNav ? "nav-active" : "active";
+      }
+    }
+  },
+  computed: {
+    changeNav() {
+      return this.$store.state.changeNav;
+    },
+    articleClassifyId(){
+      return this.$store.state.articleClassifyId;
     }
   }
 };
@@ -41,6 +53,8 @@ export default {
   display: flex;
   justify-content: flex-start;
   li {
+    display: flex;
+    align-items: center;
     font-size: 16px;
     cursor: pointer;
     padding: 10px 20px;
@@ -50,6 +64,12 @@ export default {
     color: $red;
   }
   .active {
+    color: $red;
+    border-bottom: 2px solid $red;
+  }
+  .nav-active {
+    padding: 0 20px;
+    height: 58px;
     color: $red;
     border-bottom: 2px solid $red;
   }

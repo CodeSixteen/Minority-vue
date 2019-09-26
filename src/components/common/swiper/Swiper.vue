@@ -18,13 +18,11 @@
         :class="{active:curIndex===i}"
       ></span>
     </div>
-    <div class="cut-slide">
-      <div class="prev" @click="prev">
-        <i class="iconfont icon-next"></i>
-      </div>
-      <div class="next" @click="next">
-        <i class="iconfont icon-next"></i>
-      </div>
+    <div class="prev" @click="prev">
+      <i class="iconfont icon-next"></i>
+    </div>
+    <div class="next" @click="next">
+      <i class="iconfont icon-next"></i>
     </div>
   </div>
 </template>
@@ -47,14 +45,7 @@ export default {
   },
   data() {
     return {
-      newSwiperSlides: [
-        {
-          title: "de",
-          banner:
-            "https://cdn.sspai.com/topic/3adf2abe-606b-c6a8-7209-38c0c49b151d.jpg?imageMogr2/quality/95/thumbnail/!1440x330r/gravity/Center/crop/1440x330",
-          href: "javascript:0"
-        }
-      ],
+      newSwiperSlides: [],
       curIndex: 1,
       timer: null,
       cutIsClick: true
@@ -104,10 +95,12 @@ export default {
         this.moveSlide();
         this.cutIsClick = false;
       }
-      item.addEventListener("transitionend", () => {
-        //监听动画结束事件，切换为可以点击
-        this.cutIsClick = true;
-      });
+      if (item) {
+        item.addEventListener("transitionend", () => {
+          //监听动画结束事件，切换为可以点击
+          this.cutIsClick = true;
+        });
+      }
     },
     startAutoPlay() {
       //执行后开始自动播放
@@ -127,14 +120,17 @@ export default {
       //移动swiper
       let item = this.$refs.swiperItem;
       let len = this.newSwiperSlides.length - 1;
-      item.style.transitionDuration = `0.5s`;
-      item.style.transform = `translate(-${this.distance * this.curIndex}px,0)`;
-      if (this.curIndex === len) {
-        this.curIndex = 1;
-        this.setTransfrom(item);
-      } else if (this.curIndex === 0) {
-        this.curIndex = this.newSwiperSlides.length - 2;
-        this.setTransfrom(item);
+      if (item) {
+        item.style.transitionDuration = `0.5s`;
+        item.style.transform = `translate(-${this.distance *
+          this.curIndex}px,0)`;
+        if (this.curIndex === len) {
+          this.curIndex = 1;
+          this.setTransfrom(item);
+        } else if (this.curIndex === 0) {
+          this.curIndex = this.newSwiperSlides.length - 2;
+          this.setTransfrom(item);
+        }
       }
     },
     setTransfrom(el) {
@@ -180,7 +176,6 @@ export default {
   bottom: 50px;
   left: 50%;
   margin-left: -50%;
-  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -198,18 +193,12 @@ export default {
   padding: 1px;
 }
 /* 切换按钮 */
-.cut-slide {
-  width: 100%;
-  max-width: 1110px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  margin-left: -555px;
-}
 @media (max-width: 1110px) {
-  .cut-slide {
-    margin-left: -50%;
+  .next{
+    right: 0!important;
+  }
+  .prev{
+    left: 0!important;
   }
 }
 .next,
@@ -226,14 +215,16 @@ export default {
   cursor: pointer;
   opacity: 0;
   transition: all 0.3s;
+  font-weight: 700;
+  color: #000;
 }
 .prev {
   transform: rotate(180deg) translate(20px, 0);
-  left: 0;
+  left: calc((100% - 1110px) / 2);
 }
 .next {
   transform: translate(20px, 0);
-  right: 0;
+  right: calc((100% - 1110px) / 2);
 }
 .swiper:hover .prev {
   display: block;

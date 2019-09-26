@@ -35,6 +35,8 @@ export default {
 
 <style lang='scss' scoped>
 .search-box {
+  width: 100%;
+  height: 100%;
   background-color: rgba(10, 10, 10, 0.3);
   .search-box-wrap {
     width: 100%;

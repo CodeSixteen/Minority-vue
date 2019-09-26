@@ -1,7 +1,7 @@
 <template>
   <div class="article-list-item">
     <div class="article-list-img">
-      <img :src="listImg" />
+      <img src="~@/icons/loading.gif" :data-src="listImg" class="lazy-loading"/>
     </div>
     <div class="article-list-info">
       <h2>{{aritcleTitle}}</h2>
@@ -54,8 +54,10 @@ export default {
     height: 100%;
     transition: all 0.3s ease-out;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     img {
-      width: 100%;
       transition: all 0.3s ease-out;
     }
   }

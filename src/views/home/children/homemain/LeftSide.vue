@@ -1,11 +1,6 @@
 <template>
   <div class="left-side-box">
-    <SubNav
-      :navLists="navLists"
-      class="sub-nav-component"
-      @cutArticleClassify="cutArticleClassify"
-      ref="subnav"
-    />
+    <SubNav :navLists="navLists" class="sub-nav-component" ref="subnav" />
     <ArticleItem
       v-for="(item,index) in articleLists"
       :key="index"
@@ -22,8 +17,8 @@
 </template>
 
 <script>
-import SubNav from "@/components/project/SubNav";
-import ArticleItem from "@/components/project/ArticleItem";
+import SubNav from "./SubNav";
+import ArticleItem from "./ArticleItem";
 import { getArticleLists } from "@/network/home";
 
 export default {
@@ -32,8 +27,9 @@ export default {
     return {
       navLists: ["推荐", "最热", "应用推荐", "生活方式", "Power+"],
       articleLists: [],
-      articleClassify: "推荐",
-      subnavOffsetop: 0
+      subnavTopDistance: 0,
+      imgSrcArr: [],
+      timer: null
     };
   },
   components: {
@@ -44,15 +40,16 @@ export default {
     this.reqData();
   },
   mounted() {
-    this.xx();
-    window.addEventListener("scroll", this.handleScroll, false); // 监听（绑定）滚轮滚动事件
+    // 监听（绑定）滚轮滚动事件
+    window.addEventListener("scroll", this.handleScroll, false);
+  },
+  updated() {
+    this.getLazyLoadingEl();
+    this.lazyLoading();
   },
   methods: {
-    cutArticleClassify(id) {
-      this.articleClassify = id;
-    },
     reqData() {
-      getArticleLists(this.articleClassify)
+      getArticleLists(this.articleClassifyId)
         .then(res => {
           this.articleLists = res.data;
         })
@@ -60,30 +57,68 @@ export default {
           console.log(err);
         });
     },
-    xx() {
-      setTimeout(() => {
-        let c = this.$refs.subnav.$el.getBoundingClientRect().top;
-        this.subnavOffsetop = c;
-      }, 200);
-    },
     handleScroll() {
-      let clientHeight =
-        document.documentElement.clientHeight || document.body.clientHeight;
-      // 设备/屏幕高度
-      let scrollObj = document.documentElement || document.body; // 滚动区域
-      let scrollTop = scrollObj.scrollTop; // div 到头部的距离
-      let c = this.$refs.subnav.$el.getBoundingClientRect().top;
-      if (c <= 0) {
+      //获取元素到顶部的距离
+      this.subnavTopDistance = this.$refs.subnav.$el.getBoundingClientRect().top;
+      let changeNav = this.$store.state.changeNav;
+      if (this.subnavTopDistance <= 0) {
+        if (!changeNav) {
+          this.$store.state.changeNav = true;
+        }
+      } else {
+        if (changeNav) {
+          this.$store.state.changeNav = false;
+        }
       }
-      let scrollHeight = scrollObj.scrollHeight; // 滚动条的总高度
-      //滚动条到底部的条件
-      if (scrollTop + clientHeight == scrollHeight) {
-        // div 到头部的距离 + 屏幕高度 = 可滚动的总高度
+      /* 获取页面可视区的高度，滚动条顶部所处的位置，元素可滚动的总高度 */
+      let el = document.documentElement || document.body;
+      let scrollTop = el.scrollTop;//滚动条顶部位置
+      let visibleTop = el.clientHeight;//可视区高度
+      let scrollheight = el.offsetHeight;//可滚动总高度
+      if (scrollTop + visibleTop === scrollheight) {
+        //已经滚动到底部，可以做一些事情
+        console.log("--");
       }
+      //添加定时器，避免执行次数过多
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
+        this.lazyLoading();
+      }, 100);
+    },
+    lazyLoading() {
+      for (let i = 0; i < this.imgSrcArr.length; i++) {
+        if (this.isInVisibleArea(this.imgSrcArr[i])) {
+          this.imgSrcArr[i].src = this.imgSrcArr[i].getAttribute("data-src");
+          this.imgSrcArr[i].style.width = "100%";
+          this.imgSrcArr.splice(i, 1);
+          i--;
+        }
+      }
+    },
+    getLazyLoadingEl() {
+      //把所有需要懒加载的图片放在一个数组中
+      let arr = document.querySelectorAll(".lazy-loading");
+      //将类数组转为数组
+      this.imgSrcArr = Array.from(arr);
+    },
+    //判断元素是否在可视区
+    isInVisibleArea(el) {
+      let rect = el.getBoundingClientRect();
+      return (
+        rect.top > 0 &&
+        rect.top < window.innerHeight &&
+        rect.right > 0 &&
+        rect.right < window.innerWidth
+      );
+    }
+  },
+  computed: {
+    articleClassifyId() {
+      return this.$store.state.articleClassifyId;
     }
   },
   watch: {
-    articleClassify() {
+    articleClassifyId() {
       this.reqData();
     }
   },

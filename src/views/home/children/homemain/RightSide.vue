@@ -30,20 +30,20 @@
 </template>
 
 <script>
-import { getRightAdImg, getMatrixLists } from "@/network/home";
-import Blogroll from '@/components/project/Blogroll';
-import BottomLink from '@/components/project/BottomLink';
+import { getRightAdImg, getMatrixLists } from '@/network/home'
+import Blogroll from './Blogroll'
+import BottomLink from './BottomLink'
 
 export default {
-  name: "RightSide",
+  name: 'RightSide',
   components:{
     Blogroll,
     BottomLink
   },
   data() {
     return {
-      adImgSrc: "",
-      adImgHref: "",
+      adImgSrc: '',
+      adImgHref: '',
       matrixLists: []
     };
   },
