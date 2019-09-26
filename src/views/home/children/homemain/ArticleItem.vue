@@ -61,16 +61,7 @@ export default {
       transition: all 0.3s ease-out;
     }
   }
-  .article-list-img::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: "";
-    background: linear-gradient(180deg, transparent, #000);
-    width: 50%;
-    height: 100%;
-    transition: all 0.3s ease-out;
-  }
+ 
   .article-list-info {
     padding: 30px;
     display: flex;
