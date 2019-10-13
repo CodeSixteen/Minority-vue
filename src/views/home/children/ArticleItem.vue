@@ -1,5 +1,5 @@
 <template>
-  <div class="article-list-item">
+  <div class="article-list-item" @click="toArticle">
     <div class="article-list-img">
       <img src="~@/icons/loading.gif" :data-src="listImg" class="lazy-loading"/>
     </div>
@@ -36,13 +36,20 @@ export default {
     "author",
     "createdTime",
     "view",
-    "comment"
-  ]
+    "comment",
+    "article_id"
+  ],
+  methods:{
+    toArticle(){
+      this.$router.push(`/post/${this.article_id}`)
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .article-list-item {
+  cursor: pointer;
   width: 100%;
   height: 200px;
   background-color: #fff;

@@ -25,9 +25,7 @@ body {
 .clearfix{
     *zoom:1;/*IE/7/6*/
 }
-a {color:#292525; text-decoration:none; }
-a:hover{color:#d7191a;}
-h1,h2,h3,h4,h5,h6 {text-decoration:none;font-weight:normal;font-size:100%;}  /*设置h标签的大小，设置跟父亲一样大的字体font-size:100%;*/
+a {text-decoration:none; }
 s,i,em{font-style:normal;text-decoration:none;}
 .col-red{color: #d7191a!important;}
 
@@ -68,3 +66,34 @@ s,i,em{font-style:normal;text-decoration:none;}
     margin: 10px 0;
     background-color: #ccc;
 }
+
+.flex-column-center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.flex-between{
+    display: flex;
+    justify-content: space-between;
+}
+.author{
+    font-size: 14px;
+    color: #292525;
+    padding-left: 10px;
+}
+.go-top-component {
+    position: fixed;
+    bottom: 60px;
+    right: 60px;
+  }
+
+  .ss-img-wrapper {
+    position: relative;
+    text-align: center;
+    outline: none;
+    margin: 40px auto;
+  }
+  .ss-img-wrapper img{
+      width: 100%;
+      max-width: 670px;
+  }

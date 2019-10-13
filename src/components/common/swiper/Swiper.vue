@@ -104,7 +104,7 @@ export default {
     },
     startAutoPlay() {
       //执行后开始自动播放
-      this.timer = setInterval(this.next, 5000);
+      this.timer = setInterval(this.next, 10000);
     },
     clearIn() {
       //鼠标移入时停止自动播放

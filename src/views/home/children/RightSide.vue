@@ -1,7 +1,7 @@
 <template>
   <div class="right-side">
     <div class="top">
-      <a :href="adImgHref">
+      <a href="javascript:0">
         <img :src="adImgSrc" v-show="isShow" />
       </a>
     </div>
@@ -21,9 +21,9 @@
       </li>
     </ul>
     <div class="matrix-all-btn">
-      <a class="matrix-all-link" href="https://sspai.com/matrix">查看全部 >></a>
+      <a class="matrix-all-link" href="javascript:0">查看全部 >></a>
     </div>
-    <div class="line"></div>
+    <div class="line" id='box'></div>
     <Blogroll/>
     <BottomLink/>
   </div>
@@ -31,8 +31,8 @@
 
 <script>
 import { getRightAdImg, getMatrixLists } from '@/network/home'
-import Blogroll from './Blogroll'
-import BottomLink from './BottomLink'
+import Blogroll from '@/components/project/Blogroll'
+import BottomLink from '@/components/project/BottomLink'
 
 export default {
   name: 'RightSide',

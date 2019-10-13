@@ -37,26 +37,19 @@
         </form>
       </div>
     </div>
-    <popup :msg="msg" v-show="isShowPopup" @clickColse="clickColse" />
   </div>
 </template>
 
 <script>
-import { requestLogin } from '@/network/login';
-import popup from '@/components/project/popup';
+import { post } from '@/network/post'
 
 export default {
   name: 'Login',
-  components: {
-    popup
-  },
   data() {
     return {
       phoneNumber: '',
       password: '',
-      isShowPopup: false,
-      check: false,
-      msg: ''
+      check: false
     };
   },
   mounted(){
@@ -78,11 +71,11 @@ export default {
       if(!phoneNumber) return;
       //判断密码是否为空
       if(!this.password){
-        this.openPopup("请输入密码");
+        this.showPopup("请输入密码");
         return;
       }
       //发送登录请求
-      requestLogin({
+      post({
         url: 'login',
         method: 'post',
         data: {
@@ -93,25 +86,25 @@ export default {
         .then(res => {
           if (res.err == 0) {
             localStorage.setItem('token', res.data.token);
-            localStorage.setItem('user_name', res.data.name);
-            this.$store.state.isLoginSuc = true;
+            localStorage.setItem('user_name', res.data.username);
+            localStorage.setItem('uid', res.data.uid);
+            localStorage.setItem('head_img', res.data.head_img);
+            this.$store.state.isLoginSuc = true;//显示用户信息
+            this.$store.state.isShowLogin = false;//关闭登录框
             //记住密码
             if(this.check){
               this.setCookie(this.phoneNumber, this.password, 30);
             }else{
               this.clearCookie();
             };
-            this.openPopup(res.msg);
+            this.showPopup(res.msg);
           } else {
-            this.openPopup(res.msg);
+            this.showPopup(res.msg);
           }
         })
         .catch(function(err) {
           console.log(err);
         });
-    },
-    clickColse(hide) {
-      this.isShowPopup = hide;
     },
     toLogup() {
       this.$store.state.isShowLogin = false;
@@ -127,19 +120,20 @@ export default {
     parityPhoneNumber(value) {
       let Reg = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
       if (value.trim() == '') {        
-        this.openPopup("请输入手机号码");
+        this.showPopup("请输入手机号码");
         return false;
       } else if (!Reg.test(value)) {
-        this.openPopup("请输入正确的手机号码");
+        this.showPopup("请输入正确的手机号码");
         return false;
       }
       return value;
     },
-    //弹出弹窗信息
-    openPopup(str){
-      this.isShowPopup = true;
-      this.msg = str;
-    },
+    showPopup(str){
+      //弹出弹窗信息
+      this.$store.state.isShowPopup = true;
+      this.$store.state.toastMsg = str;
+    }
+    ,
     //设置cookie
     setCookie(phoneNumber, pwd, exdays) {
       let exdate = new Date(); //获取时间

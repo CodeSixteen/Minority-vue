@@ -1,6 +1,6 @@
 <template>
   <div class="home-ad-img">
-    <a v-for="(item,index) in adImages" :key="index" :href="item.img_href" class="ad-img-container">
+    <a v-for="(item,index) in adImages" :key="index" href="javascript:0" class="ad-img-container">
       <img :src="item.img_src" :alt="item.img_title" />
     </a>
   </div>

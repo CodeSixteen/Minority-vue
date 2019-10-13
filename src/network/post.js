@@ -1,11 +1,10 @@
 import axios from 'axios'
 
-export function requestLogin(config) {
+export function post(config) {
     //创建实例
     const instance = axios.create({
         baseURL: 'http://localhost:8102/',
         timeout: 5000,
-        method: 'post',
         transformRequest: [
             function (data) {
                 // 对 data 进行任意转换处理

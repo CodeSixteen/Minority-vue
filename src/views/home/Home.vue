@@ -1,10 +1,13 @@
 <template>
   <div class="home">
-    <HomeNav/>
+    <HomeNav />
     <HomeSlide />
     <div class="main">
       <HomeAdImg />
-      <HomeMainWrap />
+      <div class="main-wrap">
+        <LeftSide class="left-side" />
+        <RightSide class="right-side" />
+      </div>
     </div>
     <goTop class="go-top-component" />
   </div>
@@ -12,20 +15,22 @@
 
 <script>
 // @ is an alias to /src
-import HomeNav from './children/HomeNav'
-import HomeSlide from './children/HomeSlide'
-import HomeAdImg from './children/HomeAdImg'
-import HomeMainWrap from './children/HomeMainWrap'
-import goTop from '@/components/common/gobacktop/goTop'
+import HomeNav from "./children/HomeNav";
+import HomeSlide from "./children/HomeSlide";
+import HomeAdImg from "./children/HomeAdImg";
+import LeftSide from "./children/LeftSide";
+import RightSide from "./children/RightSide";
+import goTop from "@/components/common/gobacktop/goTop";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     HomeNav,
     HomeSlide,
     HomeAdImg,
-    HomeMainWrap,
-    goTop,
+    LeftSide,
+    RightSide,
+    goTop
   }
 };
 </script>
@@ -41,11 +46,19 @@ export default {
     width: 100%;
     max-width: 1110px;
     position: relative;
-  }
-  .go-top-component {
-    position: fixed;
-    bottom: 60px;
-    right: 60px;
+    .main-wrap {
+      margin-top: 200px;
+      display: flex;
+      justify-content: space-between;
+      .left-side {
+        width: 72%;
+        max-width: 800px;
+      }
+      .right-side {
+        width: 23.4%;
+        max-width: 260px;
+      }
+    }
   }
 }
 </style>

@@ -1,16 +1,16 @@
 <!-- 友情链接 -->
 <template>
   <div class="blogroll-box">
-    <a href="https://weibo.com/sspaime?is_hot=1">
+    <a href="javascript:0">
       <i class="iconfont icon-weibo"></i>
     </a>
     <span>
       <i class="iconfont icon-WeChat"></i>
     </span>
-    <a href="https://twitter.com/sspai_com">
+    <a href="javascript:0">
       <i class="iconfont icon-tuite"></i>
     </a>
-    <a href="https://sspai.com/feed">
+    <a href="javascript:0">
       <i class="iconfont icon-rss"></i>
     </a>
   </div>

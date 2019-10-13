@@ -39,26 +39,20 @@
           </div>
           <p class="user-pro">
             <input type="checkbox" v-model="check" /> 我已经阅读并同意《
-            <a href="https://sspai.com/post/37739">少数派用户协议</a>》
+            <a href="javascript:0">少数派用户协议</a>》
           </p>
           <button type="button" class="logup-submit-btn" @click="submitLogup">注册</button>
         </form>
       </div>
     </div>
-    <popup v-show="isShowPopup" :msg="msg" @clickColse="colsePopup" />
   </div>
 </template>
 
 <script>
-import popup from '@/components/project/popup'
-import { requestLogin } from '@/network/login'
-import { isNull } from 'util';
+import { post } from '@/network/post';
 
 export default {
   name: 'Logup',
-  components: {
-    popup
-  },
   data() {
     return {
       phoneNumber: '',
@@ -66,9 +60,7 @@ export default {
       password: '',
       old_password: '',
       check: false,
-      vercode: '123456',
-      isShowPopup: false,
-      msg: ''
+      vercode: '123456'
     };
   },
   methods: {
@@ -84,20 +76,18 @@ export default {
       if (!password) return;
       //验证两次密码是否一致
       if (password != this.old_password) {
-        this.isShowPopup = true;
-        this.msg = `两次输入密码不一致`;
+        this.showPopup(`两次输入的密码不一致`);
         return;
       }
       //验证短信验证码
       //soming code.
       //判断是否勾选同意协议
-      if(!this.check){
-        this.isShowPopup = true;
-        this.msg = `请阅读用户协议并同意`;
+      if (!this.check) {
+        this.showPopup(`请阅读用户协议并同意`);
         return;
       }
       //提交到注册接口
-      requestLogin({
+      post({
         url: 'logup',
         method: 'post',
         data: {
@@ -108,10 +98,11 @@ export default {
       })
         .then(res => {
           if (res.err == 0) {
-            this.openPopup(res.msg);
+            this.$store.state.isShowLogup = false;
+            this.showPopup(res.msg);
             //重定向到指定页或者当前页并自动登录
           } else {
-            this.openPopup(res.msg);
+            this.showPopup(res.msg);
           }
         })
         .catch(function(err) {
@@ -125,9 +116,10 @@ export default {
         this.$store.state.isShowLogup = false;
       }
     },
-    //关闭弹窗
-    colsePopup() {
-      this.isShowPopup = false;
+    showPopup(str) {
+      //弹出弹窗信息
+      this.$store.state.isShowPopup = true;
+      this.$store.state.toastMsg = str;
     },
     //去登录
     toLogin() {
@@ -143,11 +135,11 @@ export default {
     //校验手机号
     parityPhoneNumber(value) {
       let Reg = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
-      if (value.trim() == '') {        
-        this.openPopup("请输入手机号码");
+      if (value.trim() == '') {
+        this.showPopup(`请输入手机号码`);
         return false;
       } else if (!Reg.test(value)) {
-        this.openPopup("请输入正确的手机号码");
+        this.showPopup(`请输入正确的手机号码`);
         return false;
       }
       return value;
@@ -157,13 +149,13 @@ export default {
       let Reg = /^[\u4e00-\u9fa5a-zA-Z0-9_]{2,10}$/;
       let reg1 = /[^\u4e00-\u9fa5a-zA-Z0-9_]/;
       if (value.trim() == '') {
-        this.openPopup("请设置昵称");
+        this.showPopup(`请设置昵称`);
         return false;
       } else if (reg1.test(value)) {
-        this.openPopup("昵称不能包含特殊除“_”以外的符号");
+        this.showPopup(`昵称不能包含特殊除“_”以外的符号`);
         return false;
-      }else if (!Reg.test(value)) {
-        this.openPopup("请设置2-10位昵称");
+      } else if (!Reg.test(value)) {
+        this.showPopup(`请设置2-10位昵称`);
         return false;
       }
       return value;
@@ -172,25 +164,20 @@ export default {
     parityPassword(value) {
       let Reg = /.{6,16}$/;
       if (value == '') {
-        this.openPopup(`密码不能为空`);
+        this.showPopup(`密码不能为空`);
         return false;
       } else if (!Reg.test(value)) {
-        this.openPopup(`密码不能少于六位`);
+        this.showPopup(`密码不能少于六位`);
         return false;
       }
       return value;
-    },
-    //弹出弹窗信息
-    openPopup(str){
-      this.isShowPopup = true;
-      this.msg = str;
     }
   }
 };
 </script>
 
 <style lang='scss' scoped>
-@import "~@/styles/variables";
+@import '~@/styles/variables';
 .logup {
   width: 100%;
   height: 100%;

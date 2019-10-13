@@ -3,11 +3,12 @@
     <TopNav class="top-nav">
       <template #left>
         <div class="left-nav-container">
-          <a class="logo">
-            <span class="logo-icon"></span>
-            <span class="logo-title" v-show="!changeNav">少数派</span>
-          </a>
-          <SubNav v-show="changeNav" :navLists="navLists" class="sub-nav" />
+          <router-link to="/">
+            <a class="logo">
+              <span class="logo-icon"></span>
+              <span class="logo-title" v-show="!changeNav">少数派</span>
+            </a>
+          </router-link>
         </div>
       </template>
       <template #center>
@@ -42,7 +43,7 @@
       </template>
       <template #right>
         <div class="right-nav-container">
-          <div class="right-nav-lists" v-if="changeNav">
+          <!--  <div class="right-nav-lists" v-if="changeNav">
             <a href="javascript:0">
               <img src="~@/icons/1.svg" />
             </a>
@@ -58,14 +59,14 @@
             <a href="javascript:0">
               <img src="~@/icons/5.svg" />
               <div class="right-tron-box">
-                <a href="javascript:0" class="right-tron-link">加入Tron 计划</a>
-                <a href="javascript:0" class="right-tron-link">
+                <a href="https://beta.sspai.com/post/46283" class="right-tron-link">加入Tron 计划</a>
+                <a href="https://shortcuts.sspai.com/" class="right-tron-link">
                   <img src="~@/assets/images/shortcut.svg" />
                 </a>
               </div>
             </a>
             <div class="line"></div>
-          </div>
+          </div>-->
           <i class="iconfont" @click="showSearchInput" :class="iconStyle"></i>
           <Search v-show="isShowSearch" class="home-search" @hideSearch="hideSearch" />
           <div
@@ -82,23 +83,21 @@
 </template>
 
 <script>
-import TopNav from '@/components/project/nav/TopNav'
-import Search from '@/components/project/nav/Search'
-import NavUser from '@/components/project/nav/NavUser'
-import SubNav from './SubNav'
+import TopNav from "@/components/project/nav/TopNav";
+import Search from "@/components/project/nav/Search";
+import NavUser from "@/components/project/nav/NavUser";
 
 export default {
-  name: 'HomeNav',
+  name: "PostNav",
   data() {
     return {
       isShowSearch: false,
-      navLists: ['推荐', '最热', '应用推荐', '生活方式', 'Power+']
+      navLists: ["推荐", "最热", "应用推荐", "生活方式", "Power+"]
     };
   },
   components: {
     TopNav,
     Search,
-    SubNav,
     NavUser
   },
   methods: {
@@ -118,8 +117,8 @@ export default {
       return this.$store.state.changeNav;
     },
     iconStyle() {
-      let res = this.isShowSearch ? 'icon-guanbi' : 'icon-search';
-      let res1 = this.changeNav ? ' icon-color' : '';
+      let res = this.isShowSearch ? "icon-guanbi" : "icon-search";
+      let res1 = this.changeNav ? " icon-color" : "";
       return res + res1;
     },
     isLoginSuc() {

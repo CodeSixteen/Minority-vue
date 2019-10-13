@@ -11,6 +11,7 @@
       :createdTime="item.created_time"
       :view="item.view"
       :comment="item.comment"
+      :article_id="item.id"
       class="article-item-component"
     />
   </div>
@@ -77,7 +78,6 @@ export default {
       let scrollheight = el.offsetHeight;//可滚动总高度
       if (scrollTop + visibleTop === scrollheight) {
         //已经滚动到底部，可以做一些事情
-        console.log("--");
       }
       //添加定时器，避免执行次数过多
       clearTimeout(this.timer);
@@ -107,8 +107,8 @@ export default {
       return (
         rect.top > 0 &&
         rect.top < window.innerHeight &&
-        rect.right > 0 &&
-        rect.right < window.innerWidth
+        rect.left > 0 &&
+        rect.left < window.innerWidth
       );
     }
   },
@@ -123,7 +123,9 @@ export default {
     }
   },
   destroyed() {
+    document.documentElement.scrollTop = 0;
     window.removeEventListener("scroll", this.handleScroll); //  离开页面清除（移除）滚轮滚动事件
+    this.$store.state.changeNav = false;//离开当前页面的时候将nav置为默认状态
   }
 };
 </script>

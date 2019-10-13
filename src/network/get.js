@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export function request(config) {
+export function get(config) {
     //创建实例
     const instance = axios.create({
         baseURL: 'http://localhost:8102/',

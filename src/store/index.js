@@ -11,7 +11,9 @@ const state = {
     isShowLogup: false,
     changeNav: false,
     articleClassifyId: '推荐',
-    isLoginSuc: false
+    isLoginSuc: false,
+    isShowPopup: false,
+    toastMsg: '确定',
 }
 export default new Vuex.Store({
     state,

@@ -10,15 +10,14 @@
 <script>
 export default {
   name: "popup",
-  props: {
-    msg: {
-      type: String,
-      default: "确定"
-    }
-  },
   methods: {
     clickColse() {
       this.$emit("clickColse");
+    }
+  },
+  computed:{
+    msg(){
+      return this.$store.state.toastMsg;
     }
   }
 };

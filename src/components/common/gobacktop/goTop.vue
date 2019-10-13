@@ -17,7 +17,7 @@ export default {
         //用于设置速度差，产生缓动的效果
         var speed = Math.floor(-osTop / 16);
         m.scrollTop = n.scrollTop = osTop + speed;
-        if (osTop == 0) {
+        if (speed == 0) {
           clearInterval(timer);
         }
       }, 5);
@@ -28,7 +28,7 @@ export default {
 
 <style lang='scss' scoped>
 .go-top {
-  background: #fff;
+  background: #ccc;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -36,7 +36,7 @@ export default {
   .icon-gotop {
     line-height: 40px;
     font-size: 24px;
-    color: #999;
+    color: #fff;
   }
 }
 </style>
