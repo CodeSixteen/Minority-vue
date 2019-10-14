@@ -6,7 +6,7 @@
         <!-- 未登录时显示请登录 -->
         <!-- 用户评论，登录后才显示 -->
         <div class="left">
-          <img class="user-head-img" src="http://localhost:8102/upload/head_img.png" />
+          <img class="user-head-img" src="~@/icons/common/default_header_img.png" />
         </div>
         <div class="right">
           <input

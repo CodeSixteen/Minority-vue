@@ -1,7 +1,7 @@
 <template>
   <div class="article-list-item" @click="toArticle">
     <div class="article-list-img">
-      <img src="~@/icons/loading.gif" :data-src="listImg" class="lazy-loading"/>
+      <img src="~@/icons/common/loading.gif" :data-src="listImg" class="lazy-loading"/>
     </div>
     <div class="article-list-info">
       <h2>{{aritcleTitle}}</h2>

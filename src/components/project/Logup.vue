@@ -2,7 +2,7 @@
   <div class="logup" @click="hideLogup">
     <div class="logup-content">
       <div class="logup-logo">
-        <img src="~@/icons/login-logo.png" />
+        <img src="~@/icons/common/logo.png" />
       </div>
       <div class="to-login-btn">
         <span @click="toLogin">登录</span>
@@ -86,28 +86,29 @@ export default {
         this.showPopup(`请阅读用户协议并同意`);
         return;
       }
+      this.showPopup('未连接数据库')
       //提交到注册接口
-      post({
-        url: 'logup',
-        method: 'post',
-        data: {
-          phoneNumber,
-          username,
-          password
-        }
-      })
-        .then(res => {
-          if (res.err == 0) {
-            this.$store.state.isShowLogup = false;
-            this.showPopup(res.msg);
-            //重定向到指定页或者当前页并自动登录
-          } else {
-            this.showPopup(res.msg);
-          }
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
+      // post({
+      //   url: 'logup',
+      //   method: 'post',
+      //   data: {
+      //     phoneNumber,
+      //     username,
+      //     password
+      //   }
+      // })
+      //   .then(res => {
+      //     if (res.err == 0) {
+      //       this.$store.state.isShowLogup = false;
+      //       this.showPopup(res.msg);
+      //       //重定向到指定页或者当前页并自动登录
+      //     } else {
+      //       this.showPopup(res.msg);
+      //     }
+      //   })
+      //   .catch(function(err) {
+      //     console.log(err);
+      //   });
     },
     //隐藏注册页
     hideLogup(e) {

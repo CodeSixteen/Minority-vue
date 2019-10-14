@@ -1,12 +1,12 @@
 <template>
   <div class="right-side">
     <div class="top">
-      <a href="javascript:0">
+      <a :href="adImgHref">
         <img :src="adImgSrc" v-show="isShow" />
       </a>
     </div>
     <div class="matrix-title">
-      <img src="~@/assets/images/icon-matrix.png" />
+      <img src="~@/icons/home/icon-matrix.png" />
       <span>Matrix精选</span>
     </div>
     <ul class="matrix-lists">
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       adImgSrc: 'https://cdn.sspai.com/article/46423bae-efd5-0390-5b55-014e2ee5a6bf.jpg',
-      adImgHref: '',
+      adImgHref: 'javascript:0',
       matrixLists: [
         {user_header_img:"https://cdn.sspai.com/2019/10/14/5666a9d8a2310222bccff427675600d1.JPG",username:"不蠢会死的某翠",summary:"利用快捷指令连接Sony耳机"},
         {user_header_img:"https://cdn.sspai.com/2018/03/25/ce2a784deb3097acb6ee9d37ea0c13ea.jpg",username:"胖鱼要进步",summary:"攻略向 | 搬家到底有多难？"},

@@ -21,23 +21,23 @@ export default {
   props: {
       banner:{
         type: String,
-        default: ''
+        default: 'https://cdn.sspai.com/article/8dc31f25-65eb-f2fc-40bb-25887ffe3d70.jpg?imageMogr2/quality/95/thumbnail/!1420x708r/gravity/Center/crop/1420x708'
       },
       title:{
         type: String,
-        default: ''
+        default: '本周看什么：皮克斯新作《1/2 的魔法》预告发布，吕克·贝松新电影《安娜》上映'
       },
       head_img:{
         type: String,
-        default: ''
+        default: 'https://cdn.sspai.com/2018/11/04/a5ae7198440f04585f4c6df1659aa96b.gif?imageMogr2/quality/95/thumbnail/!64x64r/gravity/Center/crop/64x64'
       },
       author:{
         type: String,
-        default: ''
+        default: '一只索狗'
       },
       created_time:{
         type: String,
-        default: ''
+        default: '2天前'
       }
   }
 }

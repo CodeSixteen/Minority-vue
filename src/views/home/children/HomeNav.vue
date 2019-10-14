@@ -13,28 +13,28 @@
       <template #center>
         <ul class="center-nav-lists" v-show="!changeNav">
           <li class="nav-list-item">
-            <img src="~@/assets/images/matrix.svg" />
+            <img src="~@/icons/nav/matrix.svg" />
             <span>Matrix</span>
           </li>
           <li class="nav-list-item">
-            <img src="~@/assets/images/column.svg" />
+            <img src="~@/icons/nav/column.svg" />
             <span>付费订阅</span>
           </li>
           <li class="nav-list-item">
-            <img src="~@/assets/images/mall.svg" />
+            <img src="~@/icons/nav/mall.svg" />
             <span>特别策划</span>
           </li>
           <li class="nav-list-item">
-            <img src="~@/assets/images/lobaro.svg" />
+            <img src="~@/icons/nav/lobaro.svg" />
             <span>Pi Store</span>
           </li>
           <li class="nav-list-item tron">
-            <img src="~@/assets/images/special.svg" />
+            <img src="~@/icons/nav/special.svg" />
             <span>Tron 计划</span>
             <div class="tron-box">
               <a href="javascript:0" class="tron-link">加入Tron 计划</a>
               <a href="javascript:0" class="tron-link">
-                <img src="~@/assets/images/shortcut.svg" alt />
+                <img src="~@/icons/nav/shortcut.svg" alt />
               </a>
             </div>
           </li>
@@ -44,23 +44,23 @@
         <div class="right-nav-container">
           <div class="right-nav-lists" v-if="changeNav">
             <a href="javascript:0">
-              <img src="~@/icons/1.svg" />
+              <img src="~@/icons/nav/1.svg" />
             </a>
             <a href="javascript:0">
-              <img src="~@/icons/2.svg" />
+              <img src="~@/icons/nav/2.svg" />
             </a>
             <a href="javascript:0">
-              <img src="~@/icons/3.svg" />
+              <img src="~@/icons/nav/3.svg" />
             </a>
             <a href="javascript:0">
-              <img src="~@/icons/4.svg" />
+              <img src="~@/icons/nav/4.svg" />
             </a>
             <a href="javascript:0">
-              <img src="~@/icons/5.svg" />
+              <img src="~@/icons/nav/5.svg" />
               <div class="right-tron-box">
                 <a href="javascript:0" class="right-tron-link">加入Tron 计划</a>
                 <a href="javascript:0" class="right-tron-link">
-                  <img src="~@/assets/images/shortcut.svg" />
+                  <img src="~@/icons/nav/shortcut.svg" />
                 </a>
               </div>
             </a>
@@ -161,7 +161,7 @@ export default {
     border-radius: 50%;
     background-color: #d7191a;
     padding: 5px;
-    background-image: url("~@/icons/logo.svg");
+    background-image: url("~@/icons/common/logo.svg");
     background-size: auto 100%;
   }
   .logo-title {

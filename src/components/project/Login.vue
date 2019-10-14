@@ -2,7 +2,7 @@
   <div class="login" @click="hideLogin">
     <div class="login-content">
       <div class="login-logo">
-        <img src="~@/icons/login-logo.png" />
+        <img src="~@/icons/common/logo.png" />
       </div>
       <div class="sign-in-btn">
         <span @click="toLogup">+ 注册</span>
@@ -47,9 +47,15 @@ export default {
   name: 'Login',
   data() {
     return {
-      phoneNumber: '',
-      password: '',
-      check: false
+      phoneNumber: '18882372781',
+      password: '123456',
+      check: false,
+      user_info:[
+        {
+          phoneNumber: '18882372781',
+          password: '123456'
+        }
+      ]
     };
   },
   mounted(){
@@ -74,37 +80,61 @@ export default {
         this.showPopup("请输入密码");
         return;
       }
+      
       //发送登录请求
-      post({
-        url: 'login',
-        method: 'post',
-        data: {
-          phoneNumber,
-          password: this.password
+      // post({
+      //   url: 'login',
+      //   method: 'post',
+      //   data: {
+      //     phoneNumber,
+      //     password: this.password
+      //   }
+      // })
+      //   .then(res => {
+      //     if (res.err == 0) {
+      //       localStorage.setItem('token', res.data.token);
+      //       localStorage.setItem('user_name', res.data.username);
+      //       localStorage.setItem('uid', res.data.uid);
+      //       localStorage.setItem('head_img', res.data.head_img);
+      //       this.showPopup(res.msg);
+      //     } else {
+      //       this.showPopup(res.msg);
+      //     }
+      //   })
+      //   .catch(function(err) {
+      //     console.log(err);
+      //   });
+      let succ = true;
+      this.user_info.forEach((item) =>{
+        if(item.phoneNumber === this.phoneNumber){
+          succ = false;
         }
       })
-        .then(res => {
-          if (res.err == 0) {
-            localStorage.setItem('token', res.data.token);
-            localStorage.setItem('user_name', res.data.username);
-            localStorage.setItem('uid', res.data.uid);
-            localStorage.setItem('head_img', res.data.head_img);
-            this.$store.state.isLoginSuc = true;//显示用户信息
-            this.$store.state.isShowLogin = false;//关闭登录框
-            //记住密码
-            if(this.check){
-              this.setCookie(this.phoneNumber, this.password, 30);
-            }else{
-              this.clearCookie();
-            };
-            this.showPopup(res.msg);
-          } else {
-            this.showPopup(res.msg);
-          }
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
+      if(succ){
+        this.showPopup('用户不存在');
+        return;
+      }
+      succ = true;
+      this.user_info.forEach((item) =>{
+        if(item.password === this.password){
+          succ = false;
+        }
+      })
+      if(succ){
+        this.showPopup('密码不正确');
+        return
+      }
+      
+      this.$store.state.isLoginSuc = true;//显示用户信息
+      this.$store.state.isShowLogin = false;//关闭登录框
+      localStorage.setItem('phoneNumber', this.phoneNumber);
+      this.showPopup('登录成功')
+      //记住密码
+      if(this.check){
+        this.setCookie(this.phoneNumber, this.password, 30);
+      }else{
+        this.clearCookie();
+      };
     },
     toLogup() {
       this.$store.state.isShowLogin = false;

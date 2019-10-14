@@ -20,7 +20,7 @@ export default {
     popup
   },
   created() {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("phoneNumber")) {
       this.$store.state.isLoginSuc = true;
     }
   },

@@ -1,6 +1,6 @@
 <template>
   <div class="swiper-slide-container">
-    <a href="javascript:0" class="slide-link">
+    <a :href="slideLink" class="slide-link">
       <img :src="slideSrc" :alt="slideTitle" class="slide-img"/>
     </a>
   </div>

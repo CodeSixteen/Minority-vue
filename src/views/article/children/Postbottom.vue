@@ -65,7 +65,7 @@ export default {
           border-radius: 50%;
           background-color: #d7191a;
           padding: 5px;
-          background-image: url("~@/icons/logo.svg");
+          background-image: url("~@/icons/common/logo.svg");
           background-size: auto 100%;
         }
         .logo-title {

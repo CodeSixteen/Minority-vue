@@ -57,9 +57,9 @@ export default {
   data() {
     return {
       isShowRe: false,
-      banner: "http://localhost:8102/upload/article_banner.png",
+      banner: "",
       title: "",
-      head_img: "http://localhost:8102/upload/article_head_img.png",
+      head_img: "",
       author: "",
       created_time: "",
       content: "",

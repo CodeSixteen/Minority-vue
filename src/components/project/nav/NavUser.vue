@@ -1,6 +1,6 @@
 <template>
   <div class="nav-user-box">
-    <img src="http://localhost:8102/upload/head_img.png" class="user-head-photo" />
+    <img src="~@/icons/common/default_header_img.png" class="user-head-photo" />
     <div class="triangle"></div>
     <div class="user-function-list">
       <ul>

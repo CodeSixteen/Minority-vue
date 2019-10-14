@@ -32,7 +32,81 @@ export default {
   name: "recommend",
   data() {
     return {
-      recommentedList: []
+      recommentedList: [
+        {
+          id: 1,
+          title: "Power+ Live 02",
+          created_time: "2月15日",
+          author: "SpencerWoo",
+          view: 88,
+          comment: 0,
+          list_img_src:
+            "https://cdn.sspai.com/article/d44a82eb-3732-a9d3-4f4b-408fb3f689d7.jpg?imageMogr2/quality/95/thumbnail/!800x400r/gravity/Center/crop/800x400",
+          headerImg:
+            "https://cdn.sspai.com/2019/07/31/avatar/c328e1cae65eb20dde99d811b58d0bd0.jpg"
+        },
+        {
+          id: 2,
+          title:
+            "国庆看什么：DC 新片《猛禽小队和哈莉·奎因》正式预告，《我和我的祖国》上映",
+          created_time: "2月15日",
+          author: "SpencerWoo",
+          view: 88,
+          comment: 0,
+          list_img_src:
+            "https://cdn.sspai.com/article/3156926e-2b92-b834-735b-9edb3daea9c1.jpg?imageMogr2/quality/95/thumbnail/!800x400r/gravity/Center/crop/800x400",
+          headerImg:
+            "https://cdn.sspai.com/2019/07/31/avatar/c328e1cae65eb20dde99d811b58d0bd0.jpg"
+        },
+        {
+          id: 3,
+          title: "展示来自用户的最真实的体验和观点",
+          created_time: "2月15日",
+          author: "SpencerWoo",
+          view: 88,
+          comment: 0,
+          list_img_src:
+            "https://cdn.sspai.com/2019/10/13/a6f195e0291a70e52f8b9966b2519cf1.jpg?imageMogr2/quality/95/thumbnail/!1420x708r/gravity/Center/crop/1420x708",
+          headerImg:
+            "https://cdn.sspai.com/2019/07/31/avatar/c328e1cae65eb20dde99d811b58d0bd0.jpg"
+        },
+        {
+          id: 4,
+          title: "除了年年都有的新表盘，一起来看看 watchOS 6 的实用新功能",
+          created_time: "2月15日",
+          author: "SpencerWoo",
+          view: 88,
+          comment: 0,
+          list_img_src:
+            "https://cdn.sspai.com/article/59491614-e890-9d5c-2b6c-33d4da8b2946.jpg?imageMogr2/quality/95/thumbnail/!800x400r/gravity/Center/crop/800x400",
+          headerImg:
+            "https://cdn.sspai.com/2019/07/31/avatar/c328e1cae65eb20dde99d811b58d0bd0.jpg"
+        },
+        {
+          id: 5,
+          title: "如何用 Quicker 优化 Windows 的剪贴板功能 | 实用技巧",
+          created_time: "7月15日",
+          author: "Clyde",
+          view: 88,
+          comment: 0,
+          list_img_src:
+            "https://cdn.sspai.com/article/b7faf603-977c-87d8-8ea4-170d34293077.jpg?imageMogr2/quality/95/thumbnail/!800x400r/gravity/Center/crop/800x400",
+          headerImg:
+            "https://cdn.sspai.com/2019/08/28/88c5ab085428f7c4bce981810ff073bc.png?imageMogr2/quality/95/thumbnail/!64x64r/gravity/Center/crop/64x64"
+        },
+        {
+          id: 6,
+          title: "如何让 Android 10 拥有不输 iOS 的暗色模式体验？",
+          created_time: "2月15日",
+          author: "SpencerWoo",
+          view: 18,
+          comment: 6,
+          list_img_src:
+            "https://cdn.sspai.com/article/047e3478-08c6-cfab-5ad1-8a945076f431.jpg?imageMogr2/quality/95/thumbnail/!800x400r/gravity/Center/crop/800x400",
+          headerImg:
+            "https://cdn.sspai.com/2019/03/21/6cd415f9bb5ae6efb08c6a63a1b0ba67.jpg?imageMogr2/quality/95/thumbnail/!48x48r/gravity/Center/crop/48x48"
+        }
+      ]
     };
   },
   created() {
@@ -40,13 +114,13 @@ export default {
   },
   methods: {
     reqData() {
-      getRecommented()
-        .then(res => {
-          this.recommentedList = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      // getRecommented()
+      //   .then(res => {
+      //     this.recommentedList = res.data;
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     },
     toX(id) {
       const { href } = this.$router.resolve({
