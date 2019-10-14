@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { getHomeAdImg } from "@/network/home";
 export default {
   name: "HomeAdImg",
   data() {
@@ -19,16 +18,6 @@ export default {
         {id:1,img_src:"https://cdn.sspai.com/article/4a3cfa17-157e-68da-f89f-5c554b750f12.jpg",img_title:"管理文件",img_href:"javascript:0"}
       ]
     };
-  },
-  created() {
-    //请求小广告数据
-    // getHomeAdImg()
-    //   .then(res => {
-    //     this.adImages = res.data;
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
   }
 };
 </script>

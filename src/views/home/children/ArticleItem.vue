@@ -41,7 +41,7 @@ export default {
   ],
   methods:{
     toArticle(){
-      this.$router.push(`/post/${this.article_id}`)
+      this.$router.push(`/articledetails/${this.article_id}`)
     }
   }
 };

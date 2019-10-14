@@ -6,7 +6,6 @@
 
 <script>
 import Swiper from "@/components/common/swiper/Swiper";
-import { getDataByBanner } from "@/network/home";
 
 export default {
   name: "HomeSlide",
@@ -22,17 +21,6 @@ export default {
   },
   components: {
     Swiper
-  },
-  created() {
-    //请求banner数据
-    // getDataByBanner()
-    //   .then(res => {
-    //     //处理数据（res）
-    //     this.swiperSlides = res.data;
-    //   })
-    //   .catch(err => {
-    //     //错误时的处理（err）
-    //   });
   }
 };
 </script>

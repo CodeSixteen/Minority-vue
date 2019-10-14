@@ -24,17 +24,12 @@
 </template>
 
 <script>
-import {
-  canclearticleclickZan,
-  articleclickZan,
-  articleIsClickZ
-} from "@/network/articledetils";
 export default {
   name: "PostCenter",
   props: {
     content: {
       type: String,
-      default: "<p>内容</p>"
+      default: "<pre>          </pre>"
     },
     author: {
       type: String,
@@ -65,9 +60,16 @@ export default {
   },
   created() {
     this.article_id = this.$route.params.id;
-    this.reqArticleUserClickZan();
+    //判断是否登录
+    if(localStorage.getItem('phoneNumber')){
+      //已登录
+      //判断是否点过充电
+    }else{
+      //没有登录
+      //充电图标不选中
+    }
   },
-  updated() {
+  mounted() {
     window.addEventListener("scroll", this.fixedLeft, false);
   },
   methods: {
@@ -114,44 +116,7 @@ export default {
       }, 5);
     },
     likeArticle() {
-      //获取用户id
-      let uid = localStorage.getItem("uid");
-      uid = uid || 0;
-      //发送请求（判断状态）
-      if (this.likeArt.includes(this.article_id)) {
-        //已经点了
-        canclearticleclickZan({
-          uid,
-          article_id: this.article_id
-        }).then(res => {
-          console.log(res);
-          this.reqArticleUserClickZan();
-          this.$emit("userClickZan");
-        });
-      } else {
-        //没有点
-        articleclickZan({
-          uid,
-          article_id: this.article_id
-        }).then(res => {
-          console.log(res);
-          this.reqArticleUserClickZan();
-          this.$emit("userClickZan");
-        });
-      }
-    },
-    reqArticleUserClickZan() {
-      let uid = localStorage.getItem("uid");
-      if (!uid) {
-        return;
-      }
-      uid = uid || 0;
-      articleIsClickZ({
-        uid
-      }).then(res => {
-        console.log(res);
-        this.likeArt = res.data;
-      });
+      //充电
     }
   },
   destroyed() {

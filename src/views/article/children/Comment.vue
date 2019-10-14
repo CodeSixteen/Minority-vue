@@ -6,7 +6,7 @@
         <!-- 未登录时显示请登录 -->
         <!-- 用户评论，登录后才显示 -->
         <div class="left">
-          <img class="user-head-img" src="~@/icons/common/default_header_img.png" />
+          <img class="user-head-img" :src="headImg" />
         </div>
         <div class="right">
           <input
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="no-comment" v-if="isNo">还没有评论哦！</div>
+      <div class="no-comment" v-if="isNo">还没有评论哦~</div>
       <ul class="comment-ul">
         <div class="comment-item" v-for="(item,index) in commentList" :key="index">
           <li class="comment-li">
@@ -37,7 +37,7 @@
             <div class="right">
               <p class="user-name">{{item.username}}</p>
               <p class="comment-created-time">{{item.createdTime}}</p>
-              <p class="comment-content" v-html="item.content"></p>
+              <p class="comment-content" v-html="item.comment_content"></p>
               <div class="comment-icon">
                 <i class="iconfont icon-liuyan" @click="showTexterea(item.createdTime)"></i>
                 <span class="amount">{{item.reNumber}}</span>
@@ -103,13 +103,7 @@
 </template>
 
 <script>
-import {
-  getArticleComment,
-  submitComment,
-  reqClickZan,
-  reqIsClickZ,
-  cancleClickZ
-} from "@/network/articledetils";
+import { getComment } from "@/network/data";
 export default {
   name: "comment",
   props: {
@@ -124,7 +118,9 @@ export default {
   },
   data() {
     return {
-      username: "",
+      headImg:
+        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571071012103&di=246bbc25cc64b3ae9e466baf1755e816&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01460b57e4a6fa0000012e7ed75e83.png%401280w_1l_2o_100sh.png",
+      username: "Mestarry",
       commentList: [],
       isNo: true,
       commentContent: "",
@@ -134,32 +130,71 @@ export default {
   created() {
     this.reqIsClickZan();
     this.reqComment();
-    this.username = localStorage.getItem("user_name");
+    //判断是否登录
+    if (localStorage.getItem("phoneNumber")) {
+      //更换评论区头像和用户名
+    }
   },
   methods: {
-    cc(){
-console.log(this.commentContent);
-    },
     writeComment() {
-      this.$emit("showRe", true);
-      let boxAll = document.querySelectorAll(`.texterea-container`);
-      boxAll.forEach(item => {
-        item.style.display = "none";
-      });
+      if (!localStorage.getItem("phoneNumber")) {
+        this.$store.state.isShowLogin = true;
+      } else {
+        this.$emit("showRe", true);
+        let boxAll = document.querySelectorAll(`.texterea-container`);
+        boxAll.forEach(item => {
+          item.style.display = "none";
+        });
+      }
     },
     //请求数据
     reqComment() {
       let id = this.$route.params.id;
-      getArticleComment(id)
-        .then(res => {
-          if (res.data) {
-            this.isNo = false;
-          }
-          this.commentList = res.data;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      //根据文章id请求评论数据
+      let datas = getComment(id);
+      console.log(datas);
+      let data = [];
+      datas.forEach(item => {
+        if (item.re_comment_id == 0) {
+          let comment = {};
+          comment.head_img = item.user_header_img;
+          comment.username = item.username;
+          comment.createdTime = item.created_time;
+          comment.content = item.comment_content;
+          comment.reNumber = item.reply_number;
+          comment.likeNumber = item.like_number;
+          comment.tread_number = item.tread_number;
+          comment.article_id = item.article_id;
+          comment.comment_id = item.id;
+          comment.user_id = item.uid;
+          comment.reComment = [];
+          data.unshift(comment);
+        } else {
+          data.forEach(x => {
+            if (x.comment_id === item.re_comment_id) {
+              let comment = {};
+              comment.head_img = item.user_header_img;
+              comment.username = item.username;
+              comment.createdTime = item.created_time;
+              comment.content = item.comment_content;
+              comment.reNumber = item.reply_number;
+              comment.likeNumber = item.like_number;
+              comment.tread_number = item.tread_number;
+              comment.article_id = item.article_id;
+              comment.comment_id = item.id;
+              comment.user_id = item.uid;
+              if (item.re_username == "0") {
+                comment.re_username = "";
+              } else {
+                comment.re_username = item.re_username;
+              }
+              x.reComment.push(comment);
+            }
+          });
+        }
+      });
+      // this.commentList = data;
+      //有评论的话隐藏“还没有评论哦~” this.isNo = false
     },
     subComment(commentId = 0, reUsername = "0", subComment = 0) {
       this.$emit("showRe", false);
@@ -169,27 +204,20 @@ console.log(this.commentContent);
         let user_id = localStorage.getItem("uid");
         let re_username = reUsername;
         let subCommentId = subComment;
-        let content = this.commentContent.replace(/\n|\r\n/g,'<br/>');
-        submitComment({
-          article_id, //文章id
-          re_comment_id, //回复的哪条评论的id，新评论就是0
-          user_id, //用户id，写这条评论的人
-          re_username, //被回复人的用户名
-          subCommentId,
-          content //评论的内容
-        })
-          .then(res => {
-            this.$emit("reqNewData");
-            this.commentContent = "";
-            let box = document.querySelectorAll(`.texterea-container`);
-            box.forEach(item => {
-              item.style.display = "none";
-            });
-            this.reqComment();
-          })
-          .catch(err => {
-            console.log(err);
-          });
+        let content = this.commentContent.replace(/\n|\r\n/g, "<br/>");
+        //向服务器提交评论，提交相关信息
+        // {
+        //   article_id, //文章id
+        //   re_comment_id, //回复的哪条评论的id，新评论就是0
+        //   user_id, //用户id，写这条评论的人
+        //   re_username, //被回复人的用户名
+        //   subCommentId,
+        //   content //评论的内容
+        // }
+        //提交成功后，重新请求一次评论数据
+        //清空评论框
+        //隐藏输入框
+        //重新请求一次文章数据，更新评论数量；
       } else {
         this.$store.state.toastMsg = "不能提交空内容！";
         this.$store.state.isShowPopup = true;
@@ -206,49 +234,22 @@ console.log(this.commentContent);
       box.style.display = "block";
     },
     clickZan(id) {
-      let uid = localStorage.getItem("uid");
-      if (!uid) {
+      //点赞
+      //判断登录
+      if (!localStorage.getItem("phoneNumber")) {
         this.$store.state.isShowLogin = true;
         return;
       }
-      let comment_id = id;
-      //发送点赞请求
-      reqClickZan({
-        uid,
-        comment_id
-      }).then(res => {
-        if (!res.err) {
-          this.reqIsClickZan();
-          this.reqComment();
-        }
-      });
+      //发送点赞请求，向服务器提交用户id和文章id
+      //成功之后
+      //更新点赞图标
+      //更新点赞数量
     },
     reqIsClickZan() {
-      let uid = localStorage.getItem("uid");
-      uid = uid || 0;
-      reqIsClickZ({
-        uid
-      }).then(res => {
-        this.likeList = res.data;
-        console.log(this.likeList)
-      });
+      //判断是否点赞过该文章，向服务器发送请求
     },
     cancleClickZan(comment_id) {
-      let uid = localStorage.getItem("uid");
-      if (!uid) {
-        return;
-      }
-      uid = uid || 0;
-      cancleClickZ({
-        uid,
-        comment_id
-      }).then(res => {
-        console.log(res);
-        if (!res.err) {
-          this.reqIsClickZan();
-          this.reqComment();
-        }
-      });
+      //取消点赞，根据文章id和用户id
     }
   }
 };
@@ -294,7 +295,7 @@ console.log(this.commentContent);
   font-size: 16px;
   background-color: #f9f9f9;
   box-sizing: border-box;
-  padding:10px;
+  padding: 10px;
   margin-bottom: 10px;
 }
 .write-comment-bottom {
@@ -358,8 +359,7 @@ console.log(this.commentContent);
   width: 100%;
   .user-name {
     font-size: 14px;
-    color: #292525;
-    font-weight: 700;
+    color: #252929;
     .reply-username {
       color: #999;
     }

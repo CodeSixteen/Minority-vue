@@ -1,6 +1,6 @@
 <template>
   <div class="nav-user-box">
-    <img src="~@/icons/common/default_header_img.png" class="user-head-photo" />
+    <img :src="headImg" class="user-head-photo" />
     <div class="triangle"></div>
     <div class="user-function-list">
       <ul>
@@ -36,10 +36,16 @@
 <script>
 export default {
   name: "NavUser",
+  data(){
+    return {
+      headImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571071012103&di=246bbc25cc64b3ae9e466baf1755e816&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01460b57e4a6fa0000012e7ed75e83.png%401280w_1l_2o_100sh.png'
+    }
+  },
   methods: {
     loginOut() {
       localStorage.clear();//清除locaStorage
       this.$store.state.isLoginSuc = false;
+      location.href = window.location.href;//重新加载当前网页
     },
     toAddArticle(){
       this.$router.push('/addarticle')

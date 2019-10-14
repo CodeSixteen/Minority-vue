@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import { getRightAdImg, getMatrixLists } from '@/network/home'
 import Blogroll from '@/components/project/Blogroll'
 import BottomLink from '@/components/project/BottomLink'
 
@@ -50,25 +49,6 @@ export default {
         {user_header_img:"https://cdn.sspai.com/attachment/origin/2014/06/27/76939.jpg",username:"Eis",summary:"巧用工具，制定一个人的日本旅行计划"}
       ]
     };
-  },
-  created() {
-    //请求小广告
-    // getRightAdImg()
-    //   .then(res => {
-    //     this.adImgSrc = res.data[0].img_src;
-    //     this.adImgHref = res.data[0].img_href;
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-    //请求Matrix
-    // getMatrixLists()
-    //   .then(res => {
-    //     this.matrixLists = res.data;
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
   },
   computed: {
     isShow() {

@@ -4,7 +4,8 @@ export function get(config) {
     //创建实例
     const instance = axios.create({
         baseURL: 'http://localhost:8102/',
-        timeout: 5000
+        timeout: 5000,
+        method: 'GET'
     })
     //axios拦截
     //请求拦截

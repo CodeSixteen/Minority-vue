@@ -128,6 +128,8 @@ export default {
       this.$store.state.isLoginSuc = true;//显示用户信息
       this.$store.state.isShowLogin = false;//关闭登录框
       localStorage.setItem('phoneNumber', this.phoneNumber);
+      localStorage.setItem('headImg', 'https://cdn.sspai.com/2018/11/04/a5ae7198440f04585f4c6df1659aa96b.gif');
+      localStorage.setItem('username', 'Me_starry');
       this.showPopup('登录成功')
       //记住密码
       if(this.check){

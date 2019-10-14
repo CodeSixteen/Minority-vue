@@ -22,11 +22,12 @@
         />
       </template>
     </PostMain>
-    <Comment :isShowRe="isShowRe" @showRe="showRe" :comment="comment" @reqNewData="reqNewData"/>
+    <Comment :isShowRe="isShowRe" @showRe="showRe" :comment="comment" @reqNewData="reqNewData" />
     <recommend />
     <Postbottom />
     <goTop class="go-top-component" />
     <PostNav />
+    <p>{{b}}</p>
   </div>
 </template>
 
@@ -39,7 +40,7 @@ import goTop from "@/components/common/gobacktop/goTop";
 import recommend from "./children/recommend";
 import Postbottom from "./children/Postbottom";
 import Comment from "./children/Comment";
-import { getArticle } from "@/network/articledetils";
+import { getArticle } from "@/network/data";
 
 export default {
   name: "Post",
@@ -65,40 +66,43 @@ export default {
       content: "",
       view: 1,
       comment: 1,
-      like_number: 1
+      like_number: 1,
+      b: ""
     };
   },
   created() {
+    //处理字符串
+    let x = ``;
+    this.b = x.replace(/\s+/g, " ");
+
     this.reqArticleData();
   },
   methods: {
     reqArticleData() {
       let id = this.$route.params.id;
-      getArticle({ id })
-        .then(res => {
-          let data = res.data;
-          let oDate = new Date(data.created_time * 1000);
-          let month = oDate.getMonth() + 1;
-          if (month.toString().length === 1) {
-            month = "0" + month.toString();
-          }
-          let day = oDate.getDate();
-          if (day.toString().length === 1) {
-            day = "0" + day.toString();
-          }
-          this.created_time = `${oDate.getFullYear()}-${month}-${day}`;
-          this.banner = data.banner_img_src;
-          this.title = data.title;
-          this.head_img = data.headerImg;
-          this.author = data.author;
-          this.content = data.content;
-          this.view = data.view;
-          this.comment = data.comment;
-          this.like_number = data.like_number;
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      let data = getArticle(id);
+      if (!data.id) {
+        this.$router.push("/");
+        return;
+      }
+      let oDate = new Date(data.created_time * 1000);
+      let month = oDate.getMonth() + 1;
+      if (month.toString().length === 1) {
+        month = "0" + month.toString();
+      }
+      let day = oDate.getDate();
+      if (day.toString().length === 1) {
+        day = "0" + day.toString();
+      }
+      this.created_time = `${month}月${day}日`;
+      this.banner = data.banner_img_src;
+      this.title = data.title;
+      this.head_img = data.headerImg;
+      this.author = data.author;
+      this.content = data.content;
+      this.view = data.view;
+      this.comment = data.comment;
+      this.like_number = data.like_number;
     },
     colseComment(e) {
       let ev = e.target;
@@ -107,21 +111,21 @@ export default {
         "comment-submit",
         "file-btn",
         "comment-textarea",
-        'iconfont icon-liuyan'
+        "iconfont icon-liuyan"
       ];
       let have = arr.includes(ev.className);
       if (!have) {
         this.isShowRe = false;
         let box = document.querySelectorAll(`.texterea-container`);
-        box.forEach(item=>{
+        box.forEach(item => {
           item.style.display = "none";
-        })
+        });
       }
     },
     showRe(x) {
       this.isShowRe = x;
     },
-    reqNewData(){
+    reqNewData() {
       this.reqArticleData();
     }
   }
