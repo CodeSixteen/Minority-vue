@@ -153,6 +153,8 @@ export default {
       //根据文章id请求评论数据
       let datas = getComment(id);
       //处理数据
+
+      //根据用户id获取用户信息
       let data = [];
       datas.forEach(item => {
         if (item.re_comment_id == 0) {
