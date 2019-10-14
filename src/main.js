@@ -12,4 +12,3 @@ new Vue({
 }).$mount('#app')
 
 import './styles/variables.scss';
-import "./styles/base.css";

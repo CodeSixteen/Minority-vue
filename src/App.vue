@@ -44,6 +44,7 @@ export default {
 </script>
 
 <style>
+@import "./styles/base.css";
 @import "//at.alicdn.com/t/font_1408960_ew8vv7uz0mo.css";
 
 #app {
