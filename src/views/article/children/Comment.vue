@@ -152,7 +152,7 @@ export default {
       let id = this.$route.params.id;
       //根据文章id请求评论数据
       let datas = getComment(id);
-      console.log(datas);
+      //处理数据
       let data = [];
       datas.forEach(item => {
         if (item.re_comment_id == 0) {
@@ -189,6 +189,7 @@ export default {
                 comment.re_username = item.re_username;
               }
               x.reComment.push(comment);
+
             }
           });
         }
