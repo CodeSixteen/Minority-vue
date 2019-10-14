@@ -12,21 +12,27 @@ export default {
   name: "HomeSlide",
   data() {
     return {
-      swiperSlides: []
+      swiperSlides: [
+      {id: 1, title: "少数派3.0", banner: "https://cdn.sspai.com/article/8592d458-d677-f58e-e82f-3d1745beeca8.jpg", href:"#"},
+      {id: 2, title: "玩转iOS13", banner: "https://cdn.sspai.com/article/ca9d2250-6f2c-6319-7cbe-5d3a6b9d4d70.jpg", href:"#"},
+      {id: 3, title: "素材库", banner: "https://cdn.sspai.com/article/df3b948c-c437-f73f-6dce-77c5ac65f091.jpg", href:"#"},
+      {id: 4, title: "印象笔记", banner: "https://cdn.sspai.com/article/3f556a6e-e84e-6c00-45bb-ff4579d952f9.jpg", href:"#"}
+    ]
     };
   },
   components: {
     Swiper
   },
   created() {
-    getDataByBanner()
-      .then(res => {
-        //处理数据（res）
-        this.swiperSlides = res.data;
-      })
-      .catch(err => {
-        //错误时的处理（err）
-      });
+    //请求banner数据
+    // getDataByBanner()
+    //   .then(res => {
+    //     //处理数据（res）
+    //     this.swiperSlides = res.data;
+    //   })
+    //   .catch(err => {
+    //     //错误时的处理（err）
+    //   });
   }
 };
 </script>

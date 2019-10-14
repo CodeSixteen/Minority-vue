@@ -42,27 +42,33 @@ export default {
   },
   data() {
     return {
-      adImgSrc: '',
+      adImgSrc: 'https://cdn.sspai.com/article/46423bae-efd5-0390-5b55-014e2ee5a6bf.jpg',
       adImgHref: '',
-      matrixLists: []
+      matrixLists: [
+        {user_header_img:"https://cdn.sspai.com/2019/10/14/5666a9d8a2310222bccff427675600d1.JPG",username:"不蠢会死的某翠",summary:"利用快捷指令连接Sony耳机"},
+        {user_header_img:"https://cdn.sspai.com/2018/03/25/ce2a784deb3097acb6ee9d37ea0c13ea.jpg",username:"胖鱼要进步",summary:"攻略向 | 搬家到底有多难？"},
+        {user_header_img:"https://cdn.sspai.com/attachment/origin/2014/06/27/76939.jpg",username:"Eis",summary:"巧用工具，制定一个人的日本旅行计划"}
+      ]
     };
   },
   created() {
-    getRightAdImg()
-      .then(res => {
-        this.adImgSrc = res.data[0].img_src;
-        this.adImgHref = res.data[0].img_href;
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    getMatrixLists()
-      .then(res => {
-        this.matrixLists = res.data;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    //请求小广告
+    // getRightAdImg()
+    //   .then(res => {
+    //     this.adImgSrc = res.data[0].img_src;
+    //     this.adImgHref = res.data[0].img_href;
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
+    //请求Matrix
+    // getMatrixLists()
+    //   .then(res => {
+    //     this.matrixLists = res.data;
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   },
   computed: {
     isShow() {
@@ -85,8 +91,13 @@ export default {
     a {
       display: block;
       width: 100%;
-      img {
-        width: 100%;
+      height: 120px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        width:400px;
       }
     }
   }

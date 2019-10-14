@@ -60,6 +60,9 @@ export default {
       return this.$refs.swiper.offsetWidth;
     }
   },
+  created(){
+    this.modifyData(this.swiperSlides);
+  },
   mounted() {
     //开启自动播放
     this.startAutoPlay();
@@ -142,7 +145,7 @@ export default {
   },
   watch: {
     swiperSlides() {
-      this.modifyData(this.swiperSlides);
+      // this.modifyData(this.swiperSlides);
     }
   }
 };

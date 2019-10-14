@@ -12,17 +12,23 @@ export default {
   name: "HomeAdImg",
   data() {
     return {
-      adImages: []
+      adImages: [
+        {id:1,img_src:"https://cdn.sspai.com/article/f21c8653-8170-18aa-452b-18f31271be2a.jpg",img_title:"管理文件"},
+        {id:1,img_src:"https://cdn.sspai.com/article/a9b271d2-dbae-8e99-17d4-58d536879a1f.jpg",img_title:"管理文件"},
+        {id:1,img_src:"https://cdn.sspai.com/article/4319e17a-d9ad-f483-6a78-1adfa213fbc1.jpg",img_title:"管理文件"},
+        {id:1,img_src:"https://cdn.sspai.com/article/4a3cfa17-157e-68da-f89f-5c554b750f12.jpg",img_title:"管理文件"}
+      ]
     };
   },
   created() {
-    getHomeAdImg()
-      .then(res => {
-        this.adImages = res.data;
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    //请求小广告数据
+    // getHomeAdImg()
+    //   .then(res => {
+    //     this.adImages = res.data;
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   }
 };
 </script>
@@ -42,6 +48,7 @@ export default {
     overflow: hidden;
     img {
       width: 100%;
+      height: 100%;
       border-radius: 5px;
       transition: all .3s;
     }
