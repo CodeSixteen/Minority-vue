@@ -1,6 +1,6 @@
 <template>
   <div class="flex-column-center post-center">
-    <div class="post-article-content" v-html="content" ref="postcontent"></div>
+    <div class="post-article-content wangEditor-text" v-html="content" ref="postcontent"></div>
     <div class="post-center-left flex-column-center" ref="postleft">
       <i
         class="iconfont icon-chongdian center"

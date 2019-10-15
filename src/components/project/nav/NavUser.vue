@@ -36,19 +36,25 @@
 <script>
 export default {
   name: "NavUser",
-  data(){
+  data() {
     return {
-      headImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571071012103&di=246bbc25cc64b3ae9e466baf1755e816&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01460b57e4a6fa0000012e7ed75e83.png%401280w_1l_2o_100sh.png'
-    }
+      headImg: "https://cdn.sspai.com/2019/07/16/fa8b7ce5ea91003b55e6ae64657b89d3.png",
+    };
+  },
+  created(){
+    this.headImg = localStorage.getItem('headImg');
   },
   methods: {
     loginOut() {
-      localStorage.clear();//清除locaStorage
-      this.$store.state.isLoginSuc = false;
-      location.href = window.location.href;//重新加载当前网页
+      localStorage.clear(); //清除locaStorage
+      let date = new Date()
+      date.setTime(date.getTime() + (24 * 360 * 1000 * -1))
+      window.document.cookie = `token='';path=/;expires=${date.toGMTString()}`;//清除cookie中的token
+      this.$store.state.isLoginSuc = false;//改变全局状态
+      location.href = window.location.href; //重新加载当前网页
     },
-    toAddArticle(){
-      this.$router.push('/addarticle')
+    toAddArticle() {
+      this.$router.push("/addarticle");
     }
   }
 };

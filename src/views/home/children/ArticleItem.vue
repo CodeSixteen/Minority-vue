@@ -17,7 +17,7 @@
             {{view}}
           </span>
           <span class="article-comment">
-            <i class="iconfont icon-liuyan"></i>
+            <i class="iconfont icon-chongdian"></i>
             {{comment}}
           </span>
         </div>
@@ -59,13 +59,13 @@ export default {
   .article-list-img {
     width: 50%;
     height: 100%;
-    transition: all 0.3s ease-out;
+    transition: all 0.3s;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     img {
-      transition: all 0.3s ease-out;
+      transition: all 0.2s;
     }
   }
  
@@ -127,5 +127,8 @@ export default {
 .article-list-item:hover .article-list-img::after {
   width: 48%;
   opacity: 0;
+}
+.lazy-loading{
+  width: auto;
 }
 </style>

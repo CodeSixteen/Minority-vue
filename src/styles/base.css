@@ -98,3 +98,13 @@ s,i,em{font-style:normal;text-decoration:none;}
   img{
     width: 100%;
   }
+
+  .wangEditor-text a{
+    text-decoration: none;
+    border-bottom: 1px solid #d71a1b;
+    color: #292525;
+    transition: border-bottom .2s;
+  }
+  .wangEditor-text a:hover{
+    border-bottom: 2px solid #d71a1b;
+  }

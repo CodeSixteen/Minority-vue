@@ -1,7 +1,7 @@
 <template>
   <div class="flex-column-center">
     <div class="comment-comtainer">
-      <div class="comment-title">全部评论（{{comment}}）</div>
+      <div class="comment-title">全部评论（{{commentCount}}）</div>
       <div class="comment-input">
         <!-- 未登录时显示请登录 -->
         <!-- 用户评论，登录后才显示 -->
@@ -36,58 +36,58 @@
             <!-- 评论内容 -->
             <div class="right">
               <p class="user-name">{{item.username}}</p>
-              <p class="comment-created-time">{{item.createdTime}}</p>
-              <p class="comment-content" v-html="item.comment_content"></p>
+              <p class="comment-created-time">{{item.created_time}}</p>
+              <p class="comment-content" v-html="item.content"></p>
               <div class="comment-icon">
-                <i class="iconfont icon-liuyan" @click="showTexterea(item.createdTime)"></i>
-                <span class="amount">{{item.reNumber}}</span>
+                <i class="iconfont icon-liuyan" @click="showTexterea(item.created_time)"></i>
+                <span class="amount">{{item.reply_num}}</span>
                 <i
-                  v-if="!likeList.includes(item.comment_id.toString())"
+                  v-if="!likeList.includes(item.id.toString())"
                   class="iconfont icon-like"
-                  @click="clickZan(item.comment_id)"
+                  @click="clickZan(item.id)"
                 ></i>
-                <i v-else class="iconfont icon-xin" @click="cancleClickZan(item.comment_id)"></i>
-                <span class="amount">{{item.likeNumber}}</span>
+                <i v-else class="iconfont icon-xin" @click="cancleClickZan(item.id)"></i>
+                <span class="amount">{{item.like_number}}</span>
               </div>
-              <div class="texterea-container" :data-index="item.createdTime">
+              <div class="texterea-container" :data-index="item.created_time">
                 <textarea class="comment-textarea" autofocus="true" v-model="commentContent"></textarea>
                 <div class="write-comment-bottom">
-                  <span class="comment-submit" @click="subComment(item.comment_id)">评论</span>
+                  <span class="comment-submit" @click="subComment(item.id)">评论</span>
                 </div>
               </div>
               <ul class="user-reply">
                 <!-- 评论的评论和回复 -->
-                <li class="comment-li" v-for="(i,index) in item.reComment" :key="index">
+                <li class="comment-li" v-for="(subItem,index) in item.re_comment" :key="index">
                   <div class="left">
-                    <img class="user-head-img" :src="i.head_img" />
+                    <img class="user-head-img" :src="subItem.head_img" />
                   </div>
                   <div class="right">
                     <p class="user-name">
-                      {{i.username}}
+                      {{subItem.username}}
                       <span
                         class="reply-username"
-                        v-if="i.re_username"
-                      >回复 {{i.re_username}}</span>
+                        v-if="subItem.re_username"
+                      >回复 {{subItem.re_username}}</span>
                     </p>
-                    <p class="comment-created-time">{{i.createdTime}}</p>
-                    <p class="comment-content" v-html="i.content"></p>
+                    <p class="comment-created-time">{{subItem.created_time}}</p>
+                    <p class="comment-content" v-html="subItem.content"></p>
                     <div class="comment-icon">
-                      <i class="iconfont icon-liuyan" @click="showTexterea(i.createdTime)"></i>
-                      <span class="amount">{{i.reNumber}}</span>
+                      <i class="iconfont icon-liuyan" @click="showTexterea(subItem.created_time)"></i>
+                      <span class="amount">{{subItem.reply_num}}</span>
                       <i
-                        v-if="!likeList.includes(i.comment_id.toString())"
+                        v-if="!likeList.includes(subItem.id.toString())"
                         class="iconfont icon-like"
-                        @click="clickZan(i.comment_id)"
+                        @click="clickZan(subItem.id)"
                       ></i>
-                      <i v-else class="iconfont icon-xin" @click="cancleClickZan(i.comment_id)"></i>
-                      <span class="amount">{{i.likeNumber}}</span>
+                      <i v-else class="iconfont icon-xin" @click="cancleClickZan(subItem.id)"></i>
+                      <span class="amount">{{subItem.like_number}}</span>
                     </div>
-                    <div class="texterea-container" :data-index="i.createdTime">
+                    <div class="texterea-container" :data-index="subItem.created_time">
                       <textarea class="comment-textarea" autofocus="true" v-model="commentContent"></textarea>
                       <div class="write-comment-bottom">
                         <span
                           class="comment-submit"
-                          @click="subComment(item.comment_id,i.username,i.comment_id)"
+                          @click="subComment(item.id,subItem.username,subItem.id)"
                         >评论</span>
                       </div>
                     </div>
@@ -103,24 +103,21 @@
 </template>
 
 <script>
-import { getComment } from "@/network/data";
+import { getComment, getUserInfo, submitComment } from "@/network/data";
+import { parseTime } from "@/utils/index";
 export default {
   name: "comment",
   props: {
     isShowRe: {
       type: Boolean,
       default: false
-    },
-    comment: {
-      type: Number,
-      default: 0
     }
   },
   data() {
     return {
-      headImg:
-        "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571071012103&di=246bbc25cc64b3ae9e466baf1755e816&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01460b57e4a6fa0000012e7ed75e83.png%401280w_1l_2o_100sh.png",
-      username: "Mestarry",
+      commentCount: 0,
+      headImg: "",
+      username: "",
       commentList: [],
       isNo: true,
       commentContent: "",
@@ -128,44 +125,103 @@ export default {
     };
   },
   created() {
-    this.reqIsClickZan();
+    //显示用户名和头像
+    this.showUserName();
+    //请求评论数据
     this.reqComment();
-    //判断是否登录
-    if (localStorage.getItem("phoneNumber")) {
-      //更换评论区头像和用户名
-    }
+    //判断用户是否已经点赞
+    this.reqIsClickZan();
   },
   methods: {
-    writeComment() {
-      if (!localStorage.getItem("phoneNumber")) {
-        this.$store.state.isShowLogin = true;
+    showUserName() {
+      //判断是否登录
+      if (this.isLogin) {
+        //更换评论区头像和用户名
+        let img = localStorage.getItem("headImg");
+        let name = localStorage.getItem("username");
+        if (img) this.headImg = img;
+        if (name) this.username = name;
       } else {
+        this.headImg =
+          "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571071012103&di=246bbc25cc64b3ae9e466baf1755e816&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01460b57e4a6fa0000012e7ed75e83.png%401280w_1l_2o_100sh.png";
+      }
+    },
+    writeComment() {
+      //判断是否登录
+      if (this.isLogin) {
         this.$emit("showRe", true);
         let boxAll = document.querySelectorAll(`.texterea-container`);
         boxAll.forEach(item => {
           item.style.display = "none";
         });
+      } else {
+        this.$store.state.isShowLogin = true;
       }
     },
-    //请求数据
+    //请求评论数据
     reqComment() {
       let id = this.$route.params.id;
       //根据文章id请求评论数据
       let datas = getComment(id);
       //处理数据
-
-
-      // this.commentList = data;
-      //有评论的话隐藏“还没有评论哦~” this.isNo = false
+      let data = [];
+      if (datas.length) {
+        datas.forEach(item => {
+          if (item.re_comment_id === 0) {
+            let info = {};
+            info.id = item.id;
+            info.article_id = item.article_id;
+            info.user_id = item.user_id;
+            info.username = getUserInfo(item.user_id).username;
+            info.head_img = getUserInfo(item.user_id).headerImg;
+            info.content = item.comment_content;
+            info.created_time = parseTime(item.created_time);
+            info.like_number = item.like_number;
+            info.reply_num = item.reply_num;
+            info.re_comment = [];
+            data.unshift(info);
+          } else {
+            data.forEach(x => {
+              if (x.id === item.re_comment_id) {
+                let comment = {};
+                comment.id = item.id;
+                comment.article_id = item.article_id;
+                comment.user_id = item.user_id;
+                comment.head_img = getUserInfo(item.user_id).headerImg;
+                comment.username = getUserInfo(item.user_id).username;
+                comment.created_time = parseTime(item.created_time);
+                comment.content = item.comment_content;
+                comment.reply_num = item.reply_num;
+                comment.like_number = item.like_number;
+                if (item.re_username == "0") {
+                  comment.re_username = "";
+                } else {
+                  comment.re_username = item.re_username;
+                }
+                x.re_comment.push(comment);
+              }
+            });
+          }
+        });
+      }
+      this.commentList = data;
+      //更改评论数量
+      this.commentCount = data.length;
+      if(data.length > 0){
+      data.forEach(item => {
+        this.commentCount = this.commentCount + item.re_comment.length;
+      });
+      }
+      this.$emit("commentCount", this.commentCount);
+      //隐藏'还没有评论'
+      if (datas.length) this.isNo = false;
     },
-    subComment(commentId = 0, reUsername = "0", subComment = 0) {
-      this.$emit("showRe", false);
+    subComment(commentId = 0, reUsername = 0 ,subCommentId = 0) {
       if (this.commentContent.trim()) {
         let article_id = this.$route.params.id;
         let re_comment_id = commentId;
         let user_id = localStorage.getItem("uid");
         let re_username = reUsername;
-        let subCommentId = subComment;
         let content = this.commentContent.replace(/\n|\r\n/g, "<br/>");
         //向服务器提交评论，提交相关信息
         // {
@@ -176,29 +232,47 @@ export default {
         //   subCommentId,
         //   content //评论的内容
         // }
-        //提交成功后，重新请求一次评论数据
-        //清空评论框
-        //隐藏输入框
-        //重新请求一次文章数据，更新评论数量；
+        let data = submitComment({
+          article_id,
+          user_id,
+          re_comment_id,
+          re_username,
+          content,
+          subCommentId
+        })
+        if(data.msg === '成功'){
+          this.reqComment()//重新请求数据
+          this.commentContent = ''//清空输入框
+          this.$emit("showRe", false);//隐藏输入框
+          this.hideTextereaAll();
+        }
       } else {
         this.$store.state.toastMsg = "不能提交空内容！";
         this.$store.state.isShowPopup = true;
       }
     },
     showTexterea(index) {
-      let boxAll = document.querySelectorAll(`.texterea-container`);
-      boxAll.forEach(item => {
-        item.style.display = "none";
-      });
+      if (!this.isLogin) {
+        this.$store.state.isShowLogin = true;
+        return;
+      }
+      this.$emit("showRe", false);//隐藏输入框
+      this.hideTextereaAll();
       let box = document.querySelector(
         `.texterea-container[data-index='${index}']`
       );
       box.style.display = "block";
     },
+    hideTextereaAll(){
+      let boxAll = document.querySelectorAll(`.texterea-container`);
+      boxAll.forEach(item => {
+        item.style.display = "none";
+      });
+    },
     clickZan(id) {
       //点赞
       //判断登录
-      if (!localStorage.getItem("phoneNumber")) {
+      if (!this.isLogin) {
         this.$store.state.isShowLogin = true;
         return;
       }
@@ -212,6 +286,16 @@ export default {
     },
     cancleClickZan(comment_id) {
       //取消点赞，根据文章id和用户id
+    }
+  },
+  computed: {
+    isLogin() {
+      return this.$store.state.isLoginSuc;
+    }
+  },
+  watch: {
+    isLogin() {
+      this.showUserName();
     }
   }
 };

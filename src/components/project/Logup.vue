@@ -193,7 +193,8 @@ export default {
   background-color: #fff;
 }
 .logup-logo {
-  width: 100%;
+  width: 120px;
+  margin: 0 auto;
   height: 60px;
   display: flex;
   justify-content: center;

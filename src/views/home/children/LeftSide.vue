@@ -8,7 +8,7 @@
       :aritcleTitle="item.title"
       :headerImg="item.headerImg"
       :author="item.author"
-      :createdTime="item.created_time"
+      :createdTime="parseTimec(item.created_time)"
       :view="item.view"
       :comment="item.comment"
       :article_id="item.id"
@@ -21,6 +21,7 @@
 import SubNav from "./SubNav";
 import ArticleItem from "./ArticleItem";
 import { getArticleLists } from "@/network/data";
+import { parseTime } from "@/utils/index";
 
 export default {
   name: "LeftSide",
@@ -51,6 +52,9 @@ export default {
     this.lazyLoading();
   },
   methods: {
+    parseTimec(time){
+      return parseTime(time).toString().slice(0,10)
+    },
     reqData() {
       //根据分类请求数据
       this.articleLists = getArticleLists(this.articleClassifyId);
@@ -85,8 +89,8 @@ export default {
     lazyLoading() {
       for (let i = 0; i < this.imgSrcArr.length; i++) {
         if (this.isInVisibleArea(this.imgSrcArr[i])) {
-          this.imgSrcArr[i].src = this.imgSrcArr[i].getAttribute("data-src");
           this.imgSrcArr[i].style.width = "100%";
+          this.imgSrcArr[i].src = this.imgSrcArr[i].getAttribute("data-src");
           this.imgSrcArr.splice(i, 1);
           i--;
         }

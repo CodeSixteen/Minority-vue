@@ -22,7 +22,7 @@
         />
       </template>
     </PostMain>
-    <Comment :isShowRe="isShowRe" @showRe="showRe" :comment="comment" @reqNewData="reqNewData" />
+    <Comment :isShowRe="isShowRe" @showRe="showRe"  @reqNewData="reqNewData" @commentCount="commentCount"/>
     <recommend />
     <Postbottom />
     <goTop class="go-top-component" />
@@ -41,6 +41,7 @@ import recommend from "./children/recommend";
 import Postbottom from "./children/Postbottom";
 import Comment from "./children/Comment";
 import { getArticle } from "@/network/data";
+import { parseTime } from "@/utils/index";
 
 export default {
   name: "Post",
@@ -65,9 +66,8 @@ export default {
       created_time: "",
       content: "",
       view: 1,
-      comment: 1,
       like_number: 1,
-      b: ""
+      comment: 0
     };
   },
   created() {
@@ -85,23 +85,13 @@ export default {
         this.$router.push("/");
         return;
       }
-      let oDate = new Date(data.created_time * 1000);
-      let month = oDate.getMonth() + 1;
-      if (month.toString().length === 1) {
-        month = "0" + month.toString();
-      }
-      let day = oDate.getDate();
-      if (day.toString().length === 1) {
-        day = "0" + day.toString();
-      }
-      this.created_time = `${month}月${day}日`;
+      this.created_time = parseTime(data.created_time).toString().slice(0,10);
       this.banner = data.banner_img_src;
       this.title = data.title;
       this.head_img = data.headerImg;
       this.author = data.author;
       this.content = data.content;
       this.view = data.view;
-      this.comment = data.comment;
       this.like_number = data.like_number;
     },
     colseComment(e) {
@@ -127,6 +117,9 @@ export default {
     },
     reqNewData() {
       this.reqArticleData();
+    },
+    commentCount(number){
+      this.comment = number;
     }
   }
 };

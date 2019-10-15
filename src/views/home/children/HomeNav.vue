@@ -101,6 +101,11 @@ export default {
     SubNav,
     NavUser
   },
+  created(){
+    if(localStorage.getItem("username")){
+       this.$store.state.isLoginSuc = true;
+    }
+  },
   methods: {
     showSearchInput() {
       this.isShowSearch = !this.isShowSearch;

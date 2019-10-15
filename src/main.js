@@ -12,3 +12,8 @@ new Vue({
 }).$mount('#app')
 
 import './styles/variables.scss';
+
+
+
+
+
