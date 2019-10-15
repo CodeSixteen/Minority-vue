@@ -154,48 +154,7 @@ export default {
       let datas = getComment(id);
       //处理数据
 
-      //根据用户id获取用户信息
-      let data = [];
-      datas.forEach(item => {
-        if (item.re_comment_id == 0) {
-          let comment = {};
-          comment.head_img = item.user_header_img;
-          comment.username = item.username;
-          comment.createdTime = item.created_time;
-          comment.content = item.comment_content;
-          comment.reNumber = item.reply_number;
-          comment.likeNumber = item.like_number;
-          comment.tread_number = item.tread_number;
-          comment.article_id = item.article_id;
-          comment.comment_id = item.id;
-          comment.user_id = item.uid;
-          comment.reComment = [];
-          data.unshift(comment);
-        } else {
-          data.forEach(x => {
-            if (x.comment_id === item.re_comment_id) {
-              let comment = {};
-              comment.head_img = item.user_header_img;
-              comment.username = item.username;
-              comment.createdTime = item.created_time;
-              comment.content = item.comment_content;
-              comment.reNumber = item.reply_number;
-              comment.likeNumber = item.like_number;
-              comment.tread_number = item.tread_number;
-              comment.article_id = item.article_id;
-              comment.comment_id = item.id;
-              comment.user_id = item.uid;
-              if (item.re_username == "0") {
-                comment.re_username = "";
-              } else {
-                comment.re_username = item.re_username;
-              }
-              x.reComment.push(comment);
 
-            }
-          });
-        }
-      });
       // this.commentList = data;
       //有评论的话隐藏“还没有评论哦~” this.isNo = false
     },

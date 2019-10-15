@@ -8,7 +8,6 @@ const NotFound = () => import('@/components/common/404/NotFound')
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {

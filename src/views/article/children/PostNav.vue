@@ -167,6 +167,7 @@ export default {
     position: relative;
     img {
       padding-right: 5px;
+      width:24px;
     }
   }
   .nav-list-item:hover {

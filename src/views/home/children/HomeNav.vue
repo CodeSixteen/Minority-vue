@@ -192,6 +192,7 @@ export default {
     position: relative;
     img {
       padding-right: 5px;
+      width: 24px;
     }
   }
   .nav-list-item:hover {
@@ -218,6 +219,9 @@ export default {
       align-items: center;
       width: 60px;
       height: 60px;
+      img{
+        width: 24px;
+      }
       .right-tron-box {
         position: absolute;
         top: 62px;
