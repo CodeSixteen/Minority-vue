@@ -15,10 +15,10 @@
           :content="content"
           :head_img="head_img"
           :author="author"
-          :view="view"
+          :like_number="like_number"
           :comment="comment"
           @userClickZan="reqNewData"
-          :like_number="like_number"
+          @chongdian="reqNewData"
         />
       </template>
     </PostMain>
@@ -27,7 +27,6 @@
     <Postbottom />
     <goTop class="go-top-component" />
     <PostNav />
-    <p>{{b}}</p>
   </div>
 </template>
 
@@ -71,11 +70,10 @@ export default {
     };
   },
   created() {
-    //处理字符串
-    let x = ``;
-    this.b = x.replace(/\s+/g, " ");
-
     this.reqArticleData();
+    if(localStorage.getItem('username')){
+      this.$store.state.isLoginSuc = true;
+    }
   },
   methods: {
     reqArticleData() {

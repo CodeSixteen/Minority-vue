@@ -51,7 +51,6 @@ export default {
       date.setTime(date.getTime() + (24 * 360 * 1000 * -1))
       window.document.cookie = `token='';path=/;expires=${date.toGMTString()}`;//清除cookie中的token
       this.$store.state.isLoginSuc = false;//改变全局状态
-      location.href = window.location.href; //重新加载当前网页
     },
     toAddArticle() {
       this.$router.push("/addarticle");

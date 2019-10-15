@@ -5,7 +5,7 @@
       <i
         class="iconfont icon-chongdian center"
         @click="likeArticle"
-        :class="{like_active:likeArt.includes(article_id)}"
+        :class="{like_active:likeArt.includes(Number(article_id))}"
       ></i>
       <span>{{like_number}}</span>
       <i class="iconfont icon-liuyan" @click="toComment"></i>
@@ -24,12 +24,13 @@
 </template>
 
 <script>
+import { chongDian,reqUserLikeArticle } from '@/network/data'
 export default {
   name: "PostCenter",
   props: {
     content: {
       type: String,
-      default: "<pre>          </pre>"
+      default: ""
     },
     author: {
       type: String,
@@ -55,22 +56,29 @@ export default {
   data() {
     return {
       likeArt: [],
-      article_id: 0
+      article_id: ''
     };
   },
   created() {
-    this.article_id = this.$route.params.id;
+    this.article_id = this.$route.params.id
     //判断是否登录
-    if(localStorage.getItem('phoneNumber')){
+    if(this.isLogin){
       //已登录
-      //判断是否点过充电
-    }else{
-      //没有登录
-      //充电图标不选中
+      //请求充电数据
+      let uid = localStorage.getItem('uid')
+      let res = reqUserLikeArticle(Number(uid))
+      if(res) this.likeArt = res.data
     }
   },
   mounted() {
     window.addEventListener("scroll", this.fixedLeft, false);
+  },
+  updated(){
+      let uid = localStorage.getItem('uid')
+      if(uid){
+      let res = reqUserLikeArticle(Number(uid))
+      if(res) this.likeArt = res.data
+      }
   },
   methods: {
     fixedLeft() {
@@ -116,7 +124,30 @@ export default {
       }, 5);
     },
     likeArticle() {
+      if(!this.isLogin){
+        this.$store.state.isShowLogin = true;
+        return;
+      }
       //充电
+      let uid = localStorage.getItem('uid') || 0
+      let id = this.$route.params.id
+      let res = chongDian(Number(uid),Number(id))
+      if(res){
+        //重新请求文章
+        this.$emit('chongdian')
+      }
+    }
+  },
+  computed:{
+    isLogin(){
+      return this.$store.state.isLoginSuc
+    }
+  },
+  watch:{
+    isLogin(){
+      let uid = localStorage.getItem('uid') || 0
+      let res = reqUserLikeArticle(Number(uid))
+      if(res) this.likeArt = res.data
     }
   },
   destroyed() {

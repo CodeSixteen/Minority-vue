@@ -14,6 +14,7 @@ body {
     font-size:14px;
     color:#666;
     background:#fff;
+    font-family: '微软雅黑';
 }
 .clearfix::before,.clearfix::after {  /*清楚浮动*/
     content:"";

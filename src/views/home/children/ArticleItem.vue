@@ -18,7 +18,7 @@
           </span>
           <span class="article-comment">
             <i class="iconfont icon-chongdian"></i>
-            {{comment}}
+            {{like_number}}
           </span>
         </div>
       </div>
@@ -36,7 +36,7 @@ export default {
     "author",
     "createdTime",
     "view",
-    "comment",
+    "like_number",
     "article_id"
   ],
   methods:{

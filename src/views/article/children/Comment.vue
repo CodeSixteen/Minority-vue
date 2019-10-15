@@ -42,7 +42,7 @@
                 <i class="iconfont icon-liuyan" @click="showTexterea(item.created_time)"></i>
                 <span class="amount">{{item.reply_num}}</span>
                 <i
-                  v-if="!likeList.includes(item.id.toString())"
+                  v-if="!likeList.includes(item.id)"
                   class="iconfont icon-like"
                   @click="clickZan(item.id)"
                 ></i>
@@ -75,7 +75,7 @@
                       <i class="iconfont icon-liuyan" @click="showTexterea(subItem.created_time)"></i>
                       <span class="amount">{{subItem.reply_num}}</span>
                       <i
-                        v-if="!likeList.includes(subItem.id.toString())"
+                        v-if="!likeList.includes(subItem.id)"
                         class="iconfont icon-like"
                         @click="clickZan(subItem.id)"
                       ></i>
@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import { getComment, getUserInfo, submitComment } from "@/network/data";
+import { getComment, getUserInfo, submitComment, clickZanReq, cancleClickZanReq, reqClickZanCommentId } from "@/network/data";
 import { parseTime } from "@/utils/index";
 export default {
   name: "comment",
@@ -129,7 +129,7 @@ export default {
     this.showUserName();
     //请求评论数据
     this.reqComment();
-    //判断用户是否已经点赞
+    //获取用户点赞数据
     this.reqIsClickZan();
   },
   methods: {
@@ -270,32 +270,46 @@ export default {
       });
     },
     clickZan(id) {
-      //点赞
       //判断登录
       if (!this.isLogin) {
         this.$store.state.isShowLogin = true;
         return;
       }
       //发送点赞请求，向服务器提交用户id和文章id
-      //成功之后
-      //更新点赞图标
-      //更新点赞数量
+      let uid = localStorage.getItem('uid')
+      let res = clickZanReq(uid,id)
+      if(res.msg === '成功'){
+        this.reqComment()//重新获取评论信息，更新点赞数量
+        this.reqIsClickZan()//重新获取点赞数据，更新icon
+      }
     },
     reqIsClickZan() {
-      //判断是否点赞过该文章，向服务器发送请求
+      //根据用户id请求点赞过的评论
+      let uid = localStorage.getItem('uid') || 0
+      let res = reqClickZanCommentId(uid);
+      if(res.data){
+        this.likeList = res.data
+      }
     },
     cancleClickZan(comment_id) {
-      //取消点赞，根据文章id和用户id
+      //取消点赞，根据评论id和用户id
+      let uid = localStorage.getItem('uid')
+      let res = cancleClickZanReq(uid,comment_id)
+      if(res.msg === "成功"){
+        this.reqComment()//重新获取评论信息，更新点赞数量
+        this.reqIsClickZan()//重新获取点赞数据，更新icon
+      }
     }
   },
   computed: {
     isLogin() {
-      return this.$store.state.isLoginSuc;
+      return this.$store.state.isLoginSuc
     }
   },
   watch: {
     isLogin() {
-      this.showUserName();
+      this.showUserName()
+      this.reqIsClickZan()
     }
   }
 };

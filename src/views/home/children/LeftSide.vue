@@ -10,7 +10,7 @@
       :author="item.author"
       :createdTime="parseTimec(item.created_time)"
       :view="item.view"
-      :comment="item.comment"
+      :like_number="item.like_number"
       :article_id="item.id"
       class="article-item-component"
     />
@@ -84,7 +84,7 @@ export default {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         this.lazyLoading();
-      }, 100);
+      }, 50);
     },
     lazyLoading() {
       for (let i = 0; i < this.imgSrcArr.length; i++) {
@@ -121,14 +121,15 @@ export default {
   watch: {
     articleClassifyId() {
       this.reqData();
-      let x = document.documentElement.scrollTop;
-      if(x>this.subnavTopDistance){
-        document.documentElement.scrollTop = 475;
+      if(this.subnavTopDistance <= 60){
+        document.documentElement.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance + 1
+        document.body.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance + 1
       }
     }
   },
   destroyed() {
-    document.documentElement.scrollTop = 0;
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
     window.removeEventListener("scroll", this.handleScroll); //  离开页面清除（移除）滚轮滚动事件
     this.$store.state.changeNav = false;//离开当前页面的时候将nav置为默认状态
   }
