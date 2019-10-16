@@ -80,7 +80,7 @@ export default {
       let id = this.$route.params.id;
       let data = getArticle(id);
       if (!data.id) {
-        this.$router.push("/");
+        this.$router.push("/Page404");
         return;
       }
       this.created_time = parseTime(data.created_time).toString().slice(0,10);
