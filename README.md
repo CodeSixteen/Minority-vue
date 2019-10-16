@@ -4,17 +4,15 @@
 
 [预览链接]( https://mestarry.github.io/vue-minority/dist/ )
 
-## Project setup
+### 项目依赖安装
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+### 本地预览
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
+### 编译
 ```
 npm run build
 ```
