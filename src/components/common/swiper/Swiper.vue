@@ -54,18 +54,30 @@ export default {
   components: {
     SwiperSlide
   },
-  computed: {
-    distance() {
-      //获取幻灯片每次切换需要移动的距离
-      return this.$refs.swiper.offsetWidth;
-    }
-  },
-  created(){
+  created() {
     this.modifyData(this.swiperSlides);
   },
   mounted() {
     //开启自动播放
     this.startAutoPlay();
+    window.addEventListener("resize", () => {
+      let el = this.$refs.swiperItem
+      if (el) {
+        el.style.transitionDuration = `0s`;
+        el.style.transform = `translate(-${this.$refs.swiper.offsetWidth *
+          this.curIndex}px,0)`;
+      }
+    });
+  },
+  updated() {
+    window.addEventListener("resize", () => {
+      let el = this.$refs.swiperItem
+      if (el) {
+        el.style.transitionDuration = `0s`;
+        el.style.transform = `translate(-${this.$refs.swiper.offsetWidth *
+          this.curIndex}px,0)`;
+      }
+    });
   },
   methods: {
     //对数据进行处理
@@ -125,7 +137,7 @@ export default {
       let len = this.newSwiperSlides.length - 1;
       if (item) {
         item.style.transitionDuration = `0.5s`;
-        item.style.transform = `translate(-${this.distance *
+        item.style.transform = `translate(-${this.$refs.swiper.offsetWidth *
           this.curIndex}px,0)`;
         if (this.curIndex === len) {
           this.curIndex = 1;
@@ -139,7 +151,8 @@ export default {
     setTransfrom(el) {
       el.addEventListener("transitionend", () => {
         el.style.transitionDuration = `0s`;
-        el.style.transform = `translate(-${this.distance * this.curIndex}px,0)`;
+        el.style.transform = `translate(-${this.$refs.swiper.offsetWidth *
+          this.curIndex}px,0)`;
       });
     }
   },
@@ -197,11 +210,11 @@ export default {
 }
 /* 切换按钮 */
 @media (max-width: 1110px) {
-  .next{
-    right: 0!important;
+  .next {
+    right: 0 !important;
   }
-  .prev{
-    left: 0!important;
+  .prev {
+    left: 0 !important;
   }
 }
 .next,

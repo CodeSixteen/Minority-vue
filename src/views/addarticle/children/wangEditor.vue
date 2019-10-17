@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div ref="editor" style="text-align:left"></div>
+        <div ref="editor" style="text-align:left" class="wangEditor-editor-container"></div>
         <button v-on:click="getContent">查看内容</button>
     </div>
 </template>
@@ -32,5 +32,11 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.wangEditor-editor-container{
+  img{
+    width:auto;
+    max-width: 750px;
+  }
+}
 </style>

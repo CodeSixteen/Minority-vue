@@ -21,15 +21,15 @@
             <span>付费订阅</span>
           </li>
           <li class="nav-list-item">
-            <img src="~@/icons/nav/mall.svg" />
+            <img src="~@/icons/nav/special.svg" />
             <span>特别策划</span>
           </li>
           <li class="nav-list-item">
-            <img src="~@/icons/nav/lobaro.svg" />
+            <img src="~@/icons/nav/mall.svg" />
             <span>Pi Store</span>
           </li>
           <li class="nav-list-item tron">
-            <img src="~@/icons/nav/special.svg" />
+            <img src="~@/icons/nav/lobaro.svg" />
             <span>Tron 计划</span>
             <div class="tron-box">
               <a href="javascript:0" class="tron-link">加入Tron 计划</a>
