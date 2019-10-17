@@ -33,17 +33,20 @@ export default {
 .nav-container {
   height: 60px;
   background-color: $themeColor;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transition: background-color 0.3s;
 }
 
 .nav-content {
+  margin: 0 auto;
   width: 1110px;
   height: 100%;
   display: flex;
   position: relative;
+}
+@media (max-width:1110px) {
+  .nav-content{
+    width: 100%;
+  }
 }
 .nav-left {
   height: 60px;
