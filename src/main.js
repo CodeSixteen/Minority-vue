@@ -11,9 +11,8 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-import './styles/variables.scss';
-
-
-
-
-
+import "./styles/normalize.scss"
+import "./styles/base.scss"
+import "./styles/style.scss"
+import './styles/variables.scss'
+import './plugins/element.js'

@@ -17,11 +17,11 @@
             <img src="~@/icons/nav/matrix.svg" />
             <span>Matrix</span>
           </li>
-          <li class="nav-list-item">
+          <li class="nav-list-item" @click="toSubscription">
             <img src="~@/icons/nav/column.svg" />
             <span>付费订阅</span>
           </li>
-          <li class="nav-list-item">
+          <li class="nav-list-item" @click="toSpecPlanning">
             <img src="~@/icons/nav/special.svg" />
             <span>特别策划</span>
           </li>
@@ -59,9 +59,9 @@
 </template>
 
 <script>
-import TopNav from "@/components/project/nav/TopNav";
-import Search from "@/components/project/nav/Search";
-import NavUser from "@/components/project/nav/NavUser";
+import TopNav from "./TopNav";
+import Search from "./Search";
+import NavUser from "./NavUser";
 
 export default {
   name: "PostNav",
@@ -93,7 +93,19 @@ export default {
       this.isShowSearch = false;
     },
     toMatrix(){
+      let link = this.$route.path
+      if(link === '/Matrix') return
       this.$router.push('/Matrix')
+    },
+    toSubscription(){
+      let link = this.$route.path
+      if(link === '/Subscription') return
+      this.$router.push('/Subscription')
+    },
+    toSpecPlanning(){
+      let link = this.$route.path
+      if(link === '/SpecPlanning') return
+      this.$router.push('/SpecPlanning')
     }
   },
   computed: {

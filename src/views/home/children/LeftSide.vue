@@ -89,8 +89,8 @@ export default {
     lazyLoading() {
       for (let i = 0; i < this.imgSrcArr.length; i++) {
         if (this.isInVisibleArea(this.imgSrcArr[i])) {
-          this.imgSrcArr[i].style.width = "100%";
           this.imgSrcArr[i].src = this.imgSrcArr[i].getAttribute("data-src");
+          this.imgSrcArr[i].style.width = "100%";
           this.imgSrcArr.splice(i, 1);
           i--;
         }

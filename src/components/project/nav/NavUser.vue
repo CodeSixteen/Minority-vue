@@ -72,7 +72,7 @@ export default {
     border-radius: 50%;
   }
   .user-function-list {
-    filter: drop-shadow(0 1px 2px #ccc);
+    filter: drop-shadow(0 0 1px #999);
     position: absolute;
     display: none;
     top: 61px;
@@ -118,9 +118,7 @@ export default {
     content: "";
     top: -8px;
     left: 44px;
-    height: 0;
-    width: 0;
-    border-bottom: 10px solid #fff;
+    border-bottom: 8px solid #fff;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
   }

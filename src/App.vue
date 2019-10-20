@@ -11,7 +11,6 @@
 import Login from "@/components/project/Login";
 import Logup from "@/components/project/Logup";
 import popup from "@/components/project/popup";
-
 export default {
   name: "App",
   components: {
@@ -44,8 +43,6 @@ export default {
 </script>
 
 <style>
-@import "./styles/base.css";
-@import "./styles/normalize.css";
 @import "//at.alicdn.com/t/font_1408960_ew8vv7uz0mo.css";
 
 #app {

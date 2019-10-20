@@ -12,7 +12,7 @@
       </template>
       <template #center>
         <ul class="center-nav-lists" v-show="!changeNav">
-          <li class="nav-list-item">
+          <li class="nav-list-item" @click="toMatrix">
             <img src="~@/icons/nav/matrix.svg" />
             <span>Matrix</span>
           </li>
@@ -116,6 +116,9 @@ export default {
     },
     hideSearch() {
       this.isShowSearch = false;
+    },
+    toMatrix(){
+      this.$router.push('/Matrix')
     }
   },
   computed: {
