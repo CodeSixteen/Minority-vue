@@ -30,7 +30,7 @@
         </div>
         <div class="item-center flex-start">
           <div class="item-center-left">
-            <h1>iPad分屏+随航+暗黑模式，宝藏配色应用：「色采」重磅更新</h1>
+            <h1 @click="toArticleDetails(2)">iPad分屏+随航+暗黑模式，宝藏配色应用：「色采」重磅更新</h1>
             <p>自六月份被少数派推荐后，「色采」获得AppStore多地区「新鲜App」推荐、「拿出📱测量一下」专题推荐。此间我们也不断更新优化app，增加了适配iPad平台、支持横屏｜分屏｜浮屏、专属列表新增简洁支持横屏｜分屏｜浮屏、专属列表新增简洁...支持横屏｜分屏｜浮屏、专属列表新增简洁...</p>
           </div>
           <div class="matrix-article-list-img">
@@ -41,10 +41,7 @@
           </div>
         </div>
         <div class="item-bottom flex-between">
-          <p>
-            出自
-            <span class="spec-name">我和App的故事</span>
-          </p>
+          <p> 出自<span class="spec-name" @click="toColumn(1)">我和App的故事</span> </p>
           <div class="flex-start font14">
             <span>
               <i class="iconfont icon-like"></i>13
@@ -56,7 +53,7 @@
         </div>
       </li>
     </ul>
-    <div class="load-more font16">加载更多</div>
+    <div class="load-more font16" @click="loadMore">加载更多</div>
   </div>
 </template>
 
@@ -64,20 +61,33 @@
 export default {
   name: "MatrixLeft",
   data() {
-    return {};
+    return {
+      articleList: [],
+      page: 1
+    };
   },
-  beforeCreate() {
+  created() {
     // 请求热门文章列表
+    this.requestArticleList(1)
   },
   methods: {
     // 请求热门文章列表方法
-    requestArticleList() {},
+    requestArticleList(page) {
+      console.log('请求文章列表')
+      this.page++
+    },
     //根据文章ID跳转文章详情页
     toArticleDetails(id) {
       this.$router.push(`/articledetails/${id}`);
     },
     //继续加载文章
-    loadMore() {}
+    loadMore() {
+      this.requestArticleList(this.page)
+    },
+    //跳转到相关专栏
+    toColumn(id){
+      this.$router.push(`/column/${id}`);      
+    }
   }
 };
 </script>

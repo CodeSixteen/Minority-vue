@@ -104,8 +104,8 @@ export default {
     },
     toSpecPlanning(){
       let link = this.$route.path
-      if(link === '/SpecPlanning') return
-      this.$router.push('/SpecPlanning')
+      if(link === '/topics') return
+      this.$router.push('/topics')
     },
     toTaobao(){
       let href = 'https://shop549593764.taobao.com/?spm=a1z10.1-c.0.0.33ee1ba8XVHos6'

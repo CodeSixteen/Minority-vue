@@ -1,6 +1,6 @@
 <template>
-  <div>
-    
+  <div class="topics">
+    我是全部专题页面
   </div>
 </template>
 
@@ -10,6 +10,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
 
 </style>

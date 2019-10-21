@@ -43,11 +43,7 @@ export default {
   display: flex;
   position: relative;
 }
-@media (max-width:1110px) {
-  .nav-content{
-    width: 100%;
-  }
-}
+
 .nav-left {
   height: 60px;
   position: absolute;
