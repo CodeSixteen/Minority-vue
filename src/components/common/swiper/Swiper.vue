@@ -1,6 +1,6 @@
 <template>
-  <div class="swiper" ref="swiper" @mouseover="clearIn" @mouseout="startIn">
-    <div class="swiper-container" ref="swiperItem">
+  <div class="home-swiper" ref="homeSwiper" @mouseover="clearIn" @mouseout="startIn">
+    <div class="home-swiper-container" ref="swiperItem">
       <SwiperSlide
         v-for="(item,index) in newSwiperSlides"
         :key="index"
@@ -16,6 +16,7 @@
         v-for="i in swiperSlides.length"
         :key="i"
         :class="{active:curIndex===i}"
+        @click="clickIndicator(i)"
       ></span>
     </div>
     <div class="prev" @click="prev">
@@ -64,7 +65,7 @@ export default {
       let el = this.$refs.swiperItem
       if (el) {
         el.style.transitionDuration = `0s`;
-        el.style.transform = `translate(-${this.$refs.swiper.offsetWidth *
+        el.style.transform = `translate(-${this.$refs.homeSwiper.offsetWidth *
           this.curIndex}px,0)`;
       }
     });
@@ -74,7 +75,7 @@ export default {
       let el = this.$refs.swiperItem
       if (el) {
         el.style.transitionDuration = `0s`;
-        el.style.transform = `translate(-${this.$refs.swiper.offsetWidth *
+        el.style.transform = `translate(-${this.$refs.homeSwiper.offsetWidth *
           this.curIndex}px,0)`;
       }
     });
@@ -137,7 +138,7 @@ export default {
       let len = this.newSwiperSlides.length - 1;
       if (item) {
         item.style.transitionDuration = `0.5s`;
-        item.style.transform = `translate(-${this.$refs.swiper.offsetWidth *
+        item.style.transform = `translate(-${this.$refs.homeSwiper.offsetWidth *
           this.curIndex}px,0)`;
         if (this.curIndex === len) {
           this.curIndex = 1;
@@ -151,32 +152,31 @@ export default {
     setTransfrom(el) {
       el.addEventListener("transitionend", () => {
         el.style.transitionDuration = `0s`;
-        el.style.transform = `translate(-${this.$refs.swiper.offsetWidth *
+        el.style.transform = `translate(-${this.$refs.homeSwiper.offsetWidth *
           this.curIndex}px,0)`;
       });
-    }
-  },
-  watch: {
-    swiperSlides() {
-      // this.modifyData(this.swiperSlides);
+    },
+    clickIndicator(i){
+      this.curIndex = i;
+      this.moveSlide();
     }
   }
 };
 </script>
 
 <style lang='scss' scoped>
-.swiper,
-.swiper-container,
+.home-swiper,
+.home-swiper-container,
 .swiper-item-container {
   width: 100%;
 }
-.swiper {
+.home-swiper {
   position: relative;
   overflow: hidden;
   height: auto;
   max-height: 410px;
 }
-.swiper-container {
+.home-swiper-container {
   display: flex;
   transition: all 0.5s;
   transform: translate(-100%, 0);
@@ -242,12 +242,12 @@ export default {
   transform: translate(20px, 0);
   right: calc((100% - 1110px) / 2);
 }
-.swiper:hover .prev {
+.home-swiper:hover .prev {
   display: block;
   transform: rotate(180deg) translate(0px, 0px);
   opacity: 0.8;
 }
-.swiper:hover .next {
+.home-swiper:hover .next {
   display: block;
   transform: translate(0, 0);
   opacity: 0.8;

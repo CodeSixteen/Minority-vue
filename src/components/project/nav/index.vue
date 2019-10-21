@@ -17,15 +17,15 @@
             <img src="~@/icons/nav/matrix.svg" />
             <span>Matrix</span>
           </li>
-          <li class="nav-list-item">
+          <li class="nav-list-item" @click="toSubscription">
             <img src="~@/icons/nav/column.svg" />
             <span>付费订阅</span>
           </li>
-          <li class="nav-list-item">
+          <li class="nav-list-item" @click="toSpecPlanning">
             <img src="~@/icons/nav/special.svg" />
             <span>特别策划</span>
           </li>
-          <li class="nav-list-item">
+          <li class="nav-list-item" @click="toTaobao">
             <img src="~@/icons/nav/mall.svg" />
             <span>Pi Store</span>
           </li>
@@ -59,9 +59,9 @@
 </template>
 
 <script>
-import TopNav from "@/components/project/nav/TopNav";
-import Search from "@/components/project/nav/Search";
-import NavUser from "@/components/project/nav/NavUser";
+import TopNav from "./TopNav";
+import Search from "./Search";
+import NavUser from "./NavUser";
 
 export default {
   name: "PostNav",
@@ -93,7 +93,23 @@ export default {
       this.isShowSearch = false;
     },
     toMatrix(){
+      let link = this.$route.path
+      if(link === '/Matrix') return
       this.$router.push('/Matrix')
+    },
+    toSubscription(){
+      let link = this.$route.path
+      if(link === '/Subscription') return
+      this.$router.push('/Subscription')
+    },
+    toSpecPlanning(){
+      let link = this.$route.path
+      if(link === '/SpecPlanning') return
+      this.$router.push('/SpecPlanning')
+    },
+    toTaobao(){
+      let href = 'https://shop549593764.taobao.com/?spm=a1z10.1-c.0.0.33ee1ba8XVHos6'
+      window.open(href, "_blank")
     }
   },
   computed: {
@@ -121,7 +137,7 @@ export default {
   position: fixed;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 999;
 }
 
 /* left */

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Nav from "@/views/article/children/PostNav";
+import Nav from "@/components/project/nav/index";
 import wangEditor from "./children/wangEditor";
 
 export default {

@@ -16,3 +16,4 @@ import "./styles/base.scss"
 import "./styles/style.scss"
 import './styles/variables.scss'
 import './plugins/element.js'
+import './plugins/swiper.js'

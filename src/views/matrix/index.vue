@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import MatrixNav from "@/components/project/nav/Nav";
+import MatrixNav from "@/components/project/nav/index";
 import MatrixBanner from "./children/Banner"
 import MatrixLeft from "./children/Left"
 import MatrixRight from "./children/Right"

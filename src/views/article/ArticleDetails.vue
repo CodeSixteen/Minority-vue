@@ -26,12 +26,12 @@
     <recommend />
     <Postbottom />
     <goTop class="go-top-component" />
-    <PostNav />
+    <Nav />
   </div>
 </template>
 
 <script>
-import PostNav from "./children/PostNav";
+import Nav from "@/components/project/nav/index";
 import PostMain from "./children/PostMain";
 import PostBanner from "./children/PostBanner";
 import PostCenter from "./children/PostCenter";
@@ -46,7 +46,7 @@ export default {
   name: "Post",
   props: ["id"],
   components: {
-    PostNav,
+    Nav,
     PostMain,
     PostBanner,
     PostCenter,
