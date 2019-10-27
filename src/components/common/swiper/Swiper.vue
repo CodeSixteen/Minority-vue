@@ -256,4 +256,23 @@ export default {
   font-size: 16px;
   color: #666;
 }
+@media (max-width:960px) {
+  .prev,.next{
+    display: block !important;
+    opacity: 0.8;
+  }
+  .prev{
+    transform: rotate(180deg) translate(0px, 0px);
+  }
+  .next{
+  transform: translate(0, 0);
+  }
+  .indicator-container{
+    bottom: 20px;
+  }
+  .indicator-item{
+    height: 6px;
+    width: 6px;
+  }
+}
 </style>

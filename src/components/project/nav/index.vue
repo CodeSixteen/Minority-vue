@@ -9,29 +9,30 @@
               <span class="logo-title" v-show="!changeNav">少数派</span>
             </a>
           </router-link>
+          <SubNav v-show="changeNav" :navLists="navLists" class="sub-nav" />
         </div>
       </template>
       <template #center>
         <ul class="center-nav-lists" v-show="!changeNav">
-          <li class="nav-list-item" @click='toMatrix'>
+          <li class="nav-list-item" @click="toMatrix">
             <img src="~@/icons/nav/matrix.svg" />
-            <span>Matrix</span>
+            <span class="nav-text">Matrix</span>
           </li>
           <li class="nav-list-item" @click="toSubscription">
             <img src="~@/icons/nav/column.svg" />
-            <span>付费订阅</span>
+            <span class="nav-text">付费订阅</span>
           </li>
-          <li class="nav-list-item" @click="toSpecPlanning">
+          <li class="nav-list-item" @click="toTopics">
             <img src="~@/icons/nav/special.svg" />
-            <span>特别策划</span>
+            <span class="nav-text">特别策划</span>
           </li>
           <li class="nav-list-item" @click="toTaobao">
             <img src="~@/icons/nav/mall.svg" />
-            <span>Pi Store</span>
+            <span class="nav-text">Pi Store</span>
           </li>
           <li class="nav-list-item tron">
             <img src="~@/icons/nav/lobaro.svg" />
-            <span>Tron 计划</span>
+            <span class="nav-text">Tron 计划</span>
             <div class="tron-box">
               <a href="javascript:0" class="tron-link">加入Tron 计划</a>
               <a href="javascript:0" class="tron-link">
@@ -43,8 +44,35 @@
       </template>
       <template #right>
         <div class="right-nav-container">
+          <div class="right-nav-lists" v-if="changeNav">
+            <div class="nav-icon">
+              <a href="javascript:0" @click="toMatrix">
+                <img src="~@/icons/nav/1.svg" />
+              </a>
+              <a href="javascript:0" @click="toSubscription">
+                <img src="~@/icons/nav/2.svg" />
+              </a>
+              <a href="javascript:0" @click="toTopics">
+                <img src="~@/icons/nav/3.svg" />
+              </a>
+              <a href="javascript:0" @click="toTaobao">
+                <img src="~@/icons/nav/4.svg" />
+              </a>
+              <a href="javascript:0">
+                <img src="~@/icons/nav/5.svg" />
+                <div class="right-tron-box">
+                  <a href="javascript:0" class="right-tron-link">加入Tron 计划</a>
+                  <a href="javascript:0" class="right-tron-link">
+                    <img src="~@/icons/nav/shortcut.svg" />
+                  </a>
+                </div>
+              </a>
+              <div class="line"></div>
+            </div>
+          </div>
           <i class="iconfont" @click="showSearchInput" :class="iconStyle"></i>
           <Search v-show="isShowSearch" class="home-search" @hideSearch="hideSearch" />
+          <i class="iconfont icon-caidan" :class="{'icon-color':changeNav}"></i>
           <div
             class="home-nav-login"
             @click="clickLogin"
@@ -62,6 +90,7 @@
 import TopNav from "./TopNav";
 import Search from "./Search";
 import NavUser from "./NavUser";
+import SubNav from "./SubNav";
 
 export default {
   name: "PostNav",
@@ -74,10 +103,11 @@ export default {
   components: {
     TopNav,
     Search,
-    NavUser
+    NavUser,
+    SubNav
   },
-  created(){
-    if(localStorage.getItem('username')){
+  created() {
+    if (localStorage.getItem("username")) {
       this.$store.state.isLoginSuc = true;
     }
   },
@@ -92,24 +122,25 @@ export default {
     hideSearch() {
       this.isShowSearch = false;
     },
-    toMatrix(){
-      let link = this.$route.path
-      if(link === '/Matrix') return
-      this.$router.push('/Matrix')
+    toMatrix() {
+      let link = this.$route.path;
+      if (link === "/Matrix") return;
+      this.$router.push("/Matrix");
     },
-    toSubscription(){
-      let link = this.$route.path
-      if(link === '/Subscription') return
-      this.$router.push('/Subscription')
+    toSubscription() {
+      let link = this.$route.path;
+      if (link === "/Subscription") return;
+      this.$router.push("/Subscription");
     },
-    toSpecPlanning(){
-      let link = this.$route.path
-      if(link === '/topics') return
-      this.$router.push('/topics')
+    toTopics() {
+      let link = this.$route.path;
+      if (link === "/topics") return;
+      this.$router.push("/topics");
     },
-    toTaobao(){
-      let href = 'https://shop549593764.taobao.com/?spm=a1z10.1-c.0.0.33ee1ba8XVHos6'
-      window.open(href, "_blank")
+    toTaobao() {
+      let href =
+        "https://shop549593764.taobao.com/?spm=a1z10.1-c.0.0.33ee1ba8XVHos6";
+      window.open(href, "_blank");
     }
   },
   computed: {
@@ -191,7 +222,7 @@ export default {
     position: relative;
     img {
       padding-right: 5px;
-      width:24px;
+      width: 24px;
     }
   }
   .nav-list-item:hover {
@@ -212,44 +243,53 @@ export default {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    a {
+    .nav-icon {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
-      width: 60px;
-      height: 60px;
-      .right-tron-box {
-        position: absolute;
-        top: 62px;
-        right: 112px;
-        width: 134px;
-        height: 0px;
-        overflow: hidden;
-        transition: all 0.2s;
-        .right-tron-link {
-          display: block;
-          width: auto;
-          height: 40px;
-          color: #fff;
-          font-weight: 400;
-          background-color: rgba(10, 10, 10, 0.8);
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          img {
-            width: 80px;
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 60px;
+        height: 60px;
+        .right-tron-box {
+          position: absolute;
+          top: 62px;
+          right: 112px;
+          width: 134px;
+          height: 0px;
+          overflow: hidden;
+          transition: all 0.2s;
+          .right-tron-link {
+            display: block;
+            width: auto;
+            height: 40px;
+            color: #fff;
+            font-weight: 400;
+            background-color: rgba(10, 10, 10, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .right-tron-link:hover {
+            background-color: rgba(10, 10, 10, 1);
           }
         }
-        .right-tron-link:hover {
-          background-color: rgba(10, 10, 10, 1);
+        img {
+          padding-right: 5px;
+          width: 24px;
         }
       }
-    }
-    a:hover {
-      background-color: #eee;
-    }
-    a:hover .right-tron-box {
-      height: 80px;
+      a:hover {
+        background-color: #eee;
+      }
+      a:hover .right-tron-box {
+        height: 80px;
+        img {
+          width: 80px;
+        }
+      }
     }
   }
   .iconfont {
@@ -312,6 +352,9 @@ export default {
   top: 60px;
   border-top: 1px solid #ccc;
 }
+.icon-caidan {
+  display: none;
+}
 /* line */
 .line {
   height: 40px;
@@ -321,5 +364,33 @@ export default {
 }
 .sub-nav {
   margin-left: 30px;
+  background-color: #fff;
+}
+
+@media (max-width: 960px) {
+  .nav-text {
+    display: none;
+  }
+  .sub-nav{
+    margin-top: 56px;
+    margin-left: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+}
+@media (max-width: 750px) {
+  .logo-title {
+    display: none;
+  }
+  .center-nav-lists {
+    display: none;
+  }
+  .icon-caidan {
+    display: block;
+  }
+  .nav-icon{
+    display: none !important;
+  }
 }
 </style>

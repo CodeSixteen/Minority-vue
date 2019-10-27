@@ -58,7 +58,6 @@ export default {
   position: relative;
   .article-list-img {
     width: 50%;
-    height: 100%;
     transition: all 0.3s;
     overflow: hidden;
     display: flex;
@@ -71,17 +70,23 @@ export default {
  
   .article-list-info {
     padding: 30px;
+    box-sizing: border-box;
+    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     h2 {
-      width: 340px;
       color: #292525;
       font-weight: 600;
       font-size: 20px;
       margin-bottom: 20px;
       line-height: 1.4;
       text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
     }
     .article-author-info {
       display: flex;
@@ -130,5 +135,22 @@ export default {
 }
 .lazy-loading{
   width: auto;
+}
+
+@media (max-width:750px) {
+  .article-list-item{
+    flex-wrap: wrap;
+    height: auto;
+  }
+  .article-list-img{
+    width: 100% !important;
+  }
+  .article-list-info{
+    width: 100% !important;
+  }
+  .article-list-img img{
+    width: 100% !important;
+    height: auto !important;
+  }
 }
 </style>

@@ -74,4 +74,17 @@ export default {
     border-bottom: 2px solid $red;
   }
 }
+@media (max-width: 960px) {
+  .sub-nav{
+    height: 50px;
+  }
+  .sub-nav li{
+    font-size: 14px;
+    padding: 0 10px;
+    height: 38px;
+  }
+  .nav-active{
+    height: 38px !important;
+  }
+}
 </style>

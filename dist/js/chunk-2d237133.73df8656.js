@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d237133"],{fa24:function(n,t,e){"use strict";e.r(t);var s=function(){var n=this,t=n.$createElement,e=n._self._c||t;return e("div",{staticClass:"topics"},[n._v("\n  我是全部专题页面\n")])},c=[],a={},i=a,u=e("2877"),l=Object(u["a"])(i,s,c,!1,null,"03e9023b",null);t["default"]=l.exports}}]);
-//# sourceMappingURL=chunk-2d237133.73df8656.js.map

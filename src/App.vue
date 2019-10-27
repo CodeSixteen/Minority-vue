@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style>
-@import "//at.alicdn.com/t/font_1408960_ew8vv7uz0mo.css";
+@import "//at.alicdn.com/t/font_1408960_mqwag5oc8s.css";
 
 #app {
   background-color: rgb(244, 244, 244);
@@ -58,4 +58,5 @@ export default {
   bottom: 0;
   z-index: 1;
 }
+
 </style>

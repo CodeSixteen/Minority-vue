@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import SubNav from "./SubNav";
+import SubNav from "@/components/project/nav/SubNav";
 import ArticleItem from "./ArticleItem";
 import { getArticleLists } from "@/network/data";
 import { parseTime } from "@/utils/index";
@@ -80,6 +80,11 @@ export default {
       if (scrollTop + visibleTop === scrollheight) {
         //已经滚动到底部，可以做一些事情
       }
+      if(scrollTop >= 1000){
+        this.$emit('isShowGoTop',true)
+      }else{
+        this.$emit('isShowGoTop',false)        
+      }
       //添加定时器，避免执行次数过多
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
@@ -90,7 +95,8 @@ export default {
       for (let i = 0; i < this.imgSrcArr.length; i++) {
         if (this.isInVisibleArea(this.imgSrcArr[i])) {
           this.imgSrcArr[i].src = this.imgSrcArr[i].getAttribute("data-src");
-          this.imgSrcArr[i].style.width = "100%";
+          this.imgSrcArr[i].style.width = "auto";
+          this.imgSrcArr[i].style.height = "100%";
           this.imgSrcArr.splice(i, 1);
           i--;
         }
@@ -122,8 +128,15 @@ export default {
     articleClassifyId() {
       this.reqData();
       if(this.subnavTopDistance <= 60){
-        document.documentElement.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance + 1
-        document.body.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance + 1
+        let screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        console.log(screenWidth<=960)
+        if(screenWidth<=960){
+          document.documentElement.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance - 60
+          document.body.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance - 60
+        }else{
+          document.documentElement.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance + 1
+          document.body.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance + 1
+        }
       }
     }
   },

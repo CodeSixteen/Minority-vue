@@ -43,7 +43,6 @@ export default {
   display: flex;
   position: relative;
 }
-
 .nav-left {
   height: 60px;
   position: absolute;
@@ -68,5 +67,17 @@ export default {
 .nav-container-bgcolor {
   background-color: #fff !important;
   border-bottom: 1px solid #ccc;
+}
+
+@media (max-width: 1110px) {
+  .nav-content{
+    width: 100%;
+  }
+  .nav-left{
+    left: 20px;
+  }
+  .nav-right{
+    right: 20px;
+  }
 }
 </style>

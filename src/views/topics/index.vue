@@ -1,16 +1,20 @@
 <template>
   <div class="topics">
-    我是全部专题页面
+    <Nav/>
   </div>
 </template>
 
 <script>
-export default {
+import Nav from '@/components/project/nav/index'
 
-}
+
+export default {
+  name: "topics",
+  components: {
+    Nav
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-
-
 </style>

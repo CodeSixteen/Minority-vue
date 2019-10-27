@@ -47,4 +47,9 @@ export default {
   }
   
 }
+@media (max-width: 960px) {
+  .home-ad-img{
+     display: none;
+  }
+}
 </style>
