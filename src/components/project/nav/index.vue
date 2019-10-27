@@ -72,7 +72,7 @@
           </div>
           <i class="iconfont" @click="showSearchInput" :class="iconStyle"></i>
           <Search v-show="isShowSearch" class="home-search" @hideSearch="hideSearch" />
-          <i class="iconfont icon-caidan" :class="{'icon-color':changeNav}"></i>
+          <i class="iconfont icon-caidan" :class="{'icon-color':changeNav}" @click="showMenu"></i>
           <div
             class="home-nav-login"
             @click="clickLogin"
@@ -80,6 +80,15 @@
             v-if="!isLoginSuc"
           >登录</div>
           <NavUser v-else />
+          <div class="nav-menu" v-show="isShowMenu">
+            <ul>
+              <li @click="toMatrix">Matrix</li>
+              <li @click="toSubscription">付费订阅</li>
+              <li @click="toTopics">特别策划</li>
+              <li @click="toTaobao">Pi Store</li>
+              <li>加入Tron 计划</li>
+            </ul>
+          </div>
         </div>
       </template>
     </TopNav>
@@ -97,7 +106,8 @@ export default {
   data() {
     return {
       isShowSearch: false,
-      navLists: ["推荐", "最热", "应用推荐", "生活方式", "Power+"]
+      navLists: ["推荐", "最热", "应用推荐", "生活方式", "Power+"],
+      isShowMenu: false
     };
   },
   components: {
@@ -141,6 +151,9 @@ export default {
       let href =
         "https://shop549593764.taobao.com/?spm=a1z10.1-c.0.0.33ee1ba8XVHos6";
       window.open(href, "_blank");
+    },
+    showMenu(){
+      this.isShowMenu = !this.isShowMenu
     }
   },
   computed: {
@@ -388,9 +401,32 @@ export default {
   }
   .icon-caidan {
     display: block;
+    cursor: pointer;
   }
   .nav-icon{
     display: none !important;
+  }
+}
+.nav-menu{
+  width:100%;
+  background-color: #fff;
+  position: fixed;
+  z-index: 999;
+  top: 61px;
+  left: 0;
+  right: 0;
+  ul{
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    li{
+      color: #292525;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+    li:last-child{
+    border:none;
+  }
   }
 }
 </style>
