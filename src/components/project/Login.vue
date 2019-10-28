@@ -1,6 +1,7 @@
 <template>
   <div class="login" @click="hideLogin">
     <div class="login-content">
+      <i class="iconfont icon-guanbi" @click="isShowThisDom"></i>
       <div class="login-logo">
         <img src="~@/icons/common/logo.png" />
       </div>
@@ -165,6 +166,9 @@ export default {
     //清除cookie
     clearCookie() {
       this.setCookie("", "", -1); //修改2值都为空，天数为负1天就好了
+    },
+    isShowThisDom(){
+      this.$store.state.isShowLogin = false;
     }
   }
 };
@@ -178,16 +182,18 @@ export default {
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .login-content {
-  width: 500px;
+  margin-top: 80px;
+  width: 300px;
+  height: 450px;
   padding: 50px;
   background-color: #fff;
+  position: relative;
 }
 .login-logo {
   width: 120px;
-  height: 60px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -210,7 +216,7 @@ export default {
 .form-phone,
 .form-password {
   width: 100%;
-  height: 60px;
+  height: 40px;
   border: 1px solid $themeColor;
   margin-top: 20px;
   display: flex;
@@ -220,9 +226,9 @@ export default {
 .form-password-input {
   width: 100%;
   box-sizing: border-box;
-  height: 58px;
-  line-height: 58px;
-  padding: 0 20px;
+  height: 38px;
+  line-height: 38px;
+  padding: 0 10px;
 }
 .password-dispose {
   padding: 20px 0;
@@ -236,7 +242,7 @@ export default {
 }
 .login-submit-btn {
   width: 100%;
-  height: 60px;
+  height: 40px;
   background-color: $themeColor;
   color: #fff;
   cursor: pointer;
@@ -269,5 +275,19 @@ export default {
 }
 .icon-WeChat {
   background-color: rgb(66, 189, 65);
+}
+.icon-guanbi{
+  color:#000;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  font-size: 20px;
+}
+
+@media (max-width:400px) {
+  .login-content{
+    margin: 80px 10px 0 10px;;
+    width: 100%;
+  }
 }
 </style>

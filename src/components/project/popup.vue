@@ -38,7 +38,7 @@ export default {
   right: 0;
   .popup-box {
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,6 +1,7 @@
 <template>
   <div class="logup" @click="hideLogup">
     <div class="logup-content">
+      <i class="iconfont icon-guanbi" @click="isShowThisDom"></i>
       <div class="logup-logo">
         <img src="~@/icons/common/logo.png" />
       </div>
@@ -13,7 +14,7 @@
             <input type="number" placeholder="手机号码" v-model="phoneNumber" @input="phoneNumLen" />
           </div>
           <div class="form-input">
-            <input type="text" placeholder="昵称（2-10个字符，中英文，数字下划线）" v-model="username" />
+            <input type="text" placeholder="昵称（2-10个字符，中英文）" v-model="username" />
           </div>
           <div class="form-input">
             <input
@@ -172,6 +173,9 @@ export default {
         return false;
       }
       return value;
+    },
+    isShowThisDom(){
+      this.$store.state.isShowLogup = false;
     }
   }
 };
@@ -185,17 +189,19 @@ export default {
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 .logup-content {
-  width: 500px;
+  width: 300px;
+  height: 470px;
   padding: 50px;
+  margin-top: 80px;
   background-color: #fff;
+  position: relative;
 }
 .logup-logo {
   width: 120px;
   margin: 0 auto;
-  height: 60px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -215,7 +221,7 @@ export default {
   font-size: 16px;
   .form-input {
     width: 100%;
-    height: 58px;
+    height: 38px;
     position: relative;
     border: 1px solid $themeColor;
     margin-top: 20px;
@@ -224,16 +230,16 @@ export default {
     input {
       width: 100%;
       box-sizing: border-box;
-      height: 58px;
-      line-height: 58px;
-      padding: 0 20px;
+      height: 38px;
+      line-height: 38px;
+      padding: 0 10px;
     }
     span {
       position: absolute;
-      height: 58px;
+      height: 38px;
       cursor: pointer;
       color: #4a90e2;
-      line-height: 58px;
+      line-height: 38px;
       padding-right: 20px;
       font-size: 14px;
       display: block;
@@ -243,7 +249,7 @@ export default {
   }
   .logup-submit-btn {
     width: 100%;
-    height: 60px;
+    height: 40px;
     background-color: $themeColor;
     color: #fff;
     cursor: pointer;
@@ -259,5 +265,18 @@ export default {
 
 .other-ways {
   margin: 30px 0;
+}
+.icon-guanbi{
+  color:#000;
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  font-size: 20px;
+}
+@media (max-width:400px) {
+  .logup-content{
+    margin: 80px 10px 0 10px;;
+    width: 100%;
+  }
 }
 </style>
