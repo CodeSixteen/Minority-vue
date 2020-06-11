@@ -20,7 +20,7 @@ const assetsCDN = {
 }
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/dist/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/Minority-vue/dist/' : '/',
   productionSourceMap: false,
   lintOnSave: false,
   devServer: {
