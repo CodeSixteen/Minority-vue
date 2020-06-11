@@ -67,7 +67,7 @@ export default {
       transition: all 0.2s;
     }
   }
- 
+
   .article-list-info {
     padding: 30px;
     box-sizing: border-box;
@@ -135,6 +135,7 @@ export default {
 }
 .lazy-loading{
   width: auto;
+  max-width: 100%;
 }
 
 @media (max-width:750px) {

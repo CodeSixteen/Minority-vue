@@ -83,7 +83,7 @@ export default {
       if(scrollTop >= 1000){
         this.$emit('isShowGoTop',true)
       }else{
-        this.$emit('isShowGoTop',false)        
+        this.$emit('isShowGoTop',false)
       }
       //添加定时器，避免执行次数过多
       clearTimeout(this.timer);
@@ -95,8 +95,6 @@ export default {
       for (let i = 0; i < this.imgSrcArr.length; i++) {
         if (this.isInVisibleArea(this.imgSrcArr[i])) {
           this.imgSrcArr[i].src = this.imgSrcArr[i].getAttribute("data-src");
-          this.imgSrcArr[i].style.width = "auto";
-          this.imgSrcArr[i].style.height = "100%";
           this.imgSrcArr.splice(i, 1);
           i--;
         }
@@ -129,7 +127,6 @@ export default {
       this.reqData();
       if(this.subnavTopDistance <= 60){
         let screenWidth = document.documentElement.clientWidth || document.body.clientWidth;
-        console.log(screenWidth<=960)
         if(screenWidth<=960){
           document.documentElement.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance - 60
           document.body.scrollTop = -document.body.getBoundingClientRect().top + this.subnavTopDistance - 60
