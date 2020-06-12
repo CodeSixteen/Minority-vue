@@ -3,13 +3,13 @@
     <header>
       <div class="nav-content">
         <div class="nav-left">
-          <slot name="left"></slot>
+          <slot name="left" />
         </div>
         <div class="nav-center">
-          <slot name="center"></slot>
+          <slot name="center" />
         </div>
         <div class="nav-right">
-          <slot name="right"></slot>
+          <slot name="right" />
         </div>
       </div>
     </header>
@@ -18,13 +18,13 @@
 
 <script>
 export default {
-  name: "TopNav",
+  name: 'TopNav',
   computed: {
     changeNav() {
-      return this.$store.state.changeNav;
+      return this.$store.state.changeNav
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

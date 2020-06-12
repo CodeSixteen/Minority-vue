@@ -5,18 +5,18 @@
       <ul class="recommend-list">
         <li v-for="(item,index) in recommentedList" :key="index" @click="toX(item.id)">
           <div class="li-list-img">
-            <img :src="item.list_img_src" />
+            <img :src="item.list_img_src">
           </div>
-          <h3>{{item.title}}</h3>
+          <h3>{{ item.title }}</h3>
           <div class="article-author-info">
             <div class="left">
-              <img :src="item.headerImg" class="author-header-img" />
-              <span class="author-username">{{item.author}}</span>
+              <img :src="item.headerImg" class="author-header-img">
+              <span class="author-username">{{ item.author }}</span>
             </div>
             <div class="right">
               <span class="article-view">
-                <i class="iconfont icon-like"></i>
-                {{item.view}}
+                <i class="iconfont icon-like" />
+                {{ item.view }}
               </span>
             </div>
           </div>
@@ -29,29 +29,29 @@
 <script>
 import { getArticleLists } from '@/network/data'
 export default {
-  name: "recommend",
+  name: 'Recommend',
   data() {
     return {
       recommentedList: []
-    };
+    }
   },
   created() {
-    this.reqData();
+    this.reqData()
   },
   methods: {
     reqData() {
-      //请求数据
-      let data = getArticleLists("推荐")
-      this.recommentedList = data.slice(3,9);
+      // 请求数据
+      const data = getArticleLists('推荐')
+      this.recommentedList = data.slice(3, 9)
     },
     toX(id) {
       const { href } = this.$router.resolve({
         path: `/articledetails/${id}`
-      });
-      window.open(href, "_blank");
+      })
+      window.open(href, '_blank')
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

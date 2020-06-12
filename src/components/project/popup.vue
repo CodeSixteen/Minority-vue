@@ -1,7 +1,7 @@
 <template>
   <div class="popup">
     <div class="popup-box">
-      <p>{{msg}}</p>
+      <p>{{ msg }}</p>
       <div @click="clickColse">确定</div>
     </div>
   </div>
@@ -9,18 +9,18 @@
 
 <script>
 export default {
-  name: "popup",
-  methods: {
-    clickColse() {
-      this.$emit("clickColse");
+  name: 'Popup',
+  computed: {
+    msg() {
+      return this.$store.state.toastMsg
     }
   },
-  computed:{
-    msg(){
-      return this.$store.state.toastMsg;
+  methods: {
+    clickColse() {
+      this.$emit('clickColse')
     }
   }
-};
+}
 </script>
 
 <style lang='scss' scoped>

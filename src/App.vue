@@ -1,45 +1,45 @@
 <template>
   <div id="app">
     <router-view />
-    <Login class="login-component" v-if="isShowLogin" />
-    <Logup class="logup-component" v-else-if="isShowLogup" />
-    <popup class="toast-component" v-if="isShowPopup" @clickColse="clickColse" />
+    <Login v-if="isShowLogin" class="login-component" />
+    <Logup v-else-if="isShowLogup" class="logup-component" />
+    <popup v-if="isShowPopup" class="toast-component" @clickColse="clickColse" />
   </div>
 </template>
 
 <script>
-import Login from "@/components/project/Login";
-import Logup from "@/components/project/Logup";
-import popup from "@/components/project/popup";
+import Login from '@/components/project/Login'
+import Logup from '@/components/project/Logup'
+import popup from '@/components/project/popup'
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Login,
     Logup,
     popup
   },
+  computed: {
+    isShowLogin() {
+      return this.$store.state.isShowLogin
+    },
+    isShowLogup() {
+      return this.$store.state.isShowLogup
+    },
+    isShowPopup() {
+      return this.$store.state.isShowPopup
+    }
+  },
   created() {
-    if (localStorage.getItem("phoneNumber")) {
-      this.$store.state.isLoginSuc = true;
+    if (localStorage.getItem('phoneNumber')) {
+      this.$store.state.isLoginSuc = true
     }
   },
   methods: {
     clickColse() {
-      this.$store.state.isShowPopup = false;
-    }
-  },
-  computed: {
-    isShowLogin() {
-      return this.$store.state.isShowLogin;
-    },
-    isShowLogup() {
-      return this.$store.state.isShowLogup;
-    },
-    isShowPopup() {
-      return this.$store.state.isShowPopup;
+      this.$store.state.isShowPopup = false
     }
   }
-};
+}
 </script>
 
 <style>

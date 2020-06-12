@@ -1,52 +1,52 @@
 <template>
   <div class="subs-classify">
-    <h2>{{itemTitle}}</h2>
+    <h2>{{ itemTitle }}</h2>
     <div>
-        <ul>
-            <li class="subs-classify-li">
-                <SubsItem/>
-            </li>
-            <li class="subs-classify-li">
-                <SubsItem/>
-            </li>
-            <li class="subs-classify-li">
-                <SubsItem/>
-            </li>
-            <li class="subs-classify-li">
-                <SubsItem/>
-            </li>
-            <li class="subs-classify-li">
-                <SubsItem/>
-            </li>
-            <li class="subs-classify-li">
-                <SubsItem/>
-            </li>
-            <li class="subs-classify-li">
-                <SubsItem/>
-            </li>
-            <li class="subs-classify-li">
-                <SubsItem/>
-            </li>
-        </ul>
+      <ul>
+        <li class="subs-classify-li">
+          <SubsItem />
+        </li>
+        <li class="subs-classify-li">
+          <SubsItem />
+        </li>
+        <li class="subs-classify-li">
+          <SubsItem />
+        </li>
+        <li class="subs-classify-li">
+          <SubsItem />
+        </li>
+        <li class="subs-classify-li">
+          <SubsItem />
+        </li>
+        <li class="subs-classify-li">
+          <SubsItem />
+        </li>
+        <li class="subs-classify-li">
+          <SubsItem />
+        </li>
+        <li class="subs-classify-li">
+          <SubsItem />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
-import  SubsItem from './subsItem' 
+import SubsItem from './subsItem'
 
 export default {
-  name: "SubsClassify",
-  props:{
-    itemTitle:{
-      type: String,
-      default: "最新上架"
-    }
-  },
-  components:{
+  name: 'SubsClassify',
+  components: {
     SubsItem
+  },
+  props: {
+    itemTitle: {
+      type: String,
+      default: '最新上架'
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

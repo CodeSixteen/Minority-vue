@@ -3,11 +3,11 @@ import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
 
-import "./styles/normalize.scss"
-import "./styles/base.scss"
-import "./styles/style.scss"
+import './styles/normalize.scss'
+import './styles/base.scss'
+import './styles/style.scss'
 import './styles/variables.scss'
-// import './plugins/element.js'
+import './plugins/element.js'
 import './plugins/swiper.js'
 
 Vue.config.productionTip = false

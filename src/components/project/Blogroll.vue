@@ -2,24 +2,24 @@
 <template>
   <div class="blogroll-box">
     <a href="javascript:0">
-      <i class="iconfont icon-weibo"></i>
+      <i class="iconfont icon-weibo" />
     </a>
     <span>
-      <i class="iconfont icon-WeChat"></i>
+      <i class="iconfont icon-WeChat" />
     </span>
     <a href="javascript:0">
-      <i class="iconfont icon-tuite"></i>
+      <i class="iconfont icon-tuite" />
     </a>
     <a href="javascript:0">
-      <i class="iconfont icon-rss"></i>
+      <i class="iconfont icon-rss" />
     </a>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Blogroll"
-};
+  name: 'Blogroll'
+}
 </script>
 
 <style lang='scss' scoped>

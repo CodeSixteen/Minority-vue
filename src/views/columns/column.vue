@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name:'column'
+  name: 'Column'
 }
 </script>
 

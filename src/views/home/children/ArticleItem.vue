@@ -1,24 +1,24 @@
 <template>
   <div class="article-list-item" @click="toArticle">
     <div class="article-list-img">
-      <img src="~@/icons/common/loading.gif" :data-src="listImg" class="lazy-loading"/>
+      <img src="~@/icons/common/loading.gif" :data-src="listImg" class="lazy-loading">
     </div>
     <div class="article-list-info">
-      <h2>{{aritcleTitle}}</h2>
+      <h2>{{ aritcleTitle }}</h2>
       <div class="article-author-info">
         <div class="left">
-          <img :src="headerImg" class="author-header-img" />
-          <span class="author-username">{{author}}</span>
-          <span class="article-created-time">{{createdTime}}</span>
+          <img :src="headerImg" class="author-header-img">
+          <span class="author-username">{{ author }}</span>
+          <span class="article-created-time">{{ createdTime }}</span>
         </div>
         <div class="right">
           <span class="article-view">
-            <i class="iconfont icon-like"></i>
-            {{view}}
+            <i class="iconfont icon-like" />
+            {{ view }}
           </span>
           <span class="article-comment">
-            <i class="iconfont icon-chongdian"></i>
-            {{like_number}}
+            <i class="iconfont icon-chongdian" />
+            {{ likeNumber }}
           </span>
         </div>
       </div>
@@ -28,23 +28,47 @@
 
 <script>
 export default {
-  name: "ArticleItem",
-  props: [
-    "listImg",
-    "aritcleTitle",
-    "headerImg",
-    "author",
-    "createdTime",
-    "view",
-    "like_number",
-    "article_id"
-  ],
-  methods:{
-    toArticle(){
-      this.$router.push(`/articledetails/${this.article_id}`)
+  name: 'ArticleItem',
+  props: {
+    listImg: {
+      type: String,
+      default: ''
+    },
+    aritcleTitle: {
+      type: String,
+      default: ''
+    },
+    headerImg: {
+      type: String,
+      default: ''
+    },
+    author: {
+      type: String,
+      default: ''
+    },
+    createdTime: {
+      type: String,
+      default: '2020-01-01'
+    },
+    view: {
+      type: Number,
+      default: 0
+    },
+    likeNumber: {
+      type: Number,
+      default: 0
+    },
+    articleId: {
+      type: Number,
+      default: 0
+    }
+  },
+  methods: {
+    toArticle() {
+      this.$router.push(`/articledetails/${this.articleId}`)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

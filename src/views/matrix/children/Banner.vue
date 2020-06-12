@@ -6,12 +6,12 @@
 
 <script>
 export default {
-name:'MatrixBanner',
-methods:{
-  toWriting(){
-    this.$router.push('/apply/writing');
+  name: 'MatrixBanner',
+  methods: {
+    toWriting() {
+      this.$router.push('/apply/writing')
+    }
   }
-}
 }
 </script>
 

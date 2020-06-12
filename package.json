@@ -1,10 +1,11 @@
 {
   "name": "vue-minority",
-  "version": "0.1.1",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -18,7 +19,14 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.1",
+    "@vue/cli-plugin-eslint": "^4.4.1",
     "@vue/cli-service": "^4.4.1",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-component": "^1.1.1",
+    "eslint": "^7.2.0",
+    "eslint-plugin-html": "^6.0.2",
+    "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-element": "^1.0.1",

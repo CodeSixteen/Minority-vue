@@ -1,6 +1,10 @@
 import Vue from 'vue'
-import Element from 'element-ui'
+import {
+  Row,
+  Col,
+  Input
+} from 'element-ui'
 
-import 'element-ui/lib/theme-chalk/index.css'
-
-Vue.use(Element)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Input)

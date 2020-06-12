@@ -8,7 +8,7 @@
 
 <script>
 export default {
-name:'ChoicenessItem'
+  name: 'ChoicenessItem'
 }
 </script>
 
@@ -23,7 +23,7 @@ name:'ChoicenessItem'
 }
 .column-title{
     color: #999;
-    padding: 10px 0; 
+    padding: 10px 0;
     font-size: 12px;
     width: 100%;
     overflow: hidden;

@@ -2,30 +2,30 @@
   <div class="right-side">
     <div class="top">
       <a :href="adImgHref">
-        <img :src="adImgSrc" v-show="isShow" />
+        <img v-show="isShow" :src="adImgSrc">
       </a>
     </div>
     <div class="matrix-title">
-      <img src="~@/icons/home/icon-matrix.png" />
+      <img src="~@/icons/home/icon-matrix.png">
       <span>Matrix精选</span>
     </div>
     <ul class="matrix-lists">
       <li v-for="(item,index) in matrixLists" :key="index" class="matrix-item">
         <div class="header-img">
-          <img :src="item.user_header_img" />
+          <img :src="item.user_header_img">
         </div>
         <div class="list-info">
-          <p class="list-username">{{item.username}}</p>
-          <p class="list-summary">{{item.summary}}</p>
+          <p class="list-username">{{ item.username }}</p>
+          <p class="list-summary">{{ item.summary }}</p>
         </div>
       </li>
     </ul>
     <div class="matrix-all-btn">
       <a class="matrix-all-link" href="javascript:0">查看全部 >></a>
     </div>
-    <div class="line" id='box'></div>
-    <Blogroll/>
-    <BottomLink/>
+    <div id="box" class="line" />
+    <Blogroll />
+    <BottomLink />
   </div>
 </template>
 
@@ -35,7 +35,7 @@ import BottomLink from '@/components/project/BottomLink'
 
 export default {
   name: 'RightSide',
-  components:{
+  components: {
     Blogroll,
     BottomLink
   },
@@ -44,22 +44,22 @@ export default {
       adImgSrc: 'https://cdn.sspai.com/article/46423bae-efd5-0390-5b55-014e2ee5a6bf.jpg',
       adImgHref: 'javascript:0',
       matrixLists: [
-        {user_header_img:"https://cdn.sspai.com/2019/10/14/5666a9d8a2310222bccff427675600d1.JPG",username:"不蠢会死的某翠",summary:"利用快捷指令连接Sony耳机"},
-        {user_header_img:"https://cdn.sspai.com/2018/03/25/ce2a784deb3097acb6ee9d37ea0c13ea.jpg",username:"胖鱼要进步",summary:"攻略向 | 搬家到底有多难？"},
-        {user_header_img:"https://cdn.sspai.com/attachment/origin/2014/06/27/76939.jpg",username:"Eis",summary:"巧用工具，制定一个人的日本旅行计划"}
+        { user_header_img: 'https://cdn.sspai.com/2019/10/14/5666a9d8a2310222bccff427675600d1.JPG', username: '不蠢会死的某翠', summary: '利用快捷指令连接Sony耳机' },
+        { user_header_img: 'https://cdn.sspai.com/2018/03/25/ce2a784deb3097acb6ee9d37ea0c13ea.jpg', username: '胖鱼要进步', summary: '攻略向 | 搬家到底有多难？' },
+        { user_header_img: 'https://cdn.sspai.com/attachment/origin/2014/06/27/76939.jpg', username: 'Eis', summary: '巧用工具，制定一个人的日本旅行计划' }
       ]
-    };
+    }
   },
   computed: {
     isShow() {
       if (this.adImgSrc) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

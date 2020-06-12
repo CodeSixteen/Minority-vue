@@ -10,7 +10,6 @@ const Topics = () => import('@/views/topics/index')
 const Writing = () => import('@/views/writing/index')
 const Columns = () => import('@/views/columns/index')
 
-
 Vue.use(Router)
 const routerPush = Router.prototype.push
 Router.prototype.push = function push(location) {
@@ -18,39 +17,39 @@ Router.prototype.push = function push(location) {
 }
 
 const routes = [{
-    path: '/',
-    component: Home
-  }, {
-    path: '/home',
-    component: Home
-  }, {
-    path: '/articledetails/:id',
-    component: ArticleDetails
-  }, {
-    path: '/addarticle',
-    component: AddArticle
-  }, {
-    path: '/Matrix',
-    component: Matrix
-  }, {
-    path: '/Subscription',
-    component: Subscription
-  }, {
-    path: '/topics',
-    component: Topics
-  }, {
-    path: '/columns',
-    component: Columns
-  }, {
-    path: '/apply/writing',
-    component: Writing
-  }, {
-    path: '/Page404',
-    component: Page404
-  }, {
-    path: '*',
-    redirect: '/Page404'
-  }]
+  path: '/',
+  component: Home
+}, {
+  path: '/home',
+  component: Home
+}, {
+  path: '/articledetails/:id',
+  component: ArticleDetails
+}, {
+  path: '/addarticle',
+  component: AddArticle
+}, {
+  path: '/Matrix',
+  component: Matrix
+}, {
+  path: '/Subscription',
+  component: Subscription
+}, {
+  path: '/topics',
+  component: Topics
+}, {
+  path: '/columns',
+  component: Columns
+}, {
+  path: '/apply/writing',
+  component: Writing
+}, {
+  path: '/Page404',
+  component: Page404
+}, {
+  path: '*',
+  redirect: '/Page404'
+}]
 
 export default new Router({
   base: process.env.BASE_URL,

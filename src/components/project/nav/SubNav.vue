@@ -5,45 +5,45 @@
       :key="index"
       :class="isActive(item)"
       @click="cutArticleClassify(item)"
-    >{{item}}</li>
+    >{{ item }}</li>
   </ul>
 </template>
 
 <script>
 export default {
-  name: "SubNav",
+  name: 'SubNav',
   props: {
     navLists: {
       type: Array,
       default() {
-        return [];
+        return []
       }
     }
   },
   data() {
     return {
       curIndex: 0
-    };
-  },
-  methods: {
-    cutArticleClassify(item) {
-      this.$store.state.articleClassifyId = item;
-    },
-    isActive(item) {
-      if (item === this.articleClassifyId) {
-        return this.changeNav ? "nav-active" : "active";
-      }
     }
   },
   computed: {
     changeNav() {
-      return this.$store.state.changeNav;
+      return this.$store.state.changeNav
     },
-    articleClassifyId(){
-      return this.$store.state.articleClassifyId;
+    articleClassifyId() {
+      return this.$store.state.articleClassifyId
+    }
+  },
+  methods: {
+    cutArticleClassify(item) {
+      this.$store.state.articleClassifyId = item
+    },
+    isActive(item) {
+      if (item === this.articleClassifyId) {
+        return this.changeNav ? 'nav-active' : 'active'
+      }
     }
   }
-};
+}
 </script>
 
 <style lang='scss' scoped>

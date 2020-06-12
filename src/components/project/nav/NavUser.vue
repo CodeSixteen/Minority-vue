@@ -1,7 +1,7 @@
 <template>
   <div class="nav-user-box">
-    <img :src="headImg" class="user-head-photo" />
-    <div class="triangle"></div>
+    <img :src="headImg" class="user-head-photo">
+    <div class="triangle" />
     <div class="user-function-list">
       <ul>
         <a>
@@ -35,28 +35,28 @@
 
 <script>
 export default {
-  name: "NavUser",
+  name: 'NavUser',
   data() {
     return {
-      headImg: "https://cdn.sspai.com/2019/07/16/fa8b7ce5ea91003b55e6ae64657b89d3.png",
-    };
+      headImg: 'https://cdn.sspai.com/2019/07/16/fa8b7ce5ea91003b55e6ae64657b89d3.png'
+    }
   },
-  created(){
-    this.headImg = localStorage.getItem('headImg');
+  created() {
+    this.headImg = localStorage.getItem('headImg')
   },
   methods: {
     loginOut() {
-      localStorage.clear(); //清除locaStorage
-      let date = new Date()
+      localStorage.clear() // 清除locaStorage
+      const date = new Date()
       date.setTime(date.getTime() + (24 * 360 * 1000 * -1))
-      window.document.cookie = `token='';path=/;expires=${date.toGMTString()}`;//清除cookie中的token
-      this.$store.state.isLoginSuc = false;//改变全局状态
+      window.document.cookie = `token='';path=/;expires=${date.toGMTString()}`// 清除cookie中的token
+      this.$store.state.isLoginSuc = false// 改变全局状态
     },
     toAddArticle() {
-      this.$router.push("/addarticle");
+      this.$router.push('/addarticle')
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

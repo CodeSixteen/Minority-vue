@@ -1,15 +1,15 @@
 <template>
   <div class="flex-column-center post-banner">
-    <div class="bgbox"></div>
+    <div class="bgbox" />
     <div class="post-banner-content">
-      <img class="post-banner-img" :src="banner" />
-      <h2>{{title}}</h2>
+      <img class="post-banner-img" :src="banner">
+      <h2>{{ title }}</h2>
       <div class="post-banner-info flex-between">
         <div class="info-left">
-          <img :src="head_img" />
-          <span class="author">{{author}}</span>
+          <img :src="headImg">
+          <span class="author">{{ author }}</span>
         </div>
-        <div class="info-right">{{created_time}}</div>
+        <div class="info-right">{{ createdTime }}</div>
       </div>
     </div>
   </div>
@@ -17,30 +17,30 @@
 
 <script>
 export default {
-  name: "PostBanner",
+  name: 'PostBanner',
   props: {
     banner: {
       type: String,
-      default: ""
+      default: ''
     },
     title: {
       type: String,
-      default: ""
+      default: ''
     },
-    head_img: {
+    headImg: {
       type: String,
-      default: ""
+      default: ''
     },
     author: {
       type: String,
-      default: ""
+      default: ''
     },
-    created_time: {
+    createdTime: {
       type: String,
-      default: ""
+      default: ''
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

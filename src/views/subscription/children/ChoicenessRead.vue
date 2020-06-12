@@ -2,35 +2,35 @@
   <div class="subs-classify">
     <h2>精选试读</h2>
     <div>
-        <ul class="flex-start">
-            <li>
-                <ChoicenessItem/>
-            </li>
-            <li>
-                <ChoicenessItem/>
-            </li>
-            <li>
-                <ChoicenessItem/>
-            </li>
-            <li>
-                <ChoicenessItem/>
-            </li>
-            <li>
-                <ChoicenessItem/>
-            </li>
-        </ul>
+      <ul class="flex-start">
+        <li>
+          <ChoicenessItem />
+        </li>
+        <li>
+          <ChoicenessItem />
+        </li>
+        <li>
+          <ChoicenessItem />
+        </li>
+        <li>
+          <ChoicenessItem />
+        </li>
+        <li>
+          <ChoicenessItem />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
-<script> 
+<script>
 import ChoicenessItem from './ChoicenessItem'
 export default {
-  name: "ChoicenessRead",
-  components:{
+  name: 'ChoicenessRead',
+  components: {
     ChoicenessItem
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

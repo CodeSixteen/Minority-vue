@@ -5,38 +5,38 @@
         <div class="left-nav-container">
           <router-link to="/">
             <a class="logo">
-              <span class="logo-icon"></span>
-              <span class="logo-title" v-show="!changeNav">少数派</span>
+              <span class="logo-icon" />
+              <span v-show="!changeNav" class="logo-title">少数派</span>
             </a>
           </router-link>
-          <SubNav v-show="changeNav" :navLists="navLists" class="sub-nav" />
+          <SubNav v-show="changeNav" :nav-lists="navLists" class="sub-nav" />
         </div>
       </template>
       <template #center>
-        <ul class="center-nav-lists" v-show="!changeNav">
+        <ul v-show="!changeNav" class="center-nav-lists">
           <li class="nav-list-item" @click="toMatrix">
-            <img src="~@/icons/nav/matrix.svg" />
+            <img src="~@/icons/nav/matrix.svg">
             <span class="nav-text">Matrix</span>
           </li>
           <li class="nav-list-item" @click="toSubscription">
-            <img src="~@/icons/nav/column.svg" />
+            <img src="~@/icons/nav/column.svg">
             <span class="nav-text">付费订阅</span>
           </li>
           <li class="nav-list-item" @click="toTopics">
-            <img src="~@/icons/nav/special.svg" />
+            <img src="~@/icons/nav/special.svg">
             <span class="nav-text">特别策划</span>
           </li>
           <li class="nav-list-item" @click="toTaobao">
-            <img src="~@/icons/nav/mall.svg" />
+            <img src="~@/icons/nav/mall.svg">
             <span class="nav-text">Pi Store</span>
           </li>
           <li class="nav-list-item tron">
-            <img src="~@/icons/nav/lobaro.svg" />
+            <img src="~@/icons/nav/lobaro.svg">
             <span class="nav-text">Tron 计划</span>
             <div class="tron-box">
               <a href="javascript:0" class="tron-link">加入Tron 计划</a>
               <a href="javascript:0" class="tron-link">
-                <img src="~@/icons/nav/shortcut.svg" alt />
+                <img src="~@/icons/nav/shortcut.svg" alt>
               </a>
             </div>
           </li>
@@ -44,43 +44,43 @@
       </template>
       <template #right>
         <div class="right-nav-container">
-          <div class="right-nav-lists" v-if="changeNav">
+          <div v-if="changeNav" class="right-nav-lists">
             <div class="nav-icon">
               <a href="javascript:0" @click="toMatrix">
-                <img src="~@/icons/nav/1.svg" />
+                <img src="~@/icons/nav/1.svg">
               </a>
               <a href="javascript:0" @click="toSubscription">
-                <img src="~@/icons/nav/2.svg" />
+                <img src="~@/icons/nav/2.svg">
               </a>
               <a href="javascript:0" @click="toTopics">
-                <img src="~@/icons/nav/3.svg" />
+                <img src="~@/icons/nav/3.svg">
               </a>
               <a href="javascript:0" @click="toTaobao">
-                <img src="~@/icons/nav/4.svg" />
+                <img src="~@/icons/nav/4.svg">
               </a>
               <a href="javascript:0">
-                <img src="~@/icons/nav/5.svg" />
+                <img src="~@/icons/nav/5.svg">
                 <div class="right-tron-box">
                   <a href="javascript:0" class="right-tron-link">加入Tron 计划</a>
                   <a href="javascript:0" class="right-tron-link">
-                    <img src="~@/icons/nav/shortcut.svg" />
+                    <img src="~@/icons/nav/shortcut.svg">
                   </a>
                 </div>
               </a>
-              <div class="line"></div>
+              <div class="line" />
             </div>
           </div>
-          <i class="iconfont" @click="showSearchInput" :class="iconStyle"></i>
+          <i class="iconfont" :class="iconStyle" @click="showSearchInput" />
           <Search v-show="isShowSearch" class="home-search" @hideSearch="hideSearch" />
-          <i class="iconfont icon-caidan" :class="{'icon-color':changeNav}" @click="showMenu"></i>
+          <i class="iconfont icon-caidan" :class="{'icon-color':changeNav}" @click="showMenu" />
           <div
-            class="home-nav-login"
-            @click="clickLogin"
-            :class="{'login-btn-black': changeNav}"
             v-if="!isLoginSuc"
+            class="home-nav-login"
+            :class="{'login-btn-black': changeNav}"
+            @click="clickLogin"
           >登录</div>
           <NavUser v-else />
-          <div class="nav-menu" v-show="isShowMenu">
+          <div v-show="isShowMenu" class="nav-menu">
             <ul>
               <li @click="toMatrix">Matrix</li>
               <li @click="toSubscription">付费订阅</li>
@@ -96,80 +96,80 @@
 </template>
 
 <script>
-import TopNav from "./TopNav";
-import Search from "./Search";
-import NavUser from "./NavUser";
-import SubNav from "./SubNav";
+import TopNav from './TopNav'
+import Search from './Search'
+import NavUser from './NavUser'
+import SubNav from './SubNav'
 
 export default {
-  name: "PostNav",
-  data() {
-    return {
-      isShowSearch: false,
-      navLists: ["推荐", "最热", "应用推荐", "生活方式", "Power+"],
-      isShowMenu: false
-    };
-  },
+  name: 'PostNav',
   components: {
     TopNav,
     Search,
     NavUser,
     SubNav
   },
-  created() {
-    if (localStorage.getItem("username")) {
-      this.$store.state.isLoginSuc = true;
-    }
-  },
-  methods: {
-    showSearchInput() {
-      this.isShowSearch = !this.isShowSearch;
-    },
-    clickLogin() {
-      this.$store.state.isShowLogin = true;
-      this.isShowSearch = false;
-    },
-    hideSearch() {
-      this.isShowSearch = false;
-    },
-    toMatrix() {
-      let link = this.$route.path;
-      if (link === "/Matrix") return;
-      this.$router.push("/Matrix");
-    },
-    toSubscription() {
-      let link = this.$route.path;
-      if (link === "/Subscription") return;
-      this.$router.push("/Subscription");
-    },
-    toTopics() {
-      let link = this.$route.path;
-      if (link === "/topics") return;
-      this.$router.push("/topics");
-    },
-    toTaobao() {
-      let href =
-        "https://shop549593764.taobao.com/?spm=a1z10.1-c.0.0.33ee1ba8XVHos6";
-      window.open(href, "_blank");
-    },
-    showMenu(){
-      this.isShowMenu = !this.isShowMenu
+  data() {
+    return {
+      isShowSearch: false,
+      navLists: ['推荐', '最热', '应用推荐', '生活方式', 'Power+'],
+      isShowMenu: false
     }
   },
   computed: {
     changeNav() {
-      return this.$store.state.changeNav;
+      return this.$store.state.changeNav
     },
     iconStyle() {
-      let res = this.isShowSearch ? "icon-guanbi" : "icon-search";
-      let res1 = this.changeNav ? " icon-color" : "";
-      return res + res1;
+      const res = this.isShowSearch ? 'icon-guanbi' : 'icon-search'
+      const res1 = this.changeNav ? ' icon-color' : ''
+      return res + res1
     },
     isLoginSuc() {
-      return this.$store.state.isLoginSuc;
+      return this.$store.state.isLoginSuc
+    }
+  },
+  created() {
+    if (localStorage.getItem('username')) {
+      this.$store.state.isLoginSuc = true
+    }
+  },
+  methods: {
+    showSearchInput() {
+      this.isShowSearch = !this.isShowSearch
+    },
+    clickLogin() {
+      this.$store.state.isShowLogin = true
+      this.isShowSearch = false
+    },
+    hideSearch() {
+      this.isShowSearch = false
+    },
+    toMatrix() {
+      const link = this.$route.path
+      if (link === '/Matrix') return
+      this.$router.push('/Matrix')
+    },
+    toSubscription() {
+      const link = this.$route.path
+      if (link === '/Subscription') return
+      this.$router.push('/Subscription')
+    },
+    toTopics() {
+      const link = this.$route.path
+      if (link === '/topics') return
+      this.$router.push('/topics')
+    },
+    toTaobao() {
+      const href =
+        'https://shop549593764.taobao.com/?spm=a1z10.1-c.0.0.33ee1ba8XVHos6'
+      window.open(href, '_blank')
+    },
+    showMenu() {
+      this.isShowMenu = !this.isShowMenu
     }
   }
-};
+}
 </script>
 
 <style lang='scss' scoped>

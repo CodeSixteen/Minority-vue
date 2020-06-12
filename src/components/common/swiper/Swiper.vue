@@ -1,42 +1,45 @@
 <template>
-  <div class="home-swiper" ref="homeSwiper" @mouseover="clearIn" @mouseout="startIn">
-    <div class="home-swiper-container" ref="swiperItem">
+  <div ref="homeSwiper" class="home-swiper" @mouseover="clearIn" @mouseout="startIn">
+    <div ref="swiperItem" class="home-swiper-container">
       <SwiperSlide
         v-for="(item,index) in newSwiperSlides"
         :key="index"
-        :slideTitle="item.title"
-        :slideSrc="item.banner"
-        :slideLink="item.href"
+        :slide-title="item.title"
+        :slide-src="item.banner"
+        :slide-link="item.href"
         class="swiper-item-container"
       />
     </div>
-    <div class="indicator-container" v-if="isIndicator">
+    <div v-if="isIndicator" class="indicator-container">
       <span
-        class="indicator-item"
         v-for="i in swiperSlides.length"
         :key="i"
+        class="indicator-item"
         :class="{active:curIndex===i}"
         @click="clickIndicator(i)"
-      ></span>
+      />
     </div>
     <div class="prev" @click="prev">
-      <i class="iconfont icon-next"></i>
+      <i class="iconfont icon-next" />
     </div>
     <div class="next" @click="next">
-      <i class="iconfont icon-next"></i>
+      <i class="iconfont icon-next" />
     </div>
   </div>
 </template>
 
 <script>
-import SwiperSlide from "./SwiperSlide";
+import SwiperSlide from './SwiperSlide'
 export default {
-  name: "Swiper",
+  name: 'Swiper',
+  components: {
+    SwiperSlide
+  },
   props: {
     swiperSlides: {
       type: Array,
       default() {
-        return [];
+        return []
       }
     },
     isIndicator: {
@@ -50,118 +53,115 @@ export default {
       curIndex: 1,
       timer: null,
       cutIsClick: true
-    };
-  },
-  components: {
-    SwiperSlide
+    }
   },
   created() {
-    this.modifyData(this.swiperSlides);
+    this.modifyData(this.swiperSlides)
   },
   mounted() {
-    //开启自动播放
-    this.startAutoPlay();
-    window.addEventListener("resize", () => {
-      let el = this.$refs.swiperItem
+    // 开启自动播放
+    this.startAutoPlay()
+    window.addEventListener('resize', () => {
+      const el = this.$refs.swiperItem
       if (el) {
-        el.style.transitionDuration = `0s`;
+        el.style.transitionDuration = `0s`
         el.style.transform = `translate(-${this.$refs.homeSwiper.offsetWidth *
-          this.curIndex}px,0)`;
+          this.curIndex}px,0)`
       }
-    });
+    })
   },
   updated() {
-    window.addEventListener("resize", () => {
-      let el = this.$refs.swiperItem
+    window.addEventListener('resize', () => {
+      const el = this.$refs.swiperItem
       if (el) {
-        el.style.transitionDuration = `0s`;
+        el.style.transitionDuration = `0s`
         el.style.transform = `translate(-${this.$refs.homeSwiper.offsetWidth *
-          this.curIndex}px,0)`;
+          this.curIndex}px,0)`
       }
-    });
+    })
   },
   methods: {
-    //对数据进行处理
+    // 对数据进行处理
     modifyData(slide) {
-      this.newSwiperSlides = [...slide];
-      //两张以上时，前后个添加一张
+      this.newSwiperSlides = [...slide]
+      // 两张以上时，前后个添加一张
       if (slide.length > 1) {
-        this.newSwiperSlides.unshift(slide[slide.length - 1]);
-        this.newSwiperSlides.push(slide[0]);
+        this.newSwiperSlides.unshift(slide[slide.length - 1])
+        this.newSwiperSlides.push(slide[0])
       }
     },
     prev() {
-      //切换下一张，要判断是否可以点击，动画没有执行完时，点击不切换
-      let item = this.$refs.swiperItem;
+      // 切换下一张，要判断是否可以点击，动画没有执行完时，点击不切换
+      const item = this.$refs.swiperItem
       if (this.cutIsClick) {
-        this.curIndex--;
-        this.moveSlide();
-        this.cutIsClick = false;
+        this.curIndex--
+        this.moveSlide()
+        this.cutIsClick = false
       }
-      item.addEventListener("transitionend", () => {
-        //监听动画结束事件，切换为可以点击
-        this.cutIsClick = true;
-      });
+      item.addEventListener('transitionend', () => {
+        // 监听动画结束事件，切换为可以点击
+        this.cutIsClick = true
+      })
     },
     next() {
-      //切换下一张，要判断是否可以点击，动画没有执行完时，点击不切换
-      let item = this.$refs.swiperItem;
+      // 切换下一张，要判断是否可以点击，动画没有执行完时，点击不切换
+      const item = this.$refs.swiperItem
       if (this.cutIsClick) {
-        this.curIndex++;
-        this.moveSlide();
-        this.cutIsClick = false;
+        this.curIndex++
+        this.moveSlide()
+        this.cutIsClick = false
       }
       if (item) {
-        item.addEventListener("transitionend", () => {
-          //监听动画结束事件，切换为可以点击
-          this.cutIsClick = true;
-        });
+        item.addEventListener('transitionend', () => {
+          // 监听动画结束事件，切换为可以点击
+          this.cutIsClick = true
+        })
       }
     },
     startAutoPlay() {
-      //执行后开始自动播放
-      this.timer = setInterval(this.next, 10000);
+      // 执行后开始自动播放
+      this.timer = setInterval(this.next, 10000)
     },
     clearIn() {
-      //鼠标移入时停止自动播放
+      // 鼠标移入时停止自动播放
       if (this.timer) {
-        clearInterval(this.timer);
+        clearInterval(this.timer)
       }
     },
     startIn() {
-      //鼠标移出后开启自动播放
-      this.startAutoPlay();
+      // 鼠标移出后开启自动播放
+      this.startAutoPlay()
     },
     moveSlide() {
-      //移动swiper
-      let item = this.$refs.swiperItem;
-      let len = this.newSwiperSlides.length - 1;
+      // 移动swiper
+      const item = this.$refs.swiperItem
+      const len = this.newSwiperSlides.length - 1
       if (item) {
-        item.style.transitionDuration = `0.5s`;
+        item.style.transitionDuration = `0.5s`
         item.style.transform = `translate(-${this.$refs.homeSwiper.offsetWidth *
-          this.curIndex}px,0)`;
+          this.curIndex}px,0)`
         if (this.curIndex === len) {
-          this.curIndex = 1;
-          this.setTransfrom(item);
+          this.curIndex = 1
+          this.setTransfrom(item)
         } else if (this.curIndex === 0) {
-          this.curIndex = this.newSwiperSlides.length - 2;
-          this.setTransfrom(item);
+          this.curIndex = this.newSwiperSlides.length - 2
+          this.setTransfrom(item)
         }
       }
     },
     setTransfrom(el) {
-      el.addEventListener("transitionend", () => {
-        el.style.transitionDuration = `0s`;
+      el.addEventListener('transitionend', () => {
+        el.style.transitionDuration = `0s`
         el.style.transform = `translate(-${this.$refs.homeSwiper.offsetWidth *
-          this.curIndex}px,0)`;
-      });
+          this.curIndex}px,0)`
+      })
     },
-    clickIndicator(i){
-      this.curIndex = i;
-      this.moveSlide();
+    clickIndicator(i) {
+      this.curIndex = i
+      this.moveSlide()
     }
   }
-};
+}
 </script>
 
 <style lang='scss' scoped>

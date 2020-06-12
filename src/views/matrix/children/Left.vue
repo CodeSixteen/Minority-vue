@@ -9,7 +9,7 @@
               <img
                 src="https://cdn.sspai.com/2019/06/19/d438c3901ed45e401dae7e6a21dd6b06.jpg?imageMogr2/quality/95/thumbnail/!80x80r/gravity/Center/crop/80x80"
                 alt="name"
-              />
+              >
             </div>
             <div>
               <p class="user-name font14">色彩</p>
@@ -18,9 +18,9 @@
           </div>
           <div class="item-top-right">
             <div class="handle-btn flex-between">
-              <span class="s-circle"></span>
-              <span class="s-circle"></span>
-              <span class="s-circle"></span>
+              <span class="s-circle" />
+              <span class="s-circle" />
+              <span class="s-circle" />
             </div>
             <div class="handle-list">
               <span>收藏</span>
@@ -37,17 +37,17 @@
             <img
               src="https://cdn.sspai.com/2019/10/17/8d6ace63e3680220d44cc9004587ca15.jpg?imageMogr2/quality/95/thumbnail/!360x220r/gravity/Center/crop/360x220"
               alt="img"
-            />
+            >
           </div>
         </div>
         <div class="item-bottom flex-between">
           <p> 出自<span class="spec-name" @click="toColumn(1)">我和App的故事</span> </p>
           <div class="flex-start font14">
             <span>
-              <i class="iconfont icon-like"></i>13
+              <i class="iconfont icon-like" />13
             </span>
             <span>
-              <i class="iconfont icon-liuyan"></i>9
+              <i class="iconfont icon-liuyan" />9
             </span>
           </div>
         </div>
@@ -59,12 +59,12 @@
 
 <script>
 export default {
-  name: "MatrixLeft",
+  name: 'MatrixLeft',
   data() {
     return {
       articleList: [],
       page: 1
-    };
+    }
   },
   created() {
     // 请求热门文章列表
@@ -76,20 +76,20 @@ export default {
       console.log('请求文章列表')
       this.page++
     },
-    //根据文章ID跳转文章详情页
+    // 根据文章ID跳转文章详情页
     toArticleDetails(id) {
-      this.$router.push(`/articledetails/${id}`);
+      this.$router.push(`/articledetails/${id}`)
     },
-    //继续加载文章
+    // 继续加载文章
     loadMore() {
       this.requestArticleList(this.page)
     },
-    //跳转到相关专栏
-    toColumn(id){
-      this.$router.push(`/column/${id}`);      
+    // 跳转到相关专栏
+    toColumn(id) {
+      this.$router.push(`/column/${id}`)
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

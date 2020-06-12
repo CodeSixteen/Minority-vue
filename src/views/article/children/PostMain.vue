@@ -1,13 +1,13 @@
 <template>
   <div class="post-main">
-      <div class="post-main-top"><slot name="top"></slot></div>
-      <div class="post-main-center"><slot name="center"></slot></div>
+    <div class="post-main-top"><slot name="top" /></div>
+    <div class="post-main-center"><slot name="center" /></div>
   </div>
 </template>
 
 <script>
 export default {
-  name:'PostMain',
+  name: 'PostMain'
 }
 </script>
 

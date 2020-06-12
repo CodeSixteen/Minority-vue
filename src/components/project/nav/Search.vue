@@ -2,8 +2,8 @@
   <div class="search-box" @click="colseBox">
     <div class="search-box-wrap">
       <div class="search-input">
-        <input type="text" placeholder="热门搜索" name="searchtext" />
-        <i class="iconfont icon-search"></i>
+        <input type="text" placeholder="热门搜索" name="searchtext">
+        <i class="iconfont icon-search" />
       </div>
       <div class="search-hot">
         <div class="left">
@@ -21,16 +21,16 @@
 
 <script>
 export default {
-  name: "HomeSearch",
+  name: 'HomeSearch',
   methods: {
     colseBox(e) {
-      let divClass = e.target.className;
-      if (divClass === "search-box home-search") {
-        this.$emit("hideSearch", false);
+      const divClass = e.target.className
+      if (divClass === 'search-box home-search') {
+        this.$emit('hideSearch', false)
       }
     }
   }
-};
+}
 </script>
 
 <style lang='scss' scoped>

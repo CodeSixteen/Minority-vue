@@ -1,16 +1,29 @@
 <template>
   <div class="swiper-slide-container">
     <a :href="slideLink" class="slide-link">
-      <img :src="slideSrc" :alt="slideTitle" class="slide-img"/>
+      <img :src="slideSrc" :alt="slideTitle" class="slide-img">
     </a>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SwiperSlide",
-  props: ["slideLink", "slideSrc", "slideTitle"]
-};
+  name: 'SwiperSlide',
+  props: {
+    slideLink: {
+      type: String,
+      default: ''
+    },
+    slideSrc: {
+      type: String,
+      default: ''
+    },
+    slideTitle: {
+      type: String,
+      default: ''
+    }
+  }
+}
 </script>
 
 <style lang='scss' scoped>

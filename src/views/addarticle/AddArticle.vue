@@ -1,21 +1,21 @@
 <template>
   <div class="add-article-container">
-    <wangEditor class="wang-editor"/>
-    <Nav class="nav"/>
+    <wangEditor class="wang-editor" />
+    <Nav class="nav" />
   </div>
 </template>
 
 <script>
-import Nav from "@/components/project/nav/index";
-import wangEditor from "./children/wangEditor";
+import Nav from '@/components/project/nav/index'
+import wangEditor from './children/wangEditor'
 
 export default {
-  name: "AddArticle",
+  name: 'AddArticle',
   components: {
     Nav,
     wangEditor
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -35,9 +35,6 @@ export default {
     padding: 10px;
     z-index: 0;
 }
-
-
-
 
 /* nav */
 .nav{

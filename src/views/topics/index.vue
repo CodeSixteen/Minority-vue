@@ -1,19 +1,18 @@
 <template>
   <div class="topics">
-    <Nav/>
+    <Nav />
   </div>
 </template>
 
 <script>
 import Nav from '@/components/project/nav/index'
 
-
 export default {
-  name: "topics",
+  name: 'Topics',
   components: {
     Nav
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

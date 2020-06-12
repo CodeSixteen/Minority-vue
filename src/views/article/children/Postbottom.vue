@@ -3,7 +3,7 @@
     <div class="post-bottom-main flex-between">
       <div class="left">
         <div class="left-logo">
-          <span class="logo-icon"></span>
+          <span class="logo-icon" />
           <span class="logo-title">少数派</span>
         </div>
         <Blogroll />
@@ -28,14 +28,14 @@
 </template>
 
 <script>
-import Blogroll from "@/components/project/Blogroll";
+import Blogroll from '@/components/project/Blogroll'
 
 export default {
-  name: "Postbottom",
+  name: 'Postbottom',
   components: {
     Blogroll
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

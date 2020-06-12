@@ -2,24 +2,24 @@
 <template>
   <div class="Matrix-container">
     <MatrixNav />
-    <MatrixBanner/>
+    <MatrixBanner />
     <div class="matrix-main">
-      <MatrixLeft class="matrix-main-left"/>
-      <MatrixRight class="matrix-main-right"/>
+      <MatrixLeft class="matrix-main-left" />
+      <MatrixRight class="matrix-main-right" />
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
 <script>
-import MatrixNav from "@/components/project/nav/index";
-import MatrixBanner from "./children/Banner"
-import MatrixLeft from "./children/Left"
-import MatrixRight from "./children/Right"
-import Footer from "@/components/project/Footer"
+import MatrixNav from '@/components/project/nav/index'
+import MatrixBanner from './children/Banner'
+import MatrixLeft from './children/Left'
+import MatrixRight from './children/Right'
+import Footer from '@/components/project/Footer'
 
 export default {
-  name: "Matrix",
+  name: 'Matrix',
   components: {
     MatrixNav,
     MatrixBanner,
@@ -27,7 +27,7 @@ export default {
     MatrixRight,
     Footer
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 .Matrix-container{

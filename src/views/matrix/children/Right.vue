@@ -4,11 +4,11 @@
       <h3 class="font14">推荐专栏</h3>
       <p>查看全部</p>
     </div>
-    <div class="line"></div>
+    <div class="line" />
     <ul class="matrix-spec-list">
       <li class="matrix-spec">
         <div class="matrix-spec-img">
-        <img src="https://cdn.sspai.com/other/718855_1498618531057.png?imageMogr2/quality/95/thumbnail/!828x442r/gravity/Center/crop/828x442" alt="我和我的故事">
+          <img src="https://cdn.sspai.com/other/718855_1498618531057.png?imageMogr2/quality/95/thumbnail/!828x442r/gravity/Center/crop/828x442" alt="我和我的故事">
         </div>
         <div class="matrix-spec-content">
           <h4>我和我的故事</h4>
@@ -25,23 +25,23 @@
 
 <script>
 export default {
-name:'MatrixRight',
-data(){
-  return{
+  name: 'MatrixRight',
+  data() {
+    return {
 
-  }
-},
-created(){
-  //获取专栏列表数据（展示三个）
-},
-methods:{
-  toMatrixSpec(){
-    //跳转到所有专栏页面
+    }
   },
-  toSpecDetails(id){
-    //根据专栏id跳转到专栏详情
+  created() {
+  // 获取专栏列表数据（展示三个）
+  },
+  methods: {
+    toMatrixSpec() {
+    // 跳转到所有专栏页面
+    },
+    toSpecDetails(id) {
+    // 根据专栏id跳转到专栏详情
+    }
   }
-}
 }
 </script>
 
@@ -102,7 +102,7 @@ methods:{
         color: #292525;
         border: 1px solid #292525;
         padding: 8px 20px 8px 20px;
-        border-radius: 17px; 
+        border-radius: 17px;
       }
       .spec-btn:hover{
         background-color: #292525;
@@ -111,6 +111,5 @@ methods:{
     }
   }
 }
-
 
 </style>

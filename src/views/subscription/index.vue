@@ -23,39 +23,39 @@
         <span>我的订阅</span>
       </div>
       <div class="subs-search">
-        <input type="text" placeholder="搜索" v-model="searchText" />
-        <i class="iconfont icon-search"></i>
+        <input v-model="searchText" type="text" placeholder="搜索">
+        <i class="iconfont icon-search" />
       </div>
     </div>
     <div class="subs-classify-list">
-      <SubsClassify :itemTitle="`最新上架`" />
+      <SubsClassify :item-title="`最新上架`" />
       <ChoicenessRead />
       <div class="ad-img-box flex-between">
         <img
           src="https://cdn.sspai.com/article/b19a79e6-64f7-f662-d786-7b105b397e70.jpg?imageMogr2/quality/95/thumbnail/!1096x508r/gravity/Center/crop/1096x508"
-        />
+        >
         <img
           src="https://cdn.sspai.com/article/a0c046b8-790e-d499-7581-cd0e3c005ea9.jpg?imageMogr2/quality/95/thumbnail/!1096x508r/gravity/Center/crop/1096x508"
-        />
+        >
       </div>
-      <SubsClassify :itemTitle="`发挥好工具的最大价值`" />
-      <SubsClassify :itemTitle="`更有效地提升工作生产力`" />
-      <SubsClassify :itemTitle="`有一种更好的生活方式`" />
-      <SubsClassify :itemTitle="`从更多维度认识这个世界`" />
+      <SubsClassify :item-title="`发挥好工具的最大价值`" />
+      <SubsClassify :item-title="`更有效地提升工作生产力`" />
+      <SubsClassify :item-title="`有一种更好的生活方式`" />
+      <SubsClassify :item-title="`从更多维度认识这个世界`" />
     </div>
     <Footer />
   </div>
 </template>
 
 <script>
-import Nav from "@/components/project/nav/index";
-import Banner from "./children/banner";
-import SubsClassify from "./children/SubsClassify";
-import ChoicenessRead from "./children/ChoicenessRead";
-import Footer from "@/components/project/Footer";
+import Nav from '@/components/project/nav/index'
+import Banner from './children/banner'
+import SubsClassify from './children/SubsClassify'
+import ChoicenessRead from './children/ChoicenessRead'
+import Footer from '@/components/project/Footer'
 
 export default {
-  name: "Subscription",
+  name: 'Subscription',
   components: {
     Nav,
     Banner,
@@ -65,13 +65,13 @@ export default {
   },
   data() {
     return {
-      searchText: ""
-    };
+      searchText: ''
+    }
   },
   updated() {
-    //data内容有更新时执行
+    // data内容有更新时执行
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

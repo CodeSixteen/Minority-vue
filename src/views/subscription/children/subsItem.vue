@@ -4,7 +4,7 @@
       <img
         src="https://cdn.sspai.com/article/ac5aba26-50eb-52b8-bd54-5973e6501b56.jpg?imageMogr2/quality/95/thumbnail/!394x524r/gravity/Center/crop/394x524"
         alt
-      />
+      >
       <div class="subs-info">
         <h4>玩转ios 13：让你的iphonezc asd</h4>
         <p class="subs-info-content">我们在 iOS 13 更新之际，挖掘整理了系统更新中加入的新功能，希望你能在更新系统后第一时间上手这些新功能。</p>
@@ -22,11 +22,11 @@
 
 <script>
 export default {
-  name: "SubsItem",
+  name: 'SubsItem',
   data() {
-    return {};
+    return {}
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
