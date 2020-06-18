@@ -1,58 +1,58 @@
 
 /*公共部分*/
 .col-red {
-    color: #d7191a !important;
+  color: #d7191a !important;
 }
 
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 .line {
-    width: 100%;
-    height: 1px;
-    display: block;
-    margin: 10px 0;
-    background-color: #ccc;
+  width: 100%;
+  height: 1px;
+  display: block;
+  margin: 10px 0;
+  background-color: #ccc;
 }
 
 .flex-column-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .flex-between {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .flex-start{
-    display: flex;
-    justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .author {
-    font-size: 14px;
-    color: #292525;
-    padding-left: 10px;
+  font-size: 14px;
+  color: #292525;
+  padding-left: 10px;
 }
 
 .go-top-component {
-    position: fixed;
-    bottom: 60px;
-    right: 60px;
+  position: fixed;
+  bottom: 60px;
+  right: 60px;
 }
 
 .ss-img-wrapper {
-    position: relative;
-    text-align: center;
-    outline: none;
-    margin: 40px auto;
+  position: relative;
+  text-align: center;
+  outline: none;
+  margin: 40px auto;
 }
 
 img {
-    width: 100%;
+  width: 100%;
 }
 
 .wangEditor-text img {
@@ -62,23 +62,23 @@ img {
 }
 
 .wangEditor-text a {
-    text-decoration: none;
-    border-bottom: 1px solid #d71a1b;
-    color: #292525;
-    transition: border-bottom .2s;
+  text-decoration: none;
+  border-bottom: 1px solid #d71a1b;
+  color: #292525;
+  transition: border-bottom .2s;
 }
 
 .wangEditor-text a:hover {
-    border-bottom: 2px solid #d71a1b;
+  border-bottom: 2px solid #d71a1b;
 }
 
 .s-circle{
-    display: inline-block;
-    height: 4px;
-    width: 4px;
-    background-color: #999;
-    border-radius: 50%;
+  display: inline-block;
+  height: 4px;
+  width: 4px;
+  background-color: #999;
+  border-radius: 50%;
 }
 .swiper-pagination-bullet{
-    background-color: #ccc !important;
+  background-color: #ccc !important;
 }
