@@ -33,11 +33,11 @@ const routes = [{
   path: '/apply/writing',
   component: () => import('@/views/writing/index')
 }, {
-  path: '/Page404',
+  path: '/404',
   component: () => import('@/components/common/404/NotFound')
 }, {
   path: '*',
-  redirect: '/Page404'
+  redirect: '/404'
 }]
 
 export default new Router({
