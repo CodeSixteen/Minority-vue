@@ -169,13 +169,17 @@ export default {
   }
   .article-list-img{
     width: 100% !important;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .article-list-info{
     width: 100% !important;
   }
   .article-list-img img{
-    width: 100% !important;
-    height: auto !important;
+    width: auto !important;
+    max-width: 100% !important;
   }
 }
 </style>

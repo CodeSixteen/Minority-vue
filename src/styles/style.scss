@@ -51,13 +51,14 @@
     margin: 40px auto;
 }
 
-.ss-img-wrapper img {
-    width: 100%;
-    max-width: 670px;
-}
-
 img {
     width: 100%;
+}
+
+.wangEditor-text img {
+  margin: 0 auto;
+  width: auto;
+  max-width: 670px;
 }
 
 .wangEditor-text a {

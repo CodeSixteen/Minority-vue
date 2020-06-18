@@ -1,14 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/home/Home.vue'
-const ArticleDetails = () => import('@/views/article/ArticleDetails.vue')
-const AddArticle = () => import('@/views/addarticle/AddArticle')
-const Page404 = () => import('@/components/common/404/NotFound')
-const Matrix = () => import('@/views/matrix/index')
-const Subscription = () => import('@/views/subscription/index')
-const Topics = () => import('@/views/topics/index')
-const Writing = () => import('@/views/writing/index')
-const Columns = () => import('@/views/columns/index')
 
 Vue.use(Router)
 const routerPush = Router.prototype.push
@@ -20,39 +12,36 @@ const routes = [{
   path: '/',
   component: Home
 }, {
-  path: '/home',
-  component: Home
-}, {
   path: '/articledetails/:id',
-  component: ArticleDetails
+  component: () => import('@/views/article/ArticleDetails.vue')
 }, {
   path: '/addarticle',
-  component: AddArticle
+  component: () => import('@/views/addarticle/AddArticle')
 }, {
   path: '/Matrix',
-  component: Matrix
+  component: () => import('@/views/matrix/index')
 }, {
   path: '/Subscription',
-  component: Subscription
+  component: () => import('@/views/subscription/index')
 }, {
   path: '/topics',
-  component: Topics
+  component: () => import('@/views/topics/index')
 }, {
   path: '/columns',
-  component: Columns
+  component: () => import('@/views/columns/index')
 }, {
   path: '/apply/writing',
-  component: Writing
+  component: () => import('@/views/writing/index')
 }, {
   path: '/Page404',
-  component: Page404
+  component: () => import('@/components/common/404/NotFound')
 }, {
   path: '*',
   redirect: '/Page404'
 }]
 
 export default new Router({
-  mode: process.env.NODE_ENV === 'production' ? 'hash' : 'history',
+  mode: process.env.NODE_ENV === 'production' ? 'history' : 'hash',
   base: process.env.BASE_URL,
   routes
 })
